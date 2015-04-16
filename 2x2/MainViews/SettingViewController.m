@@ -18,6 +18,7 @@
 #import "DXAlertView.h"
 #define URLaddress "http://www.app.chargoosh.ir/api/ProfileManager/ChangePicture"
 #define URLaddressPic "http://www.app.chargoosh.ir/"
+#import "UIImageView+WebCache.h"
 
 @interface SettingViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate,RSKImageCropViewControllerDelegate>
 {
@@ -97,7 +98,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 9;
+    return 10;
 }
 
 
@@ -229,7 +230,7 @@
         }
         case 7:
         {
-            static NSString *cellIdentifier = @"DestroyCellIdentifier";
+            static NSString *cellIdentifier = @"ClearImageCacheCellIdentifier";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
             
             if (cell==nil) {
@@ -240,6 +241,18 @@
             return cell;
         }
         case 8:
+        {
+            static NSString *cellIdentifier = @"DestroyCellIdentifier";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+            
+            if (cell==nil) {
+                
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                
+            }
+            return cell;
+        }
+        case 9:
         {
             
             static NSString *cellIdentifier = @"LogoutCellIdentifier";
@@ -264,7 +277,28 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.row) {
-        case 8:
+            
+        case 7:
+        {
+            DXAlertView *alert = [[DXAlertView alloc] initWithTitle:@"پاک کردن" contentText:@"آیا مطمئن هستید؟" leftButtonTitle:@"خیر" rightButtonTitle:@"بله"];
+            [alert show];
+            alert.leftBlock = ^() {
+                NSLog(@"left button clicked");
+            };
+            alert.rightBlock = ^() {
+                NSLog(@"right button clicked");
+                [SDWebImageManager.sharedManager.imageCache clearMemory];
+                 [SDWebImageManager.sharedManager.imageCache clearDisk];
+            };
+            alert.dismissBlock = ^() {
+                NSLog(@"Do something interesting after dismiss block");
+                NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
+                [self.tableView deselectRowAtIndexPath:tableSelection animated:NO];
+            };
+         
+        }
+            break;
+        case 9:
         {
             DXAlertView *alert = [[DXAlertView alloc] initWithTitle:@"خروج" contentText:@"آیا مطمئن هستید؟" leftButtonTitle:@"خیر" rightButtonTitle:@"بله"];
             [alert show];
@@ -284,7 +318,7 @@
         }
             break;
             
-            case 7:
+            case 8:
         {
             DXAlertView *alert = [[DXAlertView alloc] initWithTitle:@"حذف اطلاعات" contentText:@"آیا مطمئن هستید؟ تمامی اطلاعات پاک شده و غیر قابل برگشت است!" leftButtonTitle:@"خیر" rightButtonTitle:@"بله"];
             [alert show];
@@ -354,6 +388,10 @@
             return 47;
         }
         case 8:
+        {
+            return 47;
+        }
+        case 9:
         {
             
             

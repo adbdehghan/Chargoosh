@@ -28,6 +28,7 @@ UIImage *competitionImage;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.cachedImages = [[NSMutableDictionary alloc] init];
     [self CreateNavigationBarButtons];
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
@@ -93,7 +94,7 @@ UIImage *competitionImage;
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
     
-    
+        self.cachedImages = [[NSMutableDictionary alloc]init];
     RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
             
@@ -187,30 +188,49 @@ UIImage *competitionImage;
     cell.mmimageView.clipsToBounds = YES;
     [cell.activityView startAnimating];
     
-    if (competition.image) {
-        cell.mmimageView.image = competition.image;
-    } else {
-        // set default user image while image is being downloaded
-        //        cell.imageView.image = [UIImage imageNamed:@"batman.png"];
-        
-        // download the image asynchronously
-        [self downloadImageWithURL:competition.competitionUrl completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.mmimageView.image = image;
-                
-                [cell.activityView stopAnimating];
-                // cache the image for use later (when scrolling up)
-                competition.image = image;
-            }
-        }];
-    }
     
+    NSString *identifier = [NSString stringWithFormat:@"Cell%ld" , (long)indexPath.row];
+    
+    if([self.cachedImages objectForKey:identifier] != nil)
+    {
+        
+        cell.mmimageView.image = [self.cachedImages valueForKey:identifier];
+        [cell.activityView stopAnimating];
+    }
+    else
+    {
+        // download the image asynchronously
+        if (self.tableView.dragging == NO && self.tableView.decelerating == NO)
+        {
+            
+            
+            [self downloadImageWithURL:competition.competitionUrl identifier:identifier completionBlock:^(BOOL succeeded, NSMutableDictionary *image) {
+                if (succeeded) {
+                    // change the image in the cell
+                    if ([tableView indexPathForCell:cell].row == indexPath.row) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            
+                            if ([image objectForKey:identifier]!=nil) {
+                                
+                                [self.cachedImages setValue:[image valueForKey:identifier] forKey:identifier];
+                                cell.mmimageView.image =  [self.cachedImages valueForKey:identifier];
+                                [cell.activityView stopAnimating];
+                            }
+                            
+                        });
+                    }
+                }
+            }];
+        }
+        cell.mmimageView.image = nil;
+        
+    }
     return cell;
     
 }
 
-- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+- (void)downloadImageWithURL:(NSURL *)url identifier:(NSString*)Identifier completionBlock:(void (^)(BOOL succeeded, NSMutableDictionary *image))completionBlock
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request
@@ -218,13 +238,20 @@ UIImage *competitionImage;
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if ( !error )
                                {
+                                   
                                    UIImage *image = [[UIImage alloc] initWithData:data];
-                                   completionBlock(YES,image);
+                                   
+                                   NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc]init];
+                                   [imageDictionary setValue:image forKey:Identifier];
+                                   
+                                   
+                                   completionBlock(YES,imageDictionary);
                                } else{
                                    completionBlock(NO,nil);
                                }
                            }];
 }
+
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -301,6 +328,69 @@ UIImage *competitionImage;
         destination.competitionId = competitionId;
     }
     
+}
+
+- (void)loadImagesForOnscreenRows
+{
+    if ([self.cachedImages count]>0) {
+        
+        
+        NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
+        for (NSIndexPath *indexPath in visiblePaths)
+        {
+            NSString *identifier = [NSString stringWithFormat:@"Cell%ld" , (long)indexPath.row];
+            Competition *competition = [self.competitionList objectAtIndex:indexPath.row];
+            
+            if([self.cachedImages objectForKey:identifier] == nil)
+                // Avoid the app icon download if the app already has an icon
+            {
+                MMCell *cell =(MMCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+                
+                [self downloadImageWithURL:competition.competitionUrl identifier:identifier completionBlock:^(BOOL succeeded, NSMutableDictionary *image) {
+                    if (succeeded) {
+                        // change the image in the cell
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            
+                            if ([image objectForKey:identifier]!=nil) {
+                                
+                                [self.cachedImages setValue:[image valueForKey:identifier] forKey:identifier];
+                                cell.mmimageView.image =  [self.cachedImages valueForKey:identifier];
+                                [cell.activityView stopAnimating];
+                            }
+                            
+                        });
+                        
+                    }
+                }];
+                
+            }
+        }
+    }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+// -------------------------------------------------------------------------------
+//	scrollViewDidEndDragging:willDecelerate:
+//  Load images for all onscreen rows when scrolling is finished.
+// -------------------------------------------------------------------------------
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate)
+    {
+        [self loadImagesForOnscreenRows];
+    }
+}
+
+// -------------------------------------------------------------------------------
+//	scrollViewDidEndDecelerating:scrollView
+//  When scrolling stops, proceed to load the app icons that are on screen.
+// -------------------------------------------------------------------------------
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self loadImagesForOnscreenRows];
 }
 
 

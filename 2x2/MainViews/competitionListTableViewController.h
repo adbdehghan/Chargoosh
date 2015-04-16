@@ -11,5 +11,5 @@
 @interface competitionListTableViewController : UITableViewController
 @property (strong, nonatomic)  NSMutableDictionary *competitionDictionary;
 @property (strong, nonatomic)  NSMutableArray *competitionList;
-
+@property (strong ,nonatomic) NSMutableDictionary *cachedImages;
 @end

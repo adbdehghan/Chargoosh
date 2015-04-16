@@ -22,7 +22,7 @@
     NSMutableArray *dateTimeList;
     NSMutableArray *scoreList;
     NSMutableArray *stringScoreList;
-       NSURL *imageURL;
+    NSURL *imageURL;
 }
 @property (strong, nonatomic) DataDownloader *getData;
 @end
@@ -53,12 +53,12 @@
     chartView = [[UUChart alloc]initwithUUChartDataFrame:CGRectMake(5, 10, [UIScreen mainScreen].bounds.size.width-20, chartContainer.bounds.size.height-50)
                                               withSource:self
                                                withStyle:UUChartLineStyle];
-
+    
     
     dateTimeList = [[NSMutableArray alloc]init];
     scoreList = [[NSMutableArray alloc]init];
     stringScoreList =[[NSMutableArray alloc]init];
-  
+    
     
     RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
@@ -81,7 +81,7 @@
             
             name.text = [NSString stringWithFormat:@" امتیاز شما: %@",status.score];
             [activityIndicator stopAnimating];
-              [chartView showInView:chartContainer];
+            [chartView showInView:chartContainer];
         }
         
         else
@@ -103,29 +103,29 @@
     st = [DBManager selectSetting][0];
     
     [self.getData GetSummarize:st.settingId Password:st.password
-                     withCallback:callback];
- 
+                  withCallback:callback];
+    
     
     
     RequestCompleteBlock callback2 = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
             if ([data valueForKey:@"picture"] != nil) {
-            
-            imageURL =[NSURL URLWithString:[NSString stringWithFormat: @"%s%@",URLaddressPic,[data valueForKey:@"picture"]]];
-            [activityView startAnimating];
-            
-            [self downloadImageWithURL:imageURL completionBlock:^(BOOL succeeded, UIImage *image) {
-                if (succeeded) {
-                    // change the image in the cell
-                    profileImage.image = image;
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                
+                imageURL =[NSURL URLWithString:[NSString stringWithFormat: @"%s%@",URLaddressPic,[data valueForKey:@"picture"]]];
+                [activityView startAnimating];
+                
+                [self downloadImageWithURL:imageURL completionBlock:^(BOOL succeeded, UIImage *image) {
+                    if (succeeded) {
+                        // change the image in the cell
+                        profileImage.image = image;
                         
-                        [activityView stopAnimating];
-                        
-                    });
-                }
-            }];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [activityView stopAnimating];
+                            
+                        });
+                    }
+                }];
             }
             else
             {
@@ -156,8 +156,8 @@
     
     [self.getData GetProfilePicInfo:st.settingId Password:st.password
                        withCallback:callback2];
-
-   
+    
+    
 }
 
 - (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
@@ -194,7 +194,7 @@
 - (CGRange)UUChartMarkRangeInLineChart:(UUChart *)chart
 {
     if (path.row==2) {
-          return CGRangeMake(25, 75);
+        return CGRangeMake(25, 75);
     }
     return CGRangeZero;
 }
@@ -204,7 +204,7 @@
     return YES;
 }
 
-  - (BOOL)UUChart:(UUChart *)chart ShowMaxMinAtIndex:(NSInteger)index
+- (BOOL)UUChart:(UUChart *)chart ShowMaxMinAtIndex:(NSInteger)index
 {
     return NO;
 }
@@ -219,7 +219,8 @@
 - (CGRange)UUChartChooseRangeInLineChart:(UUChart *)chart
 {
     if (path.row==0) {
-          return CGRangeMake([[scoreList valueForKeyPath:@"@max.self"]integerValue]+10,[[scoreList valueForKeyPath:@"@min.self"]integerValue]);
+        //          return CGRangeMake([[scoreList valueForKeyPath:@"@max.self"]integerValue]+10,[[scoreList valueForKeyPath:@"@min.self"]integerValue]);
+        return CGRangeMake([[scoreList valueForKeyPath:@"@min.self"]integerValue],[[scoreList valueForKeyPath:@"@max.self"]integerValue]+10);
     }
     
     return CGRangeZero;
@@ -263,13 +264,13 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

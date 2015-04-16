@@ -130,7 +130,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+
     if ([segue.identifier isEqual:@"Next"]) {
         VerificationViewController *detination = [segue destinationViewController];
         detination.phoneNumber = numberUiTextField.text;

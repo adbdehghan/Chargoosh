@@ -19,7 +19,7 @@
     Settings *st;
     NSString *province;
     NSInteger buttonId;
-    
+    NSString *birthdate;
     NSString *day;
     NSString *month;
     NSString *year;
@@ -41,7 +41,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *textFieldEnterDate;
 
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbarCancelDone;
+@property (weak, nonatomic) IBOutlet UIView *toolbarCancelDone;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *customPicker;
 
@@ -113,11 +113,10 @@
                 genderSegment.selected = 1;
             }
             
-            self.textFieldEnterDate.text = [data valueForKey:@"birthday"]== [NSNull null]?@"":[NSString stringWithFormat:@"%@",[data valueForKey:@"birthday"]];
+            birthdate =[data valueForKey:@"birthday"]== [NSNull null]?@"":[NSString stringWithFormat:@"%@",[data valueForKey:@"birthday"]];
+            self.textFieldEnterDate.text = birthdate;
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-            });
+     
         }
         
         else
@@ -530,8 +529,11 @@
                      }
                      completion:^(BOOL finished){
                          
+                          self.textFieldEnterDate.text = birthdate;
                          
                      }];
+    
+   
     
     
 }

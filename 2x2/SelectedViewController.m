@@ -12,6 +12,8 @@
 #import "DBManager.h"
 #import "MMCell.h"
 #import "TopParticipate.h"
+#import "UIImageView+WebCache.h"
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #define URLaddress "http://www.app.chargoosh.ir/"
 
 @interface SelectedViewController ()
@@ -27,7 +29,8 @@ UIImage *competitionImage;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self CreateNavigationBarButtons];
-    
+
+    self.cachedImages = [[NSMutableDictionary alloc] init];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
@@ -37,7 +40,7 @@ UIImage *competitionImage;
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
-
+    
     
     self.competitionDictionary = [[NSMutableDictionary alloc]init];
     self.topParticipateList = [[NSMutableArray alloc]init];
@@ -61,7 +64,7 @@ UIImage *competitionImage;
                 top.imageDescription = [item valueForKey:@"description"]==[NSNull null]?@"":[item valueForKey:@"description"];
                 
                 [self.topParticipateList addObject:top];
-
+                
             }
             
             [activityIndicator stopAnimating];
@@ -204,7 +207,7 @@ UIImage *competitionImage;
         
     }
     
-   TopParticipate *top = [self.topParticipateList objectAtIndex:indexPath.section];
+    TopParticipate *top = [self.topParticipateList objectAtIndex:indexPath.section];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -213,27 +216,11 @@ UIImage *competitionImage;
     cell.startTimeLabel.clipsToBounds = YES;
     cell.startTimeLabel.text = top.imageDescription;
     
+
+    [cell.mmimageView setImageWithURL:top.imageUrl
+                      placeholderImage:[UIImage imageNamed:@"photoPlaceHolder.png"] options:SDWebImageRefreshCached usingActivityIndicatorStyle:(UIActivityIndicatorViewStyle)UIActivityIndicatorViewStyleWhiteLarge];
+
     
-    [cell.activityView startAnimating];
-    
-    if (top.image) {
-        cell.mmimageView.image = top.image;
-    } else {
-        // set default user image while image is being downloaded
-        //        cell.imageView.image = [UIImage imageNamed:@"batman.png"];
-        
-        // download the image asynchronously
-        [self downloadImageWithURL:top.imageUrl completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                cell.mmimageView.image = image;
-                
-                [cell.activityView stopAnimating];
-                // cache the image for use later (when scrolling up)
-                top.image = image;
-            }
-        }];
-    }
     
     return cell;
     
@@ -255,9 +242,9 @@ UIImage *competitionImage;
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-
+    
     TopParticipate *top = [self.topParticipateList objectAtIndex:section];
-   
+    
     CGRect frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width , 40);
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
     label.font = [UIFont fontWithName:@"B yekan" size:15];
@@ -266,10 +253,10 @@ UIImage *competitionImage;
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
     return label;
-
+    
 }
 
-- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+- (void)downloadImageWithURL:(NSURL *)url identifier:(NSString*)Identifier completionBlock:(void (^)(BOOL succeeded, NSMutableDictionary *image))completionBlock
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request
@@ -277,8 +264,14 @@ UIImage *competitionImage;
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if ( !error )
                                {
+                                   
                                    UIImage *image = [[UIImage alloc] initWithData:data];
-                                   completionBlock(YES,image);
+                                   
+                                   NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc]init];
+                                   [imageDictionary setValue:image forKey:Identifier];
+                                   
+                                   
+                                   completionBlock(YES,imageDictionary);
                                } else{
                                    completionBlock(NO,nil);
                                }
@@ -291,5 +284,6 @@ UIImage *competitionImage;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

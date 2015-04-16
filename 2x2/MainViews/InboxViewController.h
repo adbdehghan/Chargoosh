@@ -11,4 +11,5 @@
 @interface InboxViewController : UITableViewController
 @property (strong, nonatomic)  NSMutableDictionary *messageDictionary;
 @property (strong, nonatomic)  NSMutableArray *messageList;
+@property (strong, nonatomic)  NSMutableArray *messageDateList;
 @end

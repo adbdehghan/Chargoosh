@@ -38,6 +38,8 @@
     
     [self CreateNavigationBarButtons];
     
+    self.cachedImages = [[NSMutableDictionary alloc] init];
+    
     profileImage.layer.cornerRadius = profileImage.frame.size.width / 2;
     profileImage.layer.masksToBounds = YES;
     
@@ -178,6 +180,7 @@
     
     
     self.homeDictionary = [[NSMutableDictionary alloc]init];
+    self.cachedImages = [[NSMutableDictionary alloc]init];
     
     RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
@@ -231,6 +234,29 @@
 
 
 
+- (void)downloadImageWithURL:(NSURL *)url identifier:(NSString*)Identifier completionBlock:(void (^)(BOOL succeeded, NSMutableDictionary *image))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   
+                                   NSMutableDictionary *imageDictionary = [[NSMutableDictionary alloc]init];
+                                   [imageDictionary setValue:image forKey:Identifier];
+                                   
+                                   
+                                   completionBlock(YES,imageDictionary);
+                               } else{
+                                   completionBlock(NO,nil);
+                               }
+                           }];
+}
+
+
 - (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -264,42 +290,74 @@
     
     
     cell.captionLabel.text = homeIcon.caption;
-    
-    
+    [cell.captionLabel setTextAlignment:NSTextAlignmentCenter];
+
     cell.iconImage.layer.cornerRadius = 7;
     cell.iconImage.clipsToBounds = YES;
+
     [cell.activityView startAnimating];
     
-    if (homeIcon.image) {
-        [cell.iconImage addTarget:self action:@selector(Participate:)forControlEvents:UIControlEventTouchUpInside];
-        [cell.iconImage setImage:homeIcon.image forState:UIControlStateNormal];
-        [cell.iconImage setFrame:CGRectMake(0, 0, 70, 70)];
-        cell.iconImage.tag = [homeIcon.iconId integerValue];
-    } else {
+    
+    NSString *identifier = [NSString stringWithFormat:@"Cell%ld" , (long)indexPath.row];
+    
+    if([self.cachedImages objectForKey:identifier] != nil)
+    {
+        [cell.iconImage addTarget:self action:@selector(actionButton:)forControlEvents:UIControlEventTouchUpInside];
+        [cell.iconImage setImage:[self.cachedImages valueForKey:identifier] forState:UIControlStateNormal];
         
-        // download the image asynchronously
-        [self downloadImageWithURL:homeIcon.iconURL completionBlock:^(BOOL succeeded, UIImage *image) {
-            if (succeeded) {
-                // change the image in the cell
-                [cell.iconImage addTarget:self action:@selector(actionButton:)forControlEvents:UIControlEventTouchUpInside];
-                [cell.iconImage setImage:image forState:UIControlStateNormal];
-                [cell.iconImage setFrame:CGRectMake(0, 0, 70, 70)];
-                cell.iconImage.tag = [homeIcon.iconId integerValue];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [cell.activityView stopAnimating];
-                });
-                
-                // cache the image for use later (when scrolling up)
-                homeIcon.image = image;
-            }
-        }];
+        cell.iconImage.tag = [homeIcon.iconId integerValue];
+        
+        [cell.activityView stopAnimating];
     }
+    else
+    {
+        // download the image asynchronously
+  
+            [self downloadImageWithURL:homeIcon.iconURL identifier:identifier completionBlock:^(BOOL succeeded, NSMutableDictionary *image) {
+                if (succeeded) {
+                    // change the image in the cell
+                    if ([collectionView indexPathForCell:cell].row == indexPath.row) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            if ([image objectForKey:identifier]!=nil) {
+                                
+                                [self.cachedImages setValue:[image valueForKey:identifier] forKey:identifier];
+                                
+                                [cell.iconImage addTarget:self action:@selector(actionButton:)forControlEvents:UIControlEventTouchUpInside];
+                                [cell.iconImage setImage: [self.cachedImages valueForKey:identifier] forState:UIControlStateNormal];
+                                
+                                cell.iconImage.tag = [homeIcon.iconId integerValue];
+
+                                
+                                [cell.activityView stopAnimating];
+                            }
+                            
+                        });
+                    }
+                }
+            }];
+        
+        cell.iconImage.imageView.image = nil;
+        
+    }
+
     
     
     return cell;
 }
 
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 5.0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 2.0;
+}
+
+// Layout: Set Edges
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    // return UIEdgeInsetsMake(0,8,0,8);  // top, left, bottom, right
+    return UIEdgeInsetsMake(0,0,0,5);  // top, left, bottom, right
+}
 
 -(void)actionButton:(id)sender
 {

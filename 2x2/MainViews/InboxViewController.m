@@ -34,10 +34,7 @@ UIActivityIndicatorView *activityIndicator;
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
-    //
-    //    self.messageDictionary = [[NSMutableDictionary alloc]init];
-    //    self.messageList = [[NSMutableArray alloc]init];
-    //
+
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.estimatedRowHeight = 80;
     //self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -50,6 +47,8 @@ UIActivityIndicatorView *activityIndicator;
 {
     self.messageDictionary = [[NSMutableDictionary alloc]init];
     self.messageList = [[NSMutableArray alloc]init];
+    self.messageDateList = [[NSMutableArray alloc]init];
+    
     [activityIndicator startAnimating];
     Settings *st = [[Settings alloc]init];
     
@@ -64,6 +63,7 @@ UIActivityIndicatorView *activityIndicator;
             for (NSString *item in self.messageDictionary)
             {
                 [self.messageList addObject:[item valueForKey:@"content"]];
+                [self.messageDateList addObject:[item valueForKey:@"assignDate"]];
             }
             
             [activityIndicator stopAnimating];
@@ -104,10 +104,12 @@ UIActivityIndicatorView *activityIndicator;
             self.messageDictionary = [[NSMutableDictionary alloc]init];
             self.messageDictionary = data;
             [self.messageList removeAllObjects];
+            [self.messageDateList removeAllObjects];
             
             for (NSString *item in self.messageDictionary)
             {
                 [self.messageList addObject:[item valueForKey:@"content"]];
+                [self.messageDateList addObject:[item valueForKey:@"assignDate"]];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -191,7 +193,7 @@ UIActivityIndicatorView *activityIndicator;
     }
     
     NSString *cellText = [self.messageList objectAtIndex:indexPath.row];
-    
+    NSString *dateText = [self.messageDateList objectAtIndex:indexPath.row];
     NSMutableAttributedString* attributedString = [[NSMutableAttributedString alloc] initWithString:cellText];
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -202,38 +204,66 @@ UIActivityIndicatorView *activityIndicator;
     
     
     
-    
+
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [cellText length])];
     
-    cell.titleLabel.attributedText = attributedString ;
-    
+    cell.titleLabel.attributedText = attributedString;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    //cell.titleLabel.text= cellText;
+    cell.dateTimeLabel.text = dateText;
+    
     cell.titleLabel.textColor=[UIColor blackColor];
     cell.titleLabel.backgroundColor = [UIColor clearColor];
     
-    //[cell.background makeInsetShadowWithRadius:6 Alpha:.4];
     cell.background.layer.cornerRadius = 6;
-    
-    
-    //cell.background.layer.cornerRadius = cell.mmimageView.frame.size.width/3;
-    
+
     cell.background.clipsToBounds = YES;
     cell.background.backgroundColor = RGBCOLOR(225, 225, 225);
     
     cell.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.titleLabel.numberOfLines = 0;
     
+    
     [cell.titleLabel setTextAlignment:NSTextAlignmentRight];
     [cell.titleLabel setFont:[UIFont fontWithName:@"B Yekan" size:15]];
-    
-    
+    [cell.titleLabel sizeToFit];
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
+
     return cell;
     
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellText = [self.messageList objectAtIndex:indexPath.row];
+    
+    NSMutableAttributedString* attributedString = [[NSMutableAttributedString alloc] initWithString:cellText];
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:6];
+    //    paragraphStyle.alignment = NSTextAlignmentJustified;    // To justified text
+    
+    
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [cellText length])];
+    
+    UILabel *textLabel = [[UILabel alloc]init];
+    
+    textLabel.frame =CGRectMake(0, 0,tableView.bounds.size.width - 30 ,9999 );
+    
+    textLabel.attributedText = attributedString;
+    
+    textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    textLabel.numberOfLines = 0;
+    [textLabel setTextAlignment:NSTextAlignmentRight];
+    [textLabel setFont:[UIFont fontWithName:@"B Yekan" size:15]];
+    
+    [textLabel sizeToFit];
+    
+    int size = textLabel.frame.size.height;
+    
+    return size + 70;
+}
 
 
 - (void)didReceiveMemoryWarning {

@@ -40,6 +40,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[EnterNumberViewController continueButton:]"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/RegisterViews/EnterNumberViewController.m"
                   timestampString = "446508969.130737"
                   startingColumnNumber = "9223372036854775807"
@@ -54,6 +55,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__44-[EnterNumberViewController continueButton:]_block_invoke"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/RegisterViews/EnterNumberViewController.m"
                   timestampString = "446508969.130913"
                   startingColumnNumber = "9223372036854775807"
@@ -566,6 +568,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[UIProgressView(AFNetworking) setProgressWithDownloadProgressOfOperation:animated:]"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/Extensions/UIKit+AFNetworking/UIProgressView+AFNetworking.m"
                   timestampString = "447043313.065192"
                   startingColumnNumber = "9223372036854775807"
@@ -580,6 +583,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__84-[UIProgressView(AFNetworking) setProgressWithDownloadProgressOfOperation:animated:]_block_invoke"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/Extensions/UIKit+AFNetworking/UIProgressView+AFNetworking.m"
                   timestampString = "447043313.065448"
                   startingColumnNumber = "9223372036854775807"
@@ -742,11 +746,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/SelectedViewController.m"
-            timestampString = "447977477.541736"
+            timestampString = "450710110.77601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -758,11 +762,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/SelectedViewController.m"
-            timestampString = "447212078.437647"
+            timestampString = "450710110.77601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -774,11 +778,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/SelectedViewController.m"
-            timestampString = "447212078.437647"
+            timestampString = "450710110.77601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -790,11 +794,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/SelectedViewController.m"
-            timestampString = "447212078.437647"
+            timestampString = "450710110.77601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
             <Locations>
@@ -804,6 +808,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[SelectedViewController viewDidLoad]"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/SelectedViewController.m"
                   timestampString = "447210554.430661"
                   startingColumnNumber = "9223372036854775807"
@@ -818,6 +823,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__37-[SelectedViewController viewDidLoad]_block_invoke"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/SelectedViewController.m"
                   timestampString = "447210554.43088"
                   startingColumnNumber = "9223372036854775807"
@@ -836,11 +842,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/SelectedViewController.m"
-            timestampString = "447212078.437647"
+            timestampString = "450710110.77601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -852,11 +858,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/SelectedViewController.m"
-            timestampString = "447210083.688337"
+            timestampString = "450709162.841883"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -1028,11 +1034,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/CompetitionViewController.m"
-            timestampString = "447795501.077536"
+            timestampString = "450443373.035992"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1314,6 +1320,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__41-[CompetitionPlusViewController refresh:]_block_invoke"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/CompetitionPlusViewController.m"
                   timestampString = "447544011.424881"
                   startingColumnNumber = "9223372036854775807"
@@ -1328,6 +1335,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__41-[CompetitionPlusViewController refresh:]_block_invoke_2"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/CompetitionPlusViewController.m"
                   timestampString = "447544011.425166"
                   startingColumnNumber = "9223372036854775807"
@@ -1362,11 +1370,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/HomeViewController.m"
-            timestampString = "447952442.470852"
+            timestampString = "450528390.318671"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1378,11 +1386,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/HomeViewController.m"
-            timestampString = "447952442.470852"
+            timestampString = "450528390.318671"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "-collectionView:numberOfItemsInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1426,11 +1434,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/HomeViewController.m"
-            timestampString = "447952442.470852"
+            timestampString = "450528390.318671"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1442,43 +1450,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/HomeViewController.m"
-            timestampString = "447952442.470852"
+            timestampString = "450528390.318671"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "2x2/HomeViewController.m"
-            timestampString = "447952442.470852"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "2x2/HomeViewController.m"
-            timestampString = "447952442.470852"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1496,86 +1472,6 @@
             startingLineNumber = "46"
             endingLineNumber = "46"
             landmarkName = "-layoutSubviews"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "2x2/HomeViewController.m"
-            timestampString = "447952442.470852"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "2x2/HomeViewController.m"
-            timestampString = "447952442.470852"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "2x2/MainViews/CompetitionViewController.m"
-            timestampString = "447795501.077536"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "2x2/MainViews/CompetitionViewController.m"
-            timestampString = "447795501.077536"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "2x2/HomeViewController.m"
-            timestampString = "447952442.470852"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1682,7 +1578,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/MyStatusViewController.m"
-            timestampString = "447983161.0277"
+            timestampString = "450514707.284454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "222"
@@ -1698,11 +1594,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/SettingViewController.m"
-            timestampString = "447986324.919715"
+            timestampString = "450710957.936067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1714,11 +1610,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/SettingViewController.m"
-            timestampString = "447986324.919715"
+            timestampString = "450710957.936067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "273"
+            endingLineNumber = "273"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1730,27 +1626,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/SettingViewController.m"
-            timestampString = "447986324.919715"
+            timestampString = "450710957.936067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/SettingViewController.m"
+            timestampString = "450710957.936067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "134"
             endingLineNumber = "134"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "2x2/MainViews/SettingViewController.m"
-            timestampString = "447986324.919715"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
             <Locations>
@@ -1760,6 +1656,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[SettingViewController tableView:cellForRowAtIndexPath:]"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/SettingViewController.m"
                   timestampString = "447734503.727834"
                   startingColumnNumber = "9223372036854775807"
@@ -1774,6 +1671,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__57-[SettingViewController tableView:cellForRowAtIndexPath:]_block_invoke"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/SettingViewController.m"
                   timestampString = "447734503.728001"
                   startingColumnNumber = "9223372036854775807"
@@ -1824,11 +1722,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "447975357.522947"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -1904,11 +1802,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
             <Locations>
@@ -1918,6 +1816,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[ChangeProfileViewController viewDidLoad]"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/ChangeProfileViewController.m"
                   timestampString = "447812119.726861"
                   startingColumnNumber = "9223372036854775807"
@@ -1932,6 +1831,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__42-[ChangeProfileViewController viewDidLoad]_block_invoke"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/ChangeProfileViewController.m"
                   timestampString = "447812119.72709"
                   startingColumnNumber = "9223372036854775807"
@@ -1950,11 +1850,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
             <Locations>
@@ -1964,6 +1864,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__42-[ChangeProfileViewController viewDidLoad]_block_invoke"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/ChangeProfileViewController.m"
                   timestampString = "447817364.624068"
                   startingColumnNumber = "9223372036854775807"
@@ -1978,6 +1879,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__42-[ChangeProfileViewController viewDidLoad]_block_invoke_2"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/ChangeProfileViewController.m"
                   timestampString = "447817364.624248"
                   startingColumnNumber = "9223372036854775807"
@@ -1996,11 +1898,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2012,11 +1914,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2028,11 +1930,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2044,11 +1946,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2060,11 +1962,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2156,11 +2058,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "617"
-            endingLineNumber = "617"
+            startingLineNumber = "619"
+            endingLineNumber = "619"
             landmarkName = "-showAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2172,11 +2074,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "281"
-            endingLineNumber = "281"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2188,11 +2090,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2204,11 +2106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "640"
-            endingLineNumber = "640"
+            startingLineNumber = "642"
+            endingLineNumber = "642"
             landmarkName = "-gestureRecognizerShouldBegin:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2220,39 +2122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "641"
-            endingLineNumber = "641"
-            landmarkName = "-gestureRecognizerShouldBegin:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "639"
-            endingLineNumber = "639"
-            landmarkName = "-gestureRecognizerShouldBegin:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "643"
@@ -2268,11 +2138,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "641"
+            endingLineNumber = "641"
+            landmarkName = "-gestureRecognizerShouldBegin:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/ChangeProfileViewController.m"
+            timestampString = "450437522.452375"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "645"
+            endingLineNumber = "645"
+            landmarkName = "-gestureRecognizerShouldBegin:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/ChangeProfileViewController.m"
+            timestampString = "450437522.452375"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2300,11 +2202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "619"
-            endingLineNumber = "619"
+            startingLineNumber = "621"
+            endingLineNumber = "621"
             landmarkName = "-showAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2362,6 +2264,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__39-[InviteViewController continueButton:]_block_invoke"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/InviteViewController.m"
                   timestampString = "447831051.643959"
                   startingColumnNumber = "9223372036854775807"
@@ -2376,6 +2279,7 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__39-[InviteViewController continueButton:]_block_invoke_2"
                   moduleName = "2x2"
+                  usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/InviteViewController.m"
                   timestampString = "447831051.644118"
                   startingColumnNumber = "9223372036854775807"
@@ -2394,11 +2298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2410,11 +2314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2426,11 +2330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "695"
-            endingLineNumber = "695"
+            startingLineNumber = "697"
+            endingLineNumber = "697"
             landmarkName = "-ApplyChanges:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2474,23 +2378,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "522"
-            endingLineNumber = "522"
-            landmarkName = "-actionCancel:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "521"
@@ -2506,11 +2394,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "541"
-            endingLineNumber = "541"
+            startingLineNumber = "520"
+            endingLineNumber = "520"
+            landmarkName = "-actionCancel:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/ChangeProfileViewController.m"
+            timestampString = "450437522.452375"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "543"
+            endingLineNumber = "543"
             landmarkName = "-actionDone:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2554,11 +2458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/SelectedViewController.m"
-            timestampString = "447977548.662872"
+            timestampString = "450710110.77601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2586,11 +2490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2602,11 +2506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "2x2/MainViews/ChangeProfileViewController.m"
-            timestampString = "448749550.182699"
+            timestampString = "450437522.452375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -2624,6 +2528,502 @@
             startingLineNumber = "186"
             endingLineNumber = "186"
             landmarkName = "-Participate:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/CompetitionDetailViewController.m"
+            timestampString = "449512409.619123"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
+            landmarkName = "-didDismissShareViewController"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CompetitionDetailViewController didDismissShareViewController]"
+                  moduleName = "Chargoosh"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/CompetitionDetailViewController.m"
+                  timestampString = "449512409.622642"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "296"
+                  endingLineNumber = "296"
+                  offsetFromSymbolStart = "162">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__64-[CompetitionDetailViewController didDismissShareViewController]_block_invoke"
+                  moduleName = "Chargoosh"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/CompetitionDetailViewController.m"
+                  timestampString = "449512409.62282"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "296"
+                  endingLineNumber = "296"
+                  offsetFromSymbolStart = "50">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/CompetitionDetailViewController.m"
+            timestampString = "449512411.474074"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
+            landmarkName = "-didDismissShareViewController"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CompetitionDetailViewController didDismissShareViewController]"
+                  moduleName = "Chargoosh"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/CompetitionDetailViewController.m"
+                  timestampString = "449512411.477487"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "296"
+                  endingLineNumber = "296"
+                  offsetFromSymbolStart = "162">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__64-[CompetitionDetailViewController didDismissShareViewController]_block_invoke"
+                  moduleName = "Chargoosh"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adb/Desktop/2x2/2x2/2x2/MainViews/CompetitionDetailViewController.m"
+                  timestampString = "449512411.477659"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "296"
+                  endingLineNumber = "296"
+                  offsetFromSymbolStart = "50">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/CompetitionDetailViewController.m"
+            timestampString = "449512412.787673"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
+            landmarkName = "-didDismissShareViewController"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/CompetitionDetailViewController.m"
+            timestampString = "449512448.01356"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
+            landmarkName = "-didDismissShareViewController"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/competitionListTableViewController.m"
+            timestampString = "450444302.056787"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/SelectedViewController.m"
+            timestampString = "450710110.77601"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "-downloadImageWithURL:identifier:completionBlock:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/SelectedViewController.m"
+            timestampString = "450710110.77601"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/HomeViewController.m"
+            timestampString = "450528390.318671"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
+            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/HomeViewController.m"
+            timestampString = "450528390.318671"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
+            landmarkName = "-collectionView:cellForItemAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/HomeViewController.m"
+            timestampString = "450528390.318671"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "-downloadImageWithURL:identifier:completionBlock:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/HomeViewController.m"
+            timestampString = "450528390.318671"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
+            landmarkName = "-downloadImageWithURL:identifier:completionBlock:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/AppDelegate.m"
+            timestampString = "450710022.179368"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "-applicationWillTerminate:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/SettingViewController.m"
+            timestampString = "450711302.739728"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/InboxViewController.m"
+            timestampString = "450822775.470399"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "-viewDidAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/InboxViewController.m"
+            timestampString = "450719355.476944"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "-viewDidAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/InboxViewController.m"
+            timestampString = "450719369.332679"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "-refresh:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/InboxViewController.m"
+            timestampString = "450822775.470399"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "-viewDidAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/InboxViewController.m"
+            timestampString = "450822775.470399"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "-viewDidAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/Extensions/DataDownloader.m"
+            timestampString = "450719435.035456"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "-GetMessages:Password:withCallback:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/Extensions/DataDownloader.m"
+            timestampString = "450719444.661929"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "-GetMessages:Password:withCallback:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/InboxViewController.m"
+            timestampString = "450823421.78225"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/InboxViewController.m"
+            timestampString = "450823421.78225"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/InboxViewController.m"
+            timestampString = "450823421.78225"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/InboxViewController.m"
+            timestampString = "450822430.440218"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "-refresh:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/InboxViewController.m"
+            timestampString = "450822757.513572"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "-refresh:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/InboxViewController.m"
+            timestampString = "450822759.023682"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "-refresh:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "2x2/MainViews/InboxViewController.m"
+            timestampString = "450822779.09969"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "-viewDidAppear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "SDImageCache.h"
+#import "UIImageView+WebCache.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +21,9 @@
     
     // set the bar background color
     //[[UITabBar appearance] setBackgroundImage:[AppDelegate imageFromColor:backgroundColor forSize:CGSizeMake(320, 49) withCornerRadius:0]];
+    NSString *bundledPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"CustomPathImages"];
+    [[SDImageCache sharedImageCache] addReadOnlyCachePath:bundledPath];
+    
     if ([self.window.rootViewController isKindOfClass:[UITabBarController class]]) {
         
         UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
@@ -79,6 +84,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+
 }
 
 + (UIImage *)imageFromColor:(UIColor *)color forSize:(CGSize)size withCornerRadius:(CGFloat)radius
