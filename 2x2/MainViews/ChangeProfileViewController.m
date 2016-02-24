@@ -75,7 +75,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Get the previous view controller
+    UIViewController *previousVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count - 2];
     
+    // Create a UIBarButtonItem
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(popViewController)];
+    
+    // Associate the barButtonItem to the previous view
+    [previousVC.navigationItem setBackBarButtonItem:barButtonItem];
     
     st = [[Settings alloc]init];
     
@@ -401,7 +408,7 @@
         [pickerLabel setTextAlignment:NSTextAlignmentCenter];
         [pickerLabel setBackgroundColor:[UIColor clearColor]];
         [pickerLabel setFont:[UIFont systemFontOfSize:15.0f]];
-        pickerLabel.font = [UIFont fontWithName:@"B Yekan" size:20 ];
+        pickerLabel.font = [UIFont fontWithName:@"B Yekan+" size:20 ];
         pickerLabel.textColor = [UIColor whiteColor];
         
     }

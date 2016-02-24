@@ -37,7 +37,7 @@
 {
     [super viewDidLoad];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
-    headerFont = [UIFont fontWithName:@"B Yekan" size:15];
+    headerFont = [UIFont fontWithName:@"B Yekan+" size:15];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
@@ -68,7 +68,7 @@
     UIView *sectionHeaderView = [[UIView alloc] initWithFrame:
                                  CGRectMake(0, 10, tableView.frame.size.width, [self heightForTitle:item.question] + HEADER_MARGIN)];
     
-    sectionHeaderView.backgroundColor = RGBCOLOR(2, 203, 255);
+    sectionHeaderView.backgroundColor = RGBCOLOR(243, 30, 75);
     
     int headerW = self.view.frame.size.width * HEADER_W;
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:

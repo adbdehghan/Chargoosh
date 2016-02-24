@@ -19,7 +19,7 @@
     
    // textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, [UIScreen mainScreen].bounds.size.width-20, self.view.bounds.size.height)];
 
-    [textView setFont:[UIFont fontWithName:@"B Yekan" size:19]];
+    [textView setFont:[UIFont fontWithName:@"B Yekan+" size:19]];
     
     [textView setEditable:NO];
     [textView setSelectable:NO];

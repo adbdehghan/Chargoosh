@@ -16,9 +16,11 @@
 @property (strong, nonatomic) NSString *content;
 @property (strong, nonatomic) NSString *competitionId;
 @property (strong, nonatomic) NSString *score;
+@property (strong, nonatomic) NSString *scorePerPic;
 @property (strong, nonatomic) NSString *startTime;
 @property (strong, nonatomic) NSString *endTime;
 @property (strong, nonatomic) NSString *limit;
+@property (strong, nonatomic) NSString *userParticipationCount;
 @property (strong, nonatomic) NSURL *competitionUrl;
 @property (strong, nonatomic) UIImage *image;
 

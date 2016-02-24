@@ -29,13 +29,15 @@
     }
     
     
-    
     if (st.settingId!=nil )
     {
         [self performSelector:@selector(performSegueToMain) withObject:nil afterDelay:.9];
     }
     else
         [self performSelector:@selector(performSegueToNext) withObject:nil afterDelay:.9];
+    
+
+
     // Do any additional setup after loading the view.
 }
 
@@ -53,6 +55,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
  #pragma mark - Navigation

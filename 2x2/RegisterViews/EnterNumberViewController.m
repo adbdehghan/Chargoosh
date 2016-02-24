@@ -11,7 +11,7 @@
 #import "UIImage+ImageEffects.h"
 
 
-@interface EnterNumberViewController ()
+@interface EnterNumberViewController ()<UITextFieldDelegate>
 @property (strong, nonatomic) DataDownloader *getData;
 @property (strong, nonatomic)  UIImageView        *blurredOverlayView;
 @end
@@ -21,12 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
-    //self.blurredOverlayView = [[UIImageView alloc]init];
-    //[self setBlurredOverlayImage:[UIImage imageNamed:@"iranFlag.png"]];
-    
-    // Do any additional setup after loading the view.
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -34,6 +29,8 @@
     
     
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

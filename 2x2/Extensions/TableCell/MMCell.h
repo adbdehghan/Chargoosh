@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *limitLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *scorePerPic;
 @property (weak, nonatomic) IBOutlet UIButton *coinButton;
 @property (retain, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
 

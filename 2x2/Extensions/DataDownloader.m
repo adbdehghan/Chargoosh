@@ -99,9 +99,54 @@ NSMutableDictionary *receivedData;
      } didSendData:nil];
 }
 
+- (void)GetVersion:(NSString *)params withCallback:(RequestCompleteBlock)callback
+{
+    receivedData = [[NSMutableDictionary alloc]init];
+    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat: @"%s/api/ProfileManager/GetVersion",URLaddress]]];
+    
+    JCDHTTPConnection *connection = [[JCDHTTPConnection alloc] initWithRequest:request];
+    [connection executeRequestOnSuccess:
+     ^(NSHTTPURLResponse *response, NSData *data) {
+         if (response.statusCode == 200) {
+             
+             NSString* newStr =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+             
+             [receivedData setObject: newStr forKey:@"version"];
+             callback(YES,receivedData);
+         } else {
+             callback(NO,nil);
+         }
+     } failure:^(NSHTTPURLResponse *response, NSData *data, NSError *error) {
+         callback(NO,nil);
+     } didSendData:nil];
+}
+
 - (void)GetCompetitions:(NSString *)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback
 {
     NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat: @"%s/api/ProfileManager/GECompetitions?phoneNumber=%@&pass=%@",URLaddress,phoneNumber,password]]];
+    
+    JCDHTTPConnection *connection = [[JCDHTTPConnection alloc] initWithRequest:request];
+    [connection executeRequestOnSuccess:
+     ^(NSHTTPURLResponse *response, NSData *data) {
+         if (response.statusCode == 200) {
+             
+             NSString* newStr =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+             SBJsonParser *sbp = [SBJsonParser new];
+             
+             receivedData = [sbp objectWithString:newStr];
+             
+             callback(YES,receivedData);
+         } else {
+             callback(NO,nil);
+         }
+     } failure:^(NSHTTPURLResponse *response, NSData *data, NSError *error) {
+         callback(NO,nil);
+     } didSendData:nil];
+}
+
+- (void)GetCompetitionsForTopUsers:(NSString *)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback
+{
+    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat: @"%s/api/ProfileManager/GECompetitionsForTop?phoneNumber=%@&pass=%@",URLaddress,phoneNumber,password]]];
     
     JCDHTTPConnection *connection = [[JCDHTTPConnection alloc] initWithRequest:request];
     [connection executeRequestOnSuccess:
@@ -192,9 +237,9 @@ NSMutableDictionary *receivedData;
      } didSendData:nil];
 }
 
-- (void)GetPolls:(NSString*)param withCallback:(RequestCompleteBlock)callback
+- (void)GetPolls:(NSString*)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback
 {
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%s/api/ProfileManager/GetPolls",URLaddress]]];
+    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%s/api/ProfileManager/GetPolls?phoneNumber=%@&pass=%@",URLaddress,phoneNumber,password]]];
     
     JCDHTTPConnection *connection = [[JCDHTTPConnection alloc] initWithRequest:request];
     [connection executeRequestOnSuccess:

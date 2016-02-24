@@ -11,10 +11,16 @@
 #import "MMCell.h"
 #import "CompetitionPlus.h"
 #import "CompetitionPlusDetailViewController.h"
+#import "Settings.h"
+#import "DBManager.h"
+#import "QRCodeReaderViewController.h"
 
 #define RGBCOLOR(r,g,b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 
-@interface CompetitionPlusViewController ()
+@interface CompetitionPlusViewController ()<QRCodeReaderDelegate>
+{
+    Settings *st ;
+}
 @property (strong, nonatomic) DataDownloader *getData;
 @end
 
@@ -27,6 +33,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    st = [[Settings alloc]init];
+    
+    st = [DBManager selectSetting][0];
+    
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
@@ -35,13 +46,12 @@
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
-    //
+
     self.competitionPlusDictionary = [[NSMutableDictionary alloc]init];
     self.competitionPlusList = [[NSMutableArray alloc]init];
-    //
+
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-  //  self.tableView.estimatedRowHeight = 80;
-//    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
     
     [self CreateNavigationBarButtons];
     
@@ -49,8 +59,6 @@
         if (wasSuccessful) {
             
             self.competitionPlusDictionary = data;
-            
-            
             
             for (NSString *item in self.competitionPlusDictionary)
             {
@@ -82,7 +90,7 @@
         }
     };
     
-    [self.getData GetPolls:@""  withCallback:callback];
+    [self.getData GetPolls:st.settingId Password:st.password  withCallback:callback];
     
 }
 
@@ -101,7 +109,21 @@
     statusButton.tintColor = [UIColor whiteColor];
     
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:statusButton];
-    self.navigationItem.leftBarButtonItem = barButton;
+    UIButton *barcodeButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    UIImage *barcodeImage = [UIImage imageNamed:@"m_scan.png"];
+    
+    [barcodeButton setImage:barcodeImage forState:UIControlStateNormal];
+    
+    [barcodeButton addTarget:self action:@selector(ShowQR)forControlEvents:UIControlEventTouchUpInside];
+    [barcodeButton setFrame:CGRectMake(0, 0, 20, 20)];
+    
+    
+    UIBarButtonItem *barcodeBarButton = [[UIBarButtonItem alloc] initWithCustomView:barcodeButton];
+    
+      NSArray *barButtons = @[barcodeBarButton,barButton];
+    
+    self.navigationItem.leftBarButtonItems = barButtons;
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -117,17 +139,52 @@
     self.navigationItem.rightBarButtonItem = settingBarButton;
 }
 
+-(void)ShowQR
+{
+    static QRCodeReaderViewController *reader = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        reader = [QRCodeReaderViewController new];
+        reader.modalPresentationStyle = UIModalPresentationFormSheet;
+    });
+    reader.delegate = self;
+    
+    [reader setCompletionWithBlock:^(NSString *resultAsString) {
+        NSLog(@"Completion with result: %@", resultAsString);
+    }];
+    
+    [self presentViewController:reader animated:YES completion:NULL];
+    
+    
+}
+
+#pragma mark - QRCodeReader Delegate Methods
+
+- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 - (void)refresh:(UIRefreshControl *)refreshControl {
     
     
-
+    
     
     
     RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
             
             self.competitionPlusDictionary = data;
-               [self.competitionPlusList removeAllObjects];
+            [self.competitionPlusList removeAllObjects];
             
             for (NSString *item in self.competitionPlusDictionary)
             {
@@ -162,7 +219,7 @@
         }
     };
     
-    [self.getData GetPolls:@""  withCallback:callback];
+    [self.getData GetPolls:st.settingId Password:st.password  withCallback:callback];
     
 }
 
@@ -190,7 +247,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  //  self.tableView.estimatedRowHeight = 100;
+    //  self.tableView.estimatedRowHeight = 100;
     
     static NSString *cellIdentifier = @"CellIdentifier";
     

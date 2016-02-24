@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "SDImageCache.h"
 #import "UIImageView+WebCache.h"
+#import "DataDownloader.h"
+#import "DeviceRegisterer.h"
 
 @interface AppDelegate ()
 
@@ -18,9 +20,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
     // set the bar background color
-    //[[UITabBar appearance] setBackgroundImage:[AppDelegate imageFromColor:backgroundColor forSize:CGSizeMake(320, 49) withCornerRadius:0]];
+
     NSString *bundledPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"CustomPathImages"];
     [[SDImageCache sharedImageCache] addReadOnlyCachePath:bundledPath];
     
@@ -29,39 +31,63 @@
         UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
         [tabBar setSelectedIndex:4];
         CGFloat width = tabBar.view.bounds.size.width/5;
-        [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor colorWithRed:246/255.0 green:110/255.0 blue:0/255.0 alpha:1] forSize:CGSizeMake(width, 49) withCornerRadius:0]];
+//        [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor colorWithRed:243.f/255.f green:30.f/255.f blue:75.f/255.f alpha:.8] forSize:CGSizeMake(width, 49) withCornerRadius:0]];
     }
     
     // set the text color for selected state
-    
-
-    
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     // set the text color for unselected state
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     
     // set the selected icon color
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
-//    [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:255/255.0 green:249/255.0 blue:82/255.0 alpha:1]];
-        [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:2/255.0 green:203/255.0 blue:255/255.0 alpha:1]];
+    //    [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:255/255.0 green:249/255.0 blue:82/255.0 alpha:1]];
+//    [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:243.f/255.f green:30.f/255.f blue:75.f/255.f alpha:.8]];
     // remove the shadow
     [[UITabBar appearance] setShadowImage:nil];
-    //    [[UITabBar appearance]set]
-    // Set the dark color to selected tab (the dimmed background)
-    
-    
-    //
-  //  UIImage *navbar = [AppDelegate imageFromColor:[UIColor colorWithRed:233/255.0 green:110/255.0 blue:0/255.0 alpha:1] forSize:CGSizeMake(900, 70) withCornerRadius:0];
-    UIImage *navbar = [AppDelegate imageFromColor:[UIColor colorWithRed:2/255.0 green:203/255.0 blue:255/255.0 alpha:1] forSize:CGSizeMake(900, 70) withCornerRadius:0];
-    [[UINavigationBar appearance] setBackgroundImage:navbar forBarMetrics:UIBarMetricsDefault];
+
+
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:243.f/255.f green:30.f/255.f blue:75.f/255.f alpha:1]];
     
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     NSDictionary *textTitleOptions = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil];
     [[UINavigationBar appearance] setTitleTextAttributes:textTitleOptions];
     
-    
-    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    else
+    {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+    }
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     return YES;
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    NSLog(@"My token is: %@", deviceToken);
+    
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<> "]];
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    DeviceRegisterer *registrar = [[DeviceRegisterer alloc] init];
+    [registrar registerDeviceWithToken:token];
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+    NSLog(@"Failed to get token, error: %@", error);
+}
+
+-(void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    //    [UIApplication sharedApplication].applicationIconBadgeNumber = [[[userInfo objectForKey:@"aps"] objectForKey: @"badgecount"] intValue];
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"post" object:nil];
+     
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -78,13 +104,16 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-
+    
 }
 
 + (UIImage *)imageFromColor:(UIColor *)color forSize:(CGSize)size withCornerRadius:(CGFloat)radius

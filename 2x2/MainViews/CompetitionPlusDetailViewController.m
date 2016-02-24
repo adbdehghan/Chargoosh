@@ -39,6 +39,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Get the previous view controller
+    UIViewController *previousVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count - 2];
+    
+    // Create a UIBarButtonItem
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(popViewController)];
+    
+    // Associate the barButtonItem to the previous view
+    [previousVC.navigationItem setBackBarButtonItem:barButtonItem];
     
     activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.view addSubview:activityIndicator];
@@ -48,8 +56,16 @@
     st = [[Settings alloc]init];
     
     st = [DBManager selectSetting][0];
+ 
+    UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
+    label.text=self.competitionTitle;
+    label.textColor=[UIColor whiteColor];
+    label.backgroundColor =[UIColor clearColor];
+    label.adjustsFontSizeToFitWidth=YES;
+    label.font = [UIFont fontWithName:@"B Yekan+" size:17];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView=label;
     
-     [self setTitle:self.competitionTitle];
     
     self.competitionDictionary = [[NSMutableDictionary alloc]init];
     
@@ -156,7 +172,7 @@
     [btn addTarget:self action:@selector(getAnswersPressed:) forControlEvents:UIControlEventTouchUpInside];
     [btn setBackgroundColor:RGBCOLOR(255, 240, 0)];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btn.titleLabel.font =[UIFont fontWithName:@"B Yekan" size:15];
+    btn.titleLabel.font =[UIFont fontWithName:@"B Yekan+" size:15];
     btn.layer.cornerRadius = 4;
     
     int btnW = 100;
@@ -164,17 +180,14 @@
     [btn setFrame:CGRectMake(btnX, surveyController.tableView.contentSize.height-40, btnW, 35)];
     
     
-    [surveyController.view addSubview:btn];
+  //  [surveyController.view addSubview:btn];
+
     
-    UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"شرکت" style:UIBarButtonItemStyleDone target:self action:@selector(getAnswersPressed:)];
     
-    UIImage *settingImage = [[UIImage imageNamed:@"checked.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [settingButton setImage:settingImage forState:UIControlStateNormal];
-    settingButton.tintColor = RGBCOLOR(255, 255, 255);
-    [settingButton addTarget:self action:@selector(getAnswersPressed:)forControlEvents:UIControlEventTouchUpInside];
-    [settingButton setFrame:CGRectMake(0, 0, 24, 24)];
-    UIBarButtonItem *settingBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingButton];
-    [self.navigationItem setRightBarButtonItem:settingBarButton];
+    [self.navigationItem setRightBarButtonItem:backButton];
+    
+
     
 }
 

@@ -113,7 +113,7 @@
                                                           userInfo:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
         
-        [self.barsInCircle remove];
+        [self.barsInCircle hide];
 //        [activityIndicator stopAnimating];
        // NSLog(@"Success %@", responseObject);
            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -130,6 +130,7 @@
                progressView.progress = 0;
                shareButton.enabled = YES;
                shareButton.titleLabel.text = @"تلاش مجدد";
+               [self.barsInCircle hide];
                [activityIndicator stopAnimating];
         ;
     }];

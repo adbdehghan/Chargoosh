@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VMaskTextField.h"
 
 @interface VerificationViewController : UIViewController
 {
-        IBOutlet UITextField *verificationCodeUiTextField;
         IBOutlet UIButton *continueButton;
 }
+@property (weak,nonatomic) IBOutlet VMaskTextField * verificationCodeUiTextField;
 @property (strong, nonatomic)  NSString *phoneNumber;
 -(IBAction)continueButton:(id)sender;
 @end

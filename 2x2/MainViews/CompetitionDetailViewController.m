@@ -60,17 +60,17 @@
     [circle.layer setCornerRadius:40];
     [topView addSubview:circle];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 120, width, 20)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, width, 20)];
     [label setText:self.competitionTitle];
     
     [label setAdjustsFontSizeToFitWidth:YES];
-    [label setFont:[UIFont fontWithName:@"B Yekan" size:19]];
+    [label setFont:[UIFont fontWithName:@"B Yekan+" size:19]];
     [label setTextAlignment:NSTextAlignmentRight];
     [label setTextColor:[UIColor whiteColor]];
     [topView addSubview:label];
     //masonary constraints for parallax view subviews (optional)
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo (circle.mas_bottom).offset (10);
+        make.top.equalTo (circle.mas_bottom).offset (5);
         make.centerX.equalTo (topView);
     }];
     [circle mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -94,12 +94,12 @@
             
             self.competitionDictionary = data;
             
-            self.content =[self.competitionDictionary valueForKey:@"content"];
+            self.content =[self.competitionDictionary valueForKey:@"html"];
             self.canParticipate = [[self.competitionDictionary valueForKey:@"canPartipiateLimit"]boolValue];
             self.timeLimitParticipate =[[self.competitionDictionary valueForKey:@"canPartipiateDate"]boolValue];
             [activityIndicator stopAnimating];
             
-            [strechy addSubview:[self scrollViewItemWithY:itemStartY andContent:self.content]];
+            [strechy addSubview:[self scrollViewItem:itemStartY andContent:self.content]];
             
         }
         
@@ -144,7 +144,7 @@
     [item setBaseWritingDirection:UITextWritingDirectionRightToLeft forRange:[item textRangeFromPosition:[item beginningOfDocument] toPosition:[item endOfDocument]]];
     
     [item setTextAlignment:NSTextAlignmentJustified];
-    [item setFont:[UIFont fontWithName:@"B Yekan" size:19]];
+    [item setFont:[UIFont fontWithName:@"B Yekan+" size:19]];
     [item setText:[NSString stringWithFormat:@"%@", content]];
     [item setEditable:NO];
     [item setSelectable:NO];
@@ -166,17 +166,64 @@
     
     button.frame = CGRectMake(self.view.bounds.size.width/2-50,size, 100, 47);
     [button setTitle:@"شرکت" forState:UIControlStateNormal];
-    button.titleLabel.font =[UIFont fontWithName:@"B Yekan" size:20];
+    button.titleLabel.font =[UIFont fontWithName:@"B Yekan+" size:20];
     [button setBackgroundColor:RGBCOLOR(255, 238, 51)];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     button.layer.cornerRadius = 6;
-    [item addSubview:button];
+   // [item addSubview:button];
     
     
     
     [strechy setContentSize:CGSizeMake(self.view.bounds.size.width , item.contentSize.height*2)];
     
     return item;
+}
+
+- (UIWebView *)scrollViewItem:(CGFloat)y andContent:(NSString*)content {
+    
+    
+    UIWebView *webViewContent = [[UIWebView alloc]initWithFrame:CGRectMake(10, y, [UIScreen mainScreen].bounds.size.width-20, self.view.bounds.size.height)];
+    webViewContent.opaque = NO;
+    webViewContent.backgroundColor = [UIColor clearColor];
+    
+    
+    NSString *css = [NSString stringWithFormat:
+                     @"<html><head><style>body {direction:rtl; background-color: transparent; text-align: %@; font-family:B Yekan;} a { color: #172983; } </style></head><span>",
+                     @"justify"];
+
+    
+    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@%@%@",
+                             css,content,
+                             @"</span></html>"];
+    
+    
+    
+    [webViewContent loadHTMLString:desc baseURL:nil];
+    
+    
+//    UITextView *item = [[UITextView alloc] initWithFrame:CGRectMake(10, y, [UIScreen mainScreen].bounds.size.width-20, self.view.bounds.size.height)];
+//    
+//    
+//    [item setBaseWritingDirection:UITextWritingDirectionRightToLeft forRange:[item textRangeFromPosition:[item beginningOfDocument] toPosition:[item endOfDocument]]];
+//    
+//    [item setTextAlignment:NSTextAlignmentJustified];
+//    [item setFont:[UIFont fontWithName:@"B Yekan" size:19]];
+//    [item setText:[NSString stringWithFormat:@"%@", content]];
+//    [item setEditable:NO];
+//    [item setSelectable:NO];
+//    //[item sizeToFit];
+//    [item layoutIfNeeded];
+//    
+//    
+//    CGRect newFrame = item.frame;
+//    newFrame.size.height = item.contentSize.height+105;
+//    item.frame = newFrame;
+//    
+// 
+//    
+//    [strechy setContentSize:CGSizeMake(self.view.bounds.size.width , item.contentSize.height*2)];
+    
+    return webViewContent;
 }
 
 
@@ -197,7 +244,7 @@
     else if(!self.timeLimitParticipate)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
-                                                        message:@"زمان شرکت در مسابقه تمام شده!"
+                                                        message:@"زمان شرکت در مسابقه هنوز نرسیده یا تمام شده!"
                                                        delegate:self
                                               cancelButtonTitle:@"خب"
                                               otherButtonTitles:nil];
@@ -227,26 +274,28 @@
     // Do any additional setup after loading the view.
     
     
-    [self setTitle:self.competitionTitle];
+    UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
+    label.text=self.competitionTitle;
+    label.textColor=[UIColor whiteColor];
+    label.backgroundColor =[UIColor clearColor];
+    label.adjustsFontSizeToFitWidth=YES;
+    label.font = [UIFont fontWithName:@"B Yekan+" size:17];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView=label;
+    
     // Get the previous view controller
     UIViewController *previousVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count - 2];
     
     // Create a UIBarButtonItem
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"بازگشت" style:UIBarButtonItemStyleBordered target:self action:@selector(popViewController)];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(popViewController)];
+    
     
     // Associate the barButtonItem to the previous view
     [previousVC.navigationItem setBackBarButtonItem:barButtonItem];
     
-    UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"شرکت" style:UIBarButtonItemStyleDone target:self action:@selector(Participate:)];
     
-    UIImage *settingImage = [[UIImage imageNamed:@"participate.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [settingButton setImage:settingImage forState:UIControlStateNormal];
-    
-    settingButton.tintColor = RGBCOLOR(255, 255, 255);
-    [settingButton addTarget:self action:@selector(Participate:)forControlEvents:UIControlEventTouchUpInside];
-    [settingButton setFrame:CGRectMake(0, 0, 24, 24)];
-    UIBarButtonItem *settingBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingButton];
-    [self.navigationItem setRightBarButtonItem:settingBarButton];
+    [self.navigationItem setRightBarButtonItem:backButton];
     
 }
 
@@ -264,13 +313,10 @@
 
 - (void)didTakePicture:(SCNavigationController *)navigationController image:(UIImage *)image {
     
-    // imageToSend = [[UIImage alloc]init];
     imageToSend = image;
     [self dismissViewControllerAnimated:YES completion:nil];
     
     [self performSelector:@selector(GotoPicker) withObject:nil afterDelay:.9];
-    
-    
     
     // [self GotoPicker];
 }

@@ -10,9 +10,19 @@
 #import "DataDownloader.h"
 #import "Settings.h"
 #import "DBManager.h"
+#import <QuartzCore/QuartzCore.h>
 
-@interface VerificationViewController ()
+@interface VerificationViewController ()<UITextFieldDelegate>
 @property (strong, nonatomic) DataDownloader *getData;
+@end
+
+@implementation CALayer (Additions)
+
+- (void)setBorderColorFromUIColor:(UIColor *)color
+{
+    self.borderColor = color.CGColor;
+}
+
 @end
 
 @implementation VerificationViewController
@@ -21,9 +31,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.verificationCodeUiTextField.mask = @"####";
+    self.verificationCodeUiTextField.delegate = self;
     
-    
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,6 +41,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    VMaskTextField * maskTextField = (VMaskTextField*) textField;
+    return  [maskTextField shouldChangeCharactersInRange:range replacementString:string];
+}
 -(IBAction)continueButton:(id)sender
 {
     continueButton.enabled = NO;
@@ -81,7 +95,7 @@
         }
     };
     
-    [self.getData GetVerificationCode:self.phoneNumber Param2:verificationCodeUiTextField.text
+    [self.getData GetVerificationCode:self.phoneNumber Param2:self.verificationCodeUiTextField.text
                          withCallback:callback];
     
     

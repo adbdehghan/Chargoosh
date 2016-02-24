@@ -13,9 +13,10 @@
 #import "MMCell.h"
 #import "SelectedViewController.h"
 #import "Competition.h"
+#import "QRCodeReaderViewController.h"
 #define URLaddress "http://www.app.chargoosh.ir/"
 
-@interface competitionListTableViewController ()
+@interface competitionListTableViewController ()<QRCodeReaderDelegate>
 @property (strong, nonatomic) DataDownloader *getData;
 @end
 
@@ -59,7 +60,6 @@ UIImage *competitionImage;
                 Competition *competition = [[Competition alloc]init];
                 competition.title =[item valueForKey:@"title"];
                 competition.competitionId =[item valueForKey:@"id"];
-                competition.score =[item valueForKey:@"score"];
                 competition.competitionUrl =[NSURL URLWithString:[NSString stringWithFormat: @"%s%@",URLaddress,[item valueForKey:@"picture"]]];
                 
                 [self.competitionList addObject:competition];
@@ -87,8 +87,10 @@ UIImage *competitionImage;
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetCompetitions:st.settingId Password:st.password
+    [self.getData GetCompetitionsForTopUsers:st.settingId Password:st.password
                      withCallback:callback];
+    
+    
 
 }
 
@@ -107,7 +109,6 @@ UIImage *competitionImage;
                 Competition *competition = [[Competition alloc]init];
                 competition.title =[item valueForKey:@"title"];
                 competition.competitionId =[item valueForKey:@"id"];
-                competition.score =[item valueForKey:@"score"];
                 competition.competitionUrl =[NSURL URLWithString:[NSString stringWithFormat: @"%s%@",URLaddress,[item valueForKey:@"picture"]]];
                 
                 [self.competitionList addObject:competition];
@@ -139,7 +140,7 @@ UIImage *competitionImage;
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetCompetitions:st.settingId Password:st.password
+    [self.getData GetCompetitionsForTopUsers:st.settingId Password:st.password
                      withCallback:callback];
 
     
@@ -291,7 +292,22 @@ UIImage *competitionImage;
     statusButton.tintColor = [UIColor whiteColor];
     
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:statusButton];
-    self.navigationItem.leftBarButtonItem = barButton;
+    
+    UIButton *barcodeButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    UIImage *barcodeImage = [UIImage imageNamed:@"m_scan.png"];
+    
+    [barcodeButton setImage:barcodeImage forState:UIControlStateNormal];
+    
+    [barcodeButton addTarget:self action:@selector(ShowQR)forControlEvents:UIControlEventTouchUpInside];
+    [barcodeButton setFrame:CGRectMake(0, 0, 20, 20)];
+    
+    
+    UIBarButtonItem *barcodeBarButton = [[UIBarButtonItem alloc] initWithCustomView:barcodeButton];
+    
+      NSArray *barButtons = @[barcodeBarButton,barButton];
+    
+    self.navigationItem.leftBarButtonItems = barButtons;
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -305,6 +321,41 @@ UIImage *competitionImage;
     
     UIBarButtonItem *settingBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingButton];
     self.navigationItem.rightBarButtonItem = settingBarButton;
+}
+
+-(void)ShowQR
+{
+    static QRCodeReaderViewController *reader = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        reader = [QRCodeReaderViewController new];
+        reader.modalPresentationStyle = UIModalPresentationFormSheet;
+    });
+    reader.delegate = self;
+    
+    [reader setCompletionWithBlock:^(NSString *resultAsString) {
+        NSLog(@"Completion with result: %@", resultAsString);
+    }];
+    
+    [self presentViewController:reader animated:YES completion:NULL];
+    
+    
+}
+
+#pragma mark - QRCodeReader Delegate Methods
+
+- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void) statusButtonAction:(id) sender

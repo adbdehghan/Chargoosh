@@ -155,7 +155,7 @@ UIImage *competitionImage;
     UIViewController *previousVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count - 2];
     
     // Create a UIBarButtonItem
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"بازگشت" style:UIBarButtonItemStyleBordered target:self action:@selector(popViewController)];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(popViewController)];
     
     // Associate the barButtonItem to the previous view
     [previousVC.navigationItem setBackBarButtonItem:barButtonItem];
@@ -232,7 +232,7 @@ UIImage *competitionImage;
     NSString *cellText =[NSString stringWithFormat:@"%@ %@",top.name,top.lastName];
     CGRect frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width , 40);
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
-    label.font = [UIFont fontWithName:@"B yekan" size:15];
+    label.font = [UIFont fontWithName:@"B Yekan+" size:15];
     label.backgroundColor = [[UIColor darkGrayColor]colorWithAlphaComponent:1];
     label.text = cellText;
     label.textColor = [UIColor whiteColor];
@@ -247,7 +247,7 @@ UIImage *competitionImage;
     
     CGRect frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width , 40);
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
-    label.font = [UIFont fontWithName:@"B yekan" size:15];
+    label.font = [UIFont fontWithName:@"B Yekan+" size:15];
     label.backgroundColor = [[UIColor lightGrayColor]colorWithAlphaComponent:1];
     label.text = top.imageDescription;
     label.textColor = [UIColor whiteColor];

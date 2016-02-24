@@ -13,9 +13,10 @@
 #import "MMCell.h"
 #import "CompetitionDetailViewController.h"
 #import "Competition.h"
+#import "QRCodeReaderViewController.h"
 #define URLaddress "http://www.app.chargoosh.ir/"
 #define RGBCOLOR(r,g,b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
-@interface CompetitionViewController ()
+@interface CompetitionViewController ()<QRCodeReaderDelegate>
 @property (strong, nonatomic) DataDownloader *getData;
 
 @end
@@ -66,12 +67,13 @@
                 Competition *competition = [[Competition alloc]init];
                 competition.title =[item valueForKey:@"title"];
                 competition.competitionId =[item valueForKey:@"id"];
+                competition.userParticipationCount =[item valueForKey:@"userCompetitionCnt"];
                 competition.score =[item valueForKey:@"score"];
                 competition.competitionUrl =[NSURL URLWithString:[NSString stringWithFormat: @"%s%@",URLaddress,[item valueForKey:@"picture"]]];
                 competition.limit =[item valueForKey:@"limitParticipate"];
                 competition.startTime =[item valueForKey:@"startTime"];
                 competition.endTime =[item valueForKey:@"endTime"];
-                
+                competition.scorePerPic =[item valueForKey:@"initScore"];
                 [self.competitionList addObject:competition];
             }
             
@@ -128,11 +130,13 @@
                 Competition *competition = [[Competition alloc]init];
                 competition.title =[item valueForKey:@"title"];
                 competition.competitionId =[item valueForKey:@"id"];
+                competition.userParticipationCount =[item valueForKey:@"userCompetitionCnt"];
                 competition.score =[item valueForKey:@"score"];
                 competition.competitionUrl =[NSURL URLWithString:[NSString stringWithFormat: @"%s%@",URLaddress,[item valueForKey:@"picture"]]];
                 competition.limit =[item valueForKey:@"limitParticipate"];
                 competition.startTime =[item valueForKey:@"startTime"];
                 competition.endTime =[item valueForKey:@"endTime"];
+                competition.scorePerPic =[item valueForKey:@"initScore"];
                 [self.competitionList addObject:competition];
             }
             
@@ -178,7 +182,21 @@
     statusButton.tintColor = [UIColor whiteColor];
     
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:statusButton];
-    self.navigationItem.leftBarButtonItem = barButton;
+    UIButton *barcodeButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    UIImage *barcodeImage = [UIImage imageNamed:@"m_scan.png"];
+    
+    [barcodeButton setImage:barcodeImage forState:UIControlStateNormal];
+    
+    [barcodeButton addTarget:self action:@selector(ShowQR)forControlEvents:UIControlEventTouchUpInside];
+    [barcodeButton setFrame:CGRectMake(0, 0, 20, 20)];
+    
+    
+    UIBarButtonItem *barcodeBarButton = [[UIBarButtonItem alloc] initWithCustomView:barcodeButton];
+    
+      NSArray *barButtons = @[barcodeBarButton,barButton];
+    
+    self.navigationItem.leftBarButtonItems = barButtons;
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -192,6 +210,41 @@
     
     UIBarButtonItem *settingBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingButton];
     self.navigationItem.rightBarButtonItem = settingBarButton;
+}
+
+-(void)ShowQR
+{
+    static QRCodeReaderViewController *reader = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        reader = [QRCodeReaderViewController new];
+        reader.modalPresentationStyle = UIModalPresentationFormSheet;
+    });
+    reader.delegate = self;
+    
+    [reader setCompletionWithBlock:^(NSString *resultAsString) {
+        NSLog(@"Completion with result: %@", resultAsString);
+    }];
+    
+    [self presentViewController:reader animated:YES completion:NULL];
+    
+    
+}
+
+#pragma mark - QRCodeReader Delegate Methods
+
+- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 #pragma mark - Table view data source
@@ -234,10 +287,10 @@
     
     cell.coinLabel.text = [NSString stringWithFormat:@"%@",competition.score];
     cell.coinLabel.textAlignment = NSTextAlignmentCenter;
-    cell.limitLabel.text = [NSString stringWithFormat:@"%@ عکس",competition.limit];
+    cell.limitLabel.text = [NSString stringWithFormat:@"%@ از %@ عکس",competition.userParticipationCount,competition.limit];
     cell.startTimeLabel.text = competition.startTime;
     cell.endTimeLabel.text = competition.endTime;
-    
+    cell.scorePerPic.text = [NSString stringWithFormat:@"%@",competition.scorePerPic];
     
     [cell.activityView startAnimating];
     

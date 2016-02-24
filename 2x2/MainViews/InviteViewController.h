@@ -7,11 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "THContactPickerView.h"
+#import <AddressBookUI/AddressBookUI.h>
+#import "THContactPickerView.h"
+#import "THContactPickerTableViewCell.h"
 
-@interface InviteViewController : UIViewController
+@interface InviteViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, THContactPickerDelegate, ABPersonViewControllerDelegate>
 {
     IBOutlet UITextField *numberUiTextField;
     IBOutlet UIButton *continueButton;
     IBOutlet UIActivityIndicatorView *activityView;
 }
+@property (nonatomic, strong) THContactPickerView *contactPickerView;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray *contacts;
+@property (nonatomic, strong) NSMutableArray *selectedContacts;
+@property (nonatomic, strong) NSArray *filteredContacts;
+
 @end

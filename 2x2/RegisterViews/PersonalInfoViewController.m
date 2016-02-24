@@ -10,10 +10,19 @@
 #import "DataDownloader.h"
 #import "Settings.h"
 #import "DBManager.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 @interface PersonalInfoViewController ()
 @property (strong, nonatomic) DataDownloader *getData;
+@end
+
+@implementation CALayer (Additions)
+
+- (void)setBorderColorFromUIColor:(UIColor *)color
+{
+    self.borderColor = color.CGColor;
+}
+
 @end
 
 @implementation PersonalInfoViewController
@@ -39,8 +48,8 @@ CGFloat animatedDistance;
 
 -(IBAction)Done:(id)sender
 {
-    if ([nameUiTextField.text length]>0 && [familyNameUiTextField.text length]>0) {
-        
+//    if ([nameUiTextField.text length]>0 && [familyNameUiTextField.text length]>0) {
+    
         doneButton.enabled = NO;
         
         RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
@@ -80,30 +89,30 @@ CGFloat animatedDistance;
         [self.getData RegisterProfile:st.settingId Password:st.password Name:nameUiTextField.text LastName:familyNameUiTextField.text Gender:gender
          
                          withCallback:callback];
-    }
-    else
-    {
-        if (![nameUiTextField.text length]>0) {
-            doneButton.enabled = YES;
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"خطا"
-                                                            message:@"لطفا نام خود را وارد نمایید."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"خب"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        }
-        else
-        {
-            doneButton.enabled = YES;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"خطا"
-                                                            message:@"لطفا نام خانوادگی خود را وارد نمایید."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"خب"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        }
-    }
+//    }
+//    else
+//    {
+//        if (![nameUiTextField.text length]>0) {
+//            doneButton.enabled = YES;
+//            
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"خطا"
+//                                                            message:@"لطفا نام خود را وارد نمایید."
+//                                                           delegate:self
+//                                                  cancelButtonTitle:@"خب"
+//                                                  otherButtonTitles:nil];
+//            [alert show];
+//        }
+//        else
+//        {
+//            doneButton.enabled = YES;
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"خطا"
+//                                                            message:@"لطفا نام خانوادگی خود را وارد نمایید."
+//                                                           delegate:self
+//                                                  cancelButtonTitle:@"خب"
+//                                                  otherButtonTitles:nil];
+//            [alert show];
+//        }
+//    }
     
 }
 

@@ -12,10 +12,11 @@
 #import "DBManager.h"
 #import "CustomTableViewCell.h"
 #import "UIView+Shadow.h"
+#import "QRCodeReaderViewController.h"
 
 #define RGBCOLOR(r,g,b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 
-@interface InboxViewController ()
+@interface InboxViewController ()<QRCodeReaderDelegate>
 @property (strong, nonatomic) DataDownloader *getData;
 
 @end
@@ -34,7 +35,7 @@ UIActivityIndicatorView *activityIndicator;
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
-
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.estimatedRowHeight = 80;
     //self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -45,6 +46,7 @@ UIActivityIndicatorView *activityIndicator;
 
 -(void)viewDidAppear:(BOOL)animated
 {
+  
     self.messageDictionary = [[NSMutableDictionary alloc]init];
     self.messageList = [[NSMutableArray alloc]init];
     self.messageDateList = [[NSMutableArray alloc]init];
@@ -63,7 +65,7 @@ UIActivityIndicatorView *activityIndicator;
             for (NSString *item in self.messageDictionary)
             {
                 [self.messageList addObject:[item valueForKey:@"content"]];
-                [self.messageDateList addObject:[item valueForKey:@"assignDate"]];
+                [self.messageDateList addObject:[item valueForKey:@"assignDateString"]];
             }
             
             [activityIndicator stopAnimating];
@@ -90,6 +92,7 @@ UIActivityIndicatorView *activityIndicator;
     
 }
 
+
 - (void)refresh:(UIRefreshControl *)refreshControl {
     
     
@@ -109,7 +112,7 @@ UIActivityIndicatorView *activityIndicator;
             for (NSString *item in self.messageDictionary)
             {
                 [self.messageList addObject:[item valueForKey:@"content"]];
-                [self.messageDateList addObject:[item valueForKey:@"assignDate"]];
+                [self.messageDateList addObject:[item valueForKey:@"assignDateString"]];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -148,7 +151,21 @@ UIActivityIndicatorView *activityIndicator;
     statusButton.tintColor = [UIColor whiteColor];
     
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:statusButton];
-    self.navigationItem.leftBarButtonItem = barButton;
+    UIButton *barcodeButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    UIImage *barcodeImage = [UIImage imageNamed:@"m_scan.png"];
+    
+    [barcodeButton setImage:barcodeImage forState:UIControlStateNormal];
+    
+    [barcodeButton addTarget:self action:@selector(ShowQR)forControlEvents:UIControlEventTouchUpInside];
+    [barcodeButton setFrame:CGRectMake(0, 0, 20, 20)];
+    
+    
+    UIBarButtonItem *barcodeBarButton = [[UIBarButtonItem alloc] initWithCustomView:barcodeButton];
+    
+      NSArray *barButtons = @[barcodeBarButton,barButton];
+    
+    self.navigationItem.leftBarButtonItems = barButtons;
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -164,7 +181,40 @@ UIActivityIndicatorView *activityIndicator;
     self.navigationItem.rightBarButtonItem = settingBarButton;
 }
 
+-(void)ShowQR
+{
+    static QRCodeReaderViewController *reader = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        reader = [QRCodeReaderViewController new];
+        reader.modalPresentationStyle = UIModalPresentationFormSheet;
+    });
+    reader.delegate = self;
+    
+    [reader setCompletionWithBlock:^(NSString *resultAsString) {
+        NSLog(@"Completion with result: %@", resultAsString);
+    }];
+    
+    [self presentViewController:reader animated:YES completion:NULL];
+    
+    
+}
 
+#pragma mark - QRCodeReader Delegate Methods
+
+- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 #pragma mark - Table view data source
 
@@ -181,6 +231,9 @@ UIActivityIndicatorView *activityIndicator;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    
     self.tableView.estimatedRowHeight = 100;
     
     static NSString *cellIdentifier = @"CellIdentifier";
@@ -191,78 +244,84 @@ UIActivityIndicatorView *activityIndicator;
         cell = [[CustomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
     }
-    
-    NSString *cellText = [self.messageList objectAtIndex:indexPath.row];
-    NSString *dateText = [self.messageDateList objectAtIndex:indexPath.row];
-    NSMutableAttributedString* attributedString = [[NSMutableAttributedString alloc] initWithString:cellText];
-    
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:6];
-    //    paragraphStyle.alignment = NSTextAlignmentJustified;    // To justified text
-    
-    
-    
-    
-    
-
-    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [cellText length])];
-    
-    cell.titleLabel.attributedText = attributedString;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    cell.dateTimeLabel.text = dateText;
-    
-    cell.titleLabel.textColor=[UIColor blackColor];
-    cell.titleLabel.backgroundColor = [UIColor clearColor];
-    
-    cell.background.layer.cornerRadius = 6;
-
-    cell.background.clipsToBounds = YES;
-    cell.background.backgroundColor = RGBCOLOR(225, 225, 225);
-    
-    cell.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.titleLabel.numberOfLines = 0;
-    
-    
-    [cell.titleLabel setTextAlignment:NSTextAlignmentRight];
-    [cell.titleLabel setFont:[UIFont fontWithName:@"B Yekan" size:15]];
-    [cell.titleLabel sizeToFit];
-    [cell setNeedsUpdateConstraints];
-    [cell updateConstraintsIfNeeded];
-
+    if ([self.messageList  count]>0) {
+        NSString *cellText = [self.messageList objectAtIndex:indexPath.row];
+        NSString *dateText = [self.messageDateList objectAtIndex:indexPath.row];
+        NSMutableAttributedString* attributedString = [[NSMutableAttributedString alloc] initWithString:cellText];
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:6];
+        //    paragraphStyle.alignment = NSTextAlignmentJustified;    // To justified text
+        
+        
+        
+        
+        
+        
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [cellText length])];
+        
+        cell.titleLabel.attributedText = attributedString;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.dateTimeLabel.text = dateText;
+        
+        cell.titleLabel.textColor=[UIColor blackColor];
+        cell.titleLabel.backgroundColor = [UIColor clearColor];
+        
+        cell.background.layer.cornerRadius = 6;
+        
+        cell.background.clipsToBounds = YES;
+        cell.background.backgroundColor = RGBCOLOR(225, 225, 225);
+        
+        cell.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.titleLabel.numberOfLines = 0;
+        
+        
+        [cell.titleLabel setTextAlignment:NSTextAlignmentRight];
+        [cell.titleLabel setFont:[UIFont fontWithName:@"B Yekan+" size:15]];
+        [cell.titleLabel sizeToFit];
+        [cell setNeedsUpdateConstraints];
+        [cell updateConstraintsIfNeeded];
+    }
     return cell;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellText = [self.messageList objectAtIndex:indexPath.row];
+    if ([self.messageList  count]>0) {
+        NSString *cellText = [self.messageList objectAtIndex:indexPath.row];
+        
+        NSMutableAttributedString* attributedString = [[NSMutableAttributedString alloc] initWithString:cellText];
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:6];
+        //    paragraphStyle.alignment = NSTextAlignmentJustified;    // To justified text
+        
+        
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [cellText length])];
+        
+        UILabel *textLabel = [[UILabel alloc]init];
+        
+        textLabel.frame =CGRectMake(0, 0,tableView.bounds.size.width - 30 ,9999 );
+        
+        textLabel.attributedText = attributedString;
+        
+        textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        textLabel.numberOfLines = 0;
+        [textLabel setTextAlignment:NSTextAlignmentRight];
+        [textLabel setFont:[UIFont fontWithName:@"B Yekan+" size:15]];
+        
+        [textLabel sizeToFit];
+        
+        int size = textLabel.frame.size.height;
+        
+        return size + 70;
+    }
     
-    NSMutableAttributedString* attributedString = [[NSMutableAttributedString alloc] initWithString:cellText];
-    
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:6];
-    //    paragraphStyle.alignment = NSTextAlignmentJustified;    // To justified text
-    
-    
-    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [cellText length])];
-    
-    UILabel *textLabel = [[UILabel alloc]init];
-    
-    textLabel.frame =CGRectMake(0, 0,tableView.bounds.size.width - 30 ,9999 );
-    
-    textLabel.attributedText = attributedString;
-    
-    textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    textLabel.numberOfLines = 0;
-    [textLabel setTextAlignment:NSTextAlignmentRight];
-    [textLabel setFont:[UIFont fontWithName:@"B Yekan" size:15]];
-    
-    [textLabel sizeToFit];
-    
-    int size = textLabel.frame.size.height;
-    
-    return size + 70;
+    else
+        
+        return 50;
 }
 
 

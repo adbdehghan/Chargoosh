@@ -16,8 +16,15 @@
 #import "iconCollectionViewCell.h"
 #import "HomeIcon.h"
 #import "HomeDetailViewController.h"
+#import "CompetitionDetailViewController.h"
+#import "CompetitionPlusDetailViewController.h"
+#import "SelectedViewController.h"
+#import "QRCodeReaderViewController.h"
 #define URLaddressPic "http://www.app.chargoosh.ir/"
-@interface HomeViewController ()
+static NSString *Version = @"\"1.2\"";
+static NSString *currentVersion = @"\"1.2\"";
+static NSString *iconId;
+@interface HomeViewController ()<QRCodeReaderDelegate>
 {
     Home *home;
     NSString *content;
@@ -48,7 +55,7 @@
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [collectionViewOutlet addSubview:refreshControl];
     collectionViewOutlet.alwaysBounceVertical = YES;
-    
+    collectionViewOutlet.backgroundColor = [UIColor clearColor];
     activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
@@ -80,8 +87,8 @@
             [commentUiTextView setEditable:NO];
             [commentUiTextView setSelectable:NO];
             [commentUiTextView setText:home.comment];
-            
-            
+            commentUiTextView.textColor = [UIColor whiteColor];
+            commentUiTextView.font = [UIFont fontWithName:@"B Yekan+" size:15];
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [collectionViewOutlet reloadData];
@@ -116,6 +123,53 @@
     
     
     [self GetProfilePic:st];
+    
+    
+    
+    RequestCompleteBlock callback2 = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
+        if (wasSuccessful) {
+            
+            currentVersion =[data valueForKey:@"version"];
+            
+            if (![currentVersion isEqualToString:Version])
+            {
+                
+                [self performSegueWithIdentifier:@"Update" sender:self];
+                
+            }
+            
+        }
+        
+        else
+        
+        {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"خطا"
+//                                                            message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
+//                                                           delegate:self
+//                                                  cancelButtonTitle:@"خب"
+//                                                  otherButtonTitles:nil];
+//            [alert show];
+            
+            
+            
+            NSLog( @"Unable to fetch Data. Try again.");
+        }
+    };
+    
+    [self.getData GetVersion:@"" withCallback:callback2];
+    
+}
+
+
+-(void)viewDidAppear:(BOOL)animated
+{
+
+      [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(notify) name:@"post" object:nil];
+}
+
+-(void)notify{
+    
+    [[self.tabBarController.tabBar.items objectAtIndex:0] setBadgeValue:@"⚡︎"];
     
 }
 
@@ -306,7 +360,7 @@
         [cell.iconImage setImage:[self.cachedImages valueForKey:identifier] forState:UIControlStateNormal];
         
         cell.iconImage.tag = [homeIcon.iconId integerValue];
-        
+        homeIcon.image = [self.cachedImages valueForKey:identifier];
         [cell.activityView stopAnimating];
     }
     else
@@ -324,10 +378,9 @@
                                 
                                 [cell.iconImage addTarget:self action:@selector(actionButton:)forControlEvents:UIControlEventTouchUpInside];
                                 [cell.iconImage setImage: [self.cachedImages valueForKey:identifier] forState:UIControlStateNormal];
-                                
+                                homeIcon.image = [self.cachedImages valueForKey:identifier];
                                 cell.iconImage.tag = [homeIcon.iconId integerValue];
 
-                                
                                 [cell.activityView stopAnimating];
                             }
                             
@@ -376,10 +429,30 @@
                     [self performSegueWithIdentifier:@"Show" sender:self];
                     
                 }
-                else if ([item.type isEqualToString:@"GOTO"])
+                
+                else
                 {
-                    [self performSegueWithIdentifier:content sender:self];
+                    iconId = content;
+                    [self performSegueWithIdentifier:item.type sender:self];
+                
                 }
+                
+                
+                
+//                else if ([item.type isEqualToString:@"GOTO"])
+//                {
+//                    [self performSegueWithIdentifier:content sender:self];
+//                }
+//                
+//                else if ([item.type isEqualToString:@"Competiton"])
+//                {
+//                    [self performSegueWithIdentifier:@"HomeToCompetition" sender:self];
+//                }
+//                
+//                else if ([item.type isEqualToString:@"Poll"])
+//                {
+//                    [self performSegueWithIdentifier:@"HomeToPoll" sender:self];
+//                }
             }
         }
         
@@ -404,20 +477,45 @@
 
 - (void)CreateNavigationBarButtons {
     
+    UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
+    label.text=self.navigationItem.title;
+    label.textColor=[UIColor whiteColor];
+    label.backgroundColor =[UIColor clearColor];
+    label.adjustsFontSizeToFitWidth=YES;
+    label.font = [UIFont fontWithName:@"B Yekan+" size:17];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView=label;
+    
     UIButton *statusButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [statusButton addTarget:self action:@selector(statusButtonAction:)forControlEvents:UIControlEventTouchUpInside];
     [statusButton setFrame:CGRectMake(0, 0, 24, 24)];
     
-    UIImage *image = [[UIImage imageNamed:@"status.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *image = [[UIImage imageNamed:@"status@2x.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [statusButton setImage:image forState:UIControlStateNormal];
     statusButton.tintColor = [UIColor whiteColor];
     
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:statusButton];
-    self.navigationItem.leftBarButtonItem = barButton;
+    
+    
+    UIButton *barcodeButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    UIImage *barcodeImage = [UIImage imageNamed:@"m_scan.png"];
+    
+    [barcodeButton setImage:barcodeImage forState:UIControlStateNormal];
+    barcodeButton.tintColor = [UIColor whiteColor];
+    [barcodeButton addTarget:self action:@selector(ShowQR)forControlEvents:UIControlEventTouchUpInside];
+    [barcodeButton setFrame:CGRectMake(0, 0, 20, 20)];
+    
+    
+    UIBarButtonItem *barcodeBarButton = [[UIBarButtonItem alloc] initWithCustomView:barcodeButton];
+    
+      NSArray *barButtons = @[barcodeBarButton,barButton];
+    
+    self.navigationItem.leftBarButtonItems = barButtons;
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
-    UIImage *settingImage = [[UIImage imageNamed:@"setting.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *settingImage = [[UIImage imageNamed:@"setting@2x.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [settingButton setImage:settingImage forState:UIControlStateNormal];
     
     settingButton.tintColor = [UIColor whiteColor];
@@ -429,16 +527,50 @@
     self.navigationItem.rightBarButtonItem = settingBarButton;
 }
 
+-(void)ShowQR
+{
+    static QRCodeReaderViewController *reader = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        reader = [QRCodeReaderViewController new];
+        reader.modalPresentationStyle = UIModalPresentationFormSheet;
+    });
+    reader.delegate = self;
+    
+    [reader setCompletionWithBlock:^(NSString *resultAsString) {
+        NSLog(@"Completion with result: %@", resultAsString);
+    }];
+    
+    [self presentViewController:reader animated:YES completion:NULL];
+    
+    
+}
+
+#pragma mark - QRCodeReader Delegate Methods
+
+- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 
 - (void) statusButtonAction:(id) sender
 {
-    [self performSegueWithIdentifier:@"Status" sender:self];
+    [self performSegueWithIdentifier:@"GOTOstatus" sender:self];
 }
 
 - (void) settingButtonAction:(id) sender
 {
-    [self performSegueWithIdentifier:@"setting" sender:self];
+    [self performSegueWithIdentifier:@"GOTOsetting" sender:self];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(ChangeProfilePic)
                                                  name:@"ProfilePicIsChanged"
@@ -469,7 +601,6 @@
             home.dataDictionary = self.homeDictionary;
             
             home = [home init];
-            
             
             nameUiLabel.text = [NSString stringWithFormat:@"سلام %@", home.name];
             dayWeekUiLabel.text = home.weekDay;
@@ -508,6 +639,31 @@
         destination.content = content;
         destination.detailTitle = title;
         destination.coverImage = imageToDetail;
+    }
+    else
+    {
+        if ([segue.identifier isEqual:@"GOTOcompetition"]) {
+            
+            CompetitionDetailViewController *destination = [segue destinationViewController];
+            destination.competitionId = iconId;
+            destination.competitionTitle = title;
+            destination.coverImage = imageToDetail;
+        }
+        
+        else if ([segue.identifier isEqual:@"GOTOcompetitionplus"])
+        {
+            CompetitionPlusDetailViewController *destination = [segue destinationViewController];
+            destination.competitionTitle = title;
+            destination.competitionId = iconId;
+        
+        }
+        else if ([segue.identifier isEqual:@"GOTOtopparticipates"])
+        {
+            
+            SelectedViewController *destination = [segue destinationViewController];
+            destination.competitionId = iconId;
+        }
+    
     }
     
 }

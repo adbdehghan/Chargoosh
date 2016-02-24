@@ -18,13 +18,13 @@ typedef void (^ImageRequestCompleteBlock) (BOOL wasSuccessful,UIImage *image);
 - (void)GetVerificationCode:(NSString *)param1 Param2:(NSString*)param2 withCallback:(RequestCompleteBlock)callback;
 
 - (void)RegisterProfile:(NSString *)phoneNumber Password:(NSString*)password Name:(NSString*)name LastName:(NSString*)lastName Gender:(NSString*)gender withCallback:(RequestCompleteBlock)callback;
-
+- (void)GetVersion:(NSString *)params withCallback:(RequestCompleteBlock)callback;
 - (void)GetCompetitions:(NSString *)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback;
 - (void)GetCompetition:(NSString *)phoneNumber Password:(NSString*)password CompetitionId:(NSString*)Id withCallback:(RequestCompleteBlock)callback;
-
+- (void)GetCompetitionsForTopUsers:(NSString *)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback;
 - (void)GetMessages:(NSString *)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback;
 - (void)GetTopParticipates:(NSString *)competitionid withCallback:(RequestCompleteBlock)callback;
-- (void)GetPolls:(NSString*)param withCallback:(RequestCompleteBlock)callback;
+- (void)GetPolls:(NSString*)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback;
 
 - (void)GetPoll:(NSString*)pollId phoneNumber:(NSString *)phoneNumber withCallback:(RequestCompleteBlock)callback;
 

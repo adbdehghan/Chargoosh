@@ -39,17 +39,17 @@
     [circle.layer setCornerRadius:40];
     [topView addSubview:circle];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 120, width, 20)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, width, 20)];
     [label setText:self.detailTitle];
     
     [label setAdjustsFontSizeToFitWidth:YES];
-    [label setFont:[UIFont fontWithName:@"B Yekan" size:19]];
+    [label setFont:[UIFont fontWithName:@"B Yekan+" size:19]];
     [label setTextAlignment:NSTextAlignmentRight];
     [label setTextColor:[UIColor whiteColor]];
     [topView addSubview:label];
     //masonary constraints for parallax view subviews (optional)
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo (circle.mas_bottom).offset (10);
+        make.top.equalTo (circle.mas_bottom).offset (5);
         make.centerX.equalTo (topView);
     }];
     [circle mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -77,7 +77,7 @@
     [item setBaseWritingDirection:UITextWritingDirectionRightToLeft forRange:[item textRangeFromPosition:[item beginningOfDocument] toPosition:[item endOfDocument]]];
     
     [item setTextAlignment:NSTextAlignmentJustified];
-    [item setFont:[UIFont fontWithName:@"B Yekan" size:19]];
+    [item setFont:[UIFont fontWithName:@"B Yekan+" size:19]];
     [item setText:[NSString stringWithFormat:@"%@", content]];
     [item setEditable:NO];
     [item setSelectable:NO];
@@ -99,13 +99,20 @@
 - (void)CustomizeNavigationBar {
     // Do any additional setup after loading the view.
     
-    
-    [self setTitle:self.detailTitle];
+    UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
+    label.text=self.detailTitle;
+    label.textColor=[UIColor whiteColor];
+    label.backgroundColor =[UIColor clearColor];
+    label.adjustsFontSizeToFitWidth=YES;
+    label.font = [UIFont fontWithName:@"B Yekan+" size:17];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView=label;
+
     // Get the previous view controller
     UIViewController *previousVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count - 2];
     
     // Create a UIBarButtonItem
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"بازگشت" style:UIBarButtonItemStyleBordered target:self action:@selector(popViewController)];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleBordered target:self action:@selector(popViewController)];
     
     // Associate the barButtonItem to the previous view
     [previousVC.navigationItem setBackBarButtonItem:barButtonItem];

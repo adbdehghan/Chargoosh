@@ -61,7 +61,7 @@
     [lbl setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [lbl setAdjustsFontSizeToFitWidth:YES];
     [lbl setMinimumScaleFactor:8./15.];
-    [lbl setFont:[UIFont fontWithName:@"B Yekan" size:15]];
+    [lbl setFont:[UIFont fontWithName:@"B Yekan+" size:15]];
     [lbl setBackgroundColor:[UIColor clearColor]];
     [lbl setTextAlignment:NSTextAlignmentCenter];
     [lbl setText:[dict objectForKey:@"text"]];
