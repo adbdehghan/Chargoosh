@@ -94,7 +94,7 @@
             
             self.competitionDictionary = data;
             
-            self.content =[self.competitionDictionary valueForKey:@"html"];
+            self.content =[self.competitionDictionary valueForKey:@"content"];
             self.canParticipate = [[self.competitionDictionary valueForKey:@"canPartipiateLimit"]boolValue];
             self.timeLimitParticipate =[[self.competitionDictionary valueForKey:@"canPartipiateDate"]boolValue];
             [activityIndicator stopAnimating];
@@ -121,8 +121,7 @@
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetCompetition:st.settingId Password:st.password CompetitionId:self.competitionId
-                    withCallback:callback];
+    [self.getData GetCompetition:st.accesstoken CompetitionId:self.competitionId withCallback:callback];
     
 }
 
@@ -182,7 +181,7 @@
 - (UIWebView *)scrollViewItem:(CGFloat)y andContent:(NSString*)content {
     
     
-    UIWebView *webViewContent = [[UIWebView alloc]initWithFrame:CGRectMake(10, y, [UIScreen mainScreen].bounds.size.width-20, self.view.bounds.size.height)];
+    UIWebView *webViewContent = [[UIWebView alloc]initWithFrame:CGRectMake(10, y, [UIScreen mainScreen].bounds.size.width-20, self.view.bounds.size.height-130)];
     webViewContent.opaque = NO;
     webViewContent.backgroundColor = [UIColor clearColor];
     
@@ -200,28 +199,7 @@
     
     [webViewContent loadHTMLString:desc baseURL:nil];
     
-    
-//    UITextView *item = [[UITextView alloc] initWithFrame:CGRectMake(10, y, [UIScreen mainScreen].bounds.size.width-20, self.view.bounds.size.height)];
-//    
-//    
-//    [item setBaseWritingDirection:UITextWritingDirectionRightToLeft forRange:[item textRangeFromPosition:[item beginningOfDocument] toPosition:[item endOfDocument]]];
-//    
-//    [item setTextAlignment:NSTextAlignmentJustified];
-//    [item setFont:[UIFont fontWithName:@"B Yekan" size:19]];
-//    [item setText:[NSString stringWithFormat:@"%@", content]];
-//    [item setEditable:NO];
-//    [item setSelectable:NO];
-//    //[item sizeToFit];
-//    [item layoutIfNeeded];
-//    
-//    
-//    CGRect newFrame = item.frame;
-//    newFrame.size.height = item.contentSize.height+105;
-//    item.frame = newFrame;
-//    
-// 
-//    
-//    [strechy setContentSize:CGSizeMake(self.view.bounds.size.width , item.contentSize.height*2)];
+
     
     return webViewContent;
 }
@@ -230,34 +208,34 @@
 -(void)Participate:(id)sender
 {
     
-    if (!self.canParticipate) {
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
-                                                        message:@"شما از تمام شانس شرکت در مسابقه خود استفاده کرده اید!"
-                                                       delegate:self
-                                              cancelButtonTitle:@"خب"
-                                              otherButtonTitles:nil];
-        [alert show];
-        
-    }
-    
-    else if(!self.timeLimitParticipate)
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
-                                                        message:@"زمان شرکت در مسابقه هنوز نرسیده یا تمام شده!"
-                                                       delegate:self
-                                              cancelButtonTitle:@"خب"
-                                              otherButtonTitles:nil];
-        [alert show];
-    
-    }
-    else
-    {
+//    if (!self.canParticipate) {
+//        
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+//                                                        message:@"شما از تمام شانس شرکت در مسابقه خود استفاده کرده اید!"
+//                                                       delegate:self
+//                                              cancelButtonTitle:@"خب"
+//                                              otherButtonTitles:nil];
+//        [alert show];
+//        
+//    }
+//    
+//    else if(!self.timeLimitParticipate)
+//    {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+//                                                        message:@"زمان شرکت در مسابقه هنوز نرسیده یا تمام شده!"
+//                                                       delegate:self
+//                                              cancelButtonTitle:@"خب"
+//                                              otherButtonTitles:nil];
+//        [alert show];
+//    
+//    }
+//    else
+//    {
         SCNavigationController *nav = [[SCNavigationController alloc] init];
         nav.scNaigationDelegate = self;
         [nav showCameraWithParentController:self];
         
-    }
+//    }
     
 }
 
@@ -369,8 +347,7 @@
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetCompetition:st.settingId Password:st.password CompetitionId:self.competitionId
-                    withCallback:callback];
+    [self.getData GetCompetition:st.accesstoken CompetitionId:self.competitionId withCallback:callback];
     
     [[self.tabBarController.tabBar.items objectAtIndex:0] setBadgeValue:@"⚡︎"];
 }

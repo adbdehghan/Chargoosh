@@ -11,4 +11,5 @@
 @implementation Settings
 @synthesize settingId = _settingId;
 @synthesize password =_password;
+@synthesize accesstoken = accesstoken;
 @end

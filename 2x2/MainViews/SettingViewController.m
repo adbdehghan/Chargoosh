@@ -16,8 +16,8 @@
 #import "Settings.h"
 #import "DataDownloader.h"
 #import "DXAlertView.h"
-#define URLaddress "http://www.app.chargoosh.ir/api/ProfileManager/ChangePicture"
-#define URLaddressPic "http://www.app.chargoosh.ir/"
+#define URLaddress "http://www.newapp.chargoosh.ir/api/register/ChangePicture"
+#define URLaddressPic "http://www.newapp.chargoosh.ir/"
 #import "UIImageView+WebCache.h"
 
 @interface SettingViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate,RSKImageCropViewControllerDelegate>

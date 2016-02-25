@@ -65,7 +65,8 @@
     //add dummy scroll view items
     float itemStartY = topView.frame.size.height + 10;
     
-    [strechy addSubview:[self scrollViewItemWithY:itemStartY andContent:self.content]];
+//    [strechy addSubview:[self scrollViewItemWithY:itemStartY andContent:self.content]];
+    [strechy addSubview:[self scrollViewItem:itemStartY andContent:self.content]];
 }
 
 - (UITextView *)scrollViewItemWithY:(CGFloat)y andContent:(NSString*)content {
@@ -94,6 +95,33 @@
     [strechy setContentSize:CGSizeMake(self.view.bounds.size.width , item.contentSize.height*2)];
     
     return item;
+}
+
+
+- (UIWebView *)scrollViewItem:(CGFloat)y andContent:(NSString*)content {
+    
+    
+    UIWebView *webViewContent = [[UIWebView alloc]initWithFrame:CGRectMake(10, y, [UIScreen mainScreen].bounds.size.width-20, self.view.bounds.size.height-130)];
+    webViewContent.opaque = NO;
+    webViewContent.backgroundColor = [UIColor clearColor];
+    
+    
+    NSString *css = [NSString stringWithFormat:
+                     @"<html><head><style>body {direction:rtl; background-color: transparent; text-align: %@; font-family:B Yekan+;} a { color: #172983; } </style></head><span>",
+                     @"justify"];
+    
+    
+    NSMutableString *desc = [NSMutableString stringWithFormat:@"%@%@%@",
+                             css,content,
+                             @"</span></html>"];
+    
+    
+    
+    [webViewContent loadHTMLString:desc baseURL:nil];
+    
+    
+    
+    return webViewContent;
 }
 
 - (void)CustomizeNavigationBar {

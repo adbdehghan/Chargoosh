@@ -86,8 +86,7 @@ UIActivityIndicatorView *activityIndicator;
         }
     };
     
-    [self.getData GetMessages:st.settingId Password:st.password
-                 withCallback:callback];
+    [self.getData GetMessages:st.accesstoken withCallback:callback];
     
     
 }
@@ -136,8 +135,7 @@ UIActivityIndicatorView *activityIndicator;
         }
     };
     
-    [self.getData GetMessages:st.settingId Password:st.password
-                 withCallback:callback];
+    [self.getData GetMessages:st.accesstoken withCallback:callback];
     
 }
 

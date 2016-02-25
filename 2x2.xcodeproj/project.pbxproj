@@ -145,6 +145,7 @@
 		64B734A61C7C6EF2004B8B4F /* downarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 64B734A51C7C6EF2004B8B4F /* downarrow.png */; };
 		64B734A81C7C732A004B8B4F /* close 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 64B734A71C7C732A004B8B4F /* close 2.png */; };
 		64C38B6A1AB1478E004A05D3 /* ayandehLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 64C38B691AB1478E004A05D3 /* ayandehLogo.png */; };
+		64D6166B1C7F14B6004C1467 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64D6166A1C7F14B6004C1467 /* Launch Screen.storyboard */; };
 		64D9A83A1AE7BEDD00221B6E /* updateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9A8391AE7BEDD00221B6E /* updateViewController.m */; };
 		64D9A83C1AE7C1D900221B6E /* backOutOfdate.png in Resources */ = {isa = PBXBuildFile; fileRef = 64D9A83B1AE7C1D900221B6E /* backOutOfdate.png */; };
 		64D9DA611AAD158A006D4B26 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 64D9DA601AAD158A006D4B26 /* avatar.png */; };
@@ -466,6 +467,7 @@
 		64B734A51C7C6EF2004B8B4F /* downarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downarrow.png; sourceTree = "<group>"; };
 		64B734A71C7C732A004B8B4F /* close 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close 2.png"; sourceTree = "<group>"; };
 		64C38B691AB1478E004A05D3 /* ayandehLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ayandehLogo.png; sourceTree = "<group>"; };
+		64D6166A1C7F14B6004C1467 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		64D9A8381AE7BEDD00221B6E /* updateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = updateViewController.h; sourceTree = "<group>"; };
 		64D9A8391AE7BEDD00221B6E /* updateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = updateViewController.m; sourceTree = "<group>"; };
 		64D9A83B1AE7C1D900221B6E /* backOutOfdate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backOutOfdate.png; sourceTree = "<group>"; };
@@ -1306,6 +1308,7 @@
 			isa = PBXGroup;
 			children = (
 				640323EF1A9BA467000E1469 /* Main.storyboard */,
+				64D6166A1C7F14B6004C1467 /* Launch Screen.storyboard */,
 			);
 			name = StoryBoard;
 			sourceTree = "<group>";
@@ -1560,6 +1563,7 @@
 			files = (
 				64D9DA611AAD158A006D4B26 /* avatar.png in Resources */,
 				6403240F1A9BE5E3000E1469 /* back.png in Resources */,
+				64D6166B1C7F14B6004C1467 /* Launch Screen.storyboard in Resources */,
 				6427D29F1C7A2BE5004E19F0 /* competition@2x.png in Resources */,
 				640323F11A9BA467000E1469 /* Main.storyboard in Resources */,
 				645871B41AA3D453009D2945 /* flashing_on@2x.png in Resources */,

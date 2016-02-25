@@ -14,7 +14,7 @@
 #import "CompetitionDetailViewController.h"
 #import "Competition.h"
 #import "QRCodeReaderViewController.h"
-#define URLaddress "http://www.app.chargoosh.ir/"
+#define URLaddress "http://new.chargoosh.ir"
 #define RGBCOLOR(r,g,b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 @interface CompetitionViewController ()<QRCodeReaderDelegate>
 @property (strong, nonatomic) DataDownloader *getData;
@@ -99,8 +99,7 @@
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetCompetitions:st.settingId Password:st.password
-                     withCallback:callback];
+    [self.getData GetCompetitions:@"d017bb5e-aa26-40b4-a62d-92c5d9552f05" token:st.accesstoken withCallback:callback];
     
     
 }
@@ -166,9 +165,7 @@
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetCompetitions:st.settingId Password:st.password
-                     withCallback:callback];
-    
+    [self.getData GetCompetitions:@"d017bb5e-aa26-40b4-a62d-92c5d9552f05" token:st.accesstoken withCallback:callback];
     
 }
 
@@ -311,10 +308,10 @@
     else
     {
         // download the image asynchronously
-        if (self.tableView.dragging == NO && self.tableView.decelerating == NO)
-        {
-            
-            
+//        if (self.tableView.dragging == NO && self.tableView.decelerating == NO)
+//        {
+//            
+        
             [self downloadImageWithURL:competition.competitionUrl identifier:identifier completionBlock:^(BOOL succeeded, NSMutableDictionary *image) {
                 if (succeeded) {
                     // change the image in the cell
@@ -333,7 +330,7 @@
                     }
                 }
             }];
-        }
+//        }
         cell.mmimageView.image = nil;
         
     }

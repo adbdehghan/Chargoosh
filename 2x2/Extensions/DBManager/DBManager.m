@@ -70,7 +70,7 @@ static FMDatabase *shareDataBase = nil;
             shareDataBase = [DBManager createDataBase];
             if ([shareDataBase open]) {
                 if (![DBManager isTableExist:@"setting_table"]) {
-                    NSString *sql = @"CREATE TABLE \"setting_table\" (\"setting_id\" TEXT PRIMARY KEY  NOT NULL , \"password\" TEXT NOT NULL)";
+                    NSString *sql = @"CREATE TABLE \"setting_table\" (\"setting_id\" TEXT PRIMARY KEY  NOT NULL , \"password\" TEXT NOT NULL, \"accesstoken\" TEXT NOT NULL)";
                     NSLog(@"no Medicine ");
                     [shareDataBase executeUpdate:sql];
                 }
@@ -103,7 +103,7 @@ static FMDatabase *shareDataBase = nil;
     shareDataBase = [DBManager createDataBase];
     if ([shareDataBase open]) {
         isOk = [shareDataBase executeUpdate:
-                @"INSERT INTO \"setting_table\" (\"setting_id\",\"password\") VALUES(?,?)",Data.settingId,Data.password];
+                @"INSERT INTO \"setting_table\" (\"setting_id\",\"password\",\"accesstoken\") VALUES(?,?,?)",Data.settingId,Data.password,Data.accesstoken];
         [shareDataBase close];
     }
     return isOk;
@@ -117,8 +117,9 @@ static FMDatabase *shareDataBase = nil;
         FMResultSet *s = [shareDataBase executeQuery:[NSString stringWithFormat:@"SELECT * FROM \"setting_table\" WHERE \"setting_id\" = '%@'",SettingId]];
         if ([s next]) {
             m = [[Settings alloc] init];
-            m.SettingId = [s stringForColumn:@"setting_id"];
+            m.settingId = [s stringForColumn:@"setting_id"];
             m.password = [s stringForColumn:@"password"];
+            m.accesstoken = [s stringForColumn:@"accesstoken"];
         }
         [shareDataBase close];
     }
@@ -145,8 +146,9 @@ static FMDatabase *shareDataBase = nil;
         FMResultSet *s = [shareDataBase executeQuery:@"SELECT * FROM \"setting_table\""];
         while ([s next]) {
             m = [[Settings alloc] init];
-            m.SettingId = [s stringForColumn:@"setting_id"];
+            m.settingId = [s stringForColumn:@"setting_id"];
             m.password = [s stringForColumn:@"password"];
+            m.accesstoken = [s stringForColumn:@"accesstoken"];
             [settingArray addObject:m];
         }
         

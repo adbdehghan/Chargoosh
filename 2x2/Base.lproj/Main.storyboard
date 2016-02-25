@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LKw-XR-zNX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DIz-bK-N9V">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -64,9 +64,10 @@
             <string>BYekan+</string>
             <string>BYekan+</string>
             <string>BYekan+</string>
+            <string>BYekan+</string>
+            <string>BYekan+</string>
         </mutableArray>
         <mutableArray key="Yekan.ttf">
-            <string>BYekan</string>
             <string>BYekan</string>
             <string>BYekan</string>
             <string>BYekan</string>
@@ -606,7 +607,7 @@
                                     <segment title="مرد"/>
                                     <segment title="زن"/>
                                 </segments>
-                                <color key="tintColor" red="0.95294117649999999" green="0.1176470588" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.027450980390000001" green="0.4823529412" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                             </segmentedControl>
                             <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="استان محل سکونت" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XIm-83-uLv">
                                 <rect key="frame" x="164" y="144" width="272" height="30"/>
@@ -698,7 +699,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.95294117649999999" green="0.1176470588" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.027450980390000001" green="0.4823529412" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Els-eU-Klb" firstAttribute="top" secondItem="57h-Z3-EZo" secondAttribute="top" constant="5" id="5ue-Vr-AVA"/>
                                     <constraint firstAttribute="centerY" secondItem="Els-eU-Klb" secondAttribute="centerY" id="Qzr-XS-aE0"/>
@@ -805,7 +806,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dv-zI-Wmu">
                                 <rect key="frame" x="226" y="263" width="151" height="27"/>
-                                <color key="backgroundColor" red="0.95294117649999999" green="0.1176470588" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.027450980390000001" green="0.4823529412" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="151" id="FCm-zV-0XF"/>
                                     <constraint firstAttribute="height" constant="27" id="JSQ-RY-t5f"/>
@@ -1260,7 +1261,7 @@
                         <subviews>
                             <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4F-6R-is0">
                                 <rect key="frame" x="-1" y="560" width="601" height="40"/>
-                                <color key="backgroundColor" red="0.95294117649999999" green="0.1176470588" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.027450980390000001" green="0.4823529412" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="XAb-tt-U07"/>
                                 </constraints>
@@ -1301,7 +1302,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.95294117649999999" green="0.1176470588" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.027450980390000001" green="0.4823529412" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="igb-5M-sQi" firstAttribute="top" secondItem="vyI-z5-Ii6" secondAttribute="top" constant="23" id="2Vj-6P-F9x"/>
                                     <constraint firstItem="igb-5M-sQi" firstAttribute="centerX" secondItem="vyI-z5-Ii6" secondAttribute="centerX" id="9j0-vR-7c6"/>
@@ -1490,7 +1491,7 @@
         <!--Enter Number View Controller-->
         <scene sceneID="h1V-yA-Gve">
             <objects>
-                <viewController id="DIz-bK-N9V" customClass="EnterNumberViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="enternumber" id="DIz-bK-N9V" customClass="EnterNumberViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QnE-9O-Rb9"/>
                         <viewControllerLayoutGuide type="bottom" id="Cuw-uS-MOt"/>
@@ -1521,14 +1522,14 @@
                                     </textField>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eM7-je-jzl">
                                         <rect key="frame" x="8" y="154" width="544" height="1"/>
-                                        <color key="backgroundColor" red="1" green="0.4210716598" blue="0.42795277780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.027450980390000001" green="0.4823529412" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="gmI-I0-5rX"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoR-w1-bYg">
                                         <rect key="frame" x="8" y="178" width="544" height="44"/>
-                                        <color key="backgroundColor" red="0.95294117647058818" green="0.11764705882352941" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.027450980392156862" green="0.4823529411764706" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="tzS-Gx-NPN"/>
                                         </constraints>
@@ -1576,7 +1577,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BYekan+" family="B Yekan+" pointSize="13"/>
                                 <state key="normal" title="شرایط و ضوابط">
-                                    <color key="titleColor" red="0.89330808080000002" green="0.36911921869999997" blue="0.35410595979999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.027450980390000001" green="0.4823529412" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1749,11 +1750,11 @@ Cg
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BYekan+" family="B Yekan+" pointSize="12"/>
                                 <state key="normal" title="سعی دوباره">
-                                    <color key="titleColor" red="1" green="0.59728679293157894" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
-                                        <color key="value" red="1" green="0.59557139468019116" blue="0.032578955067182336" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="0.94720694193139043" green="1" blue="0.92995974957345817" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value=".7"/>
                                 </userDefinedRuntimeAttributes>
@@ -1763,11 +1764,11 @@ Cg
                             </button>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t2x-x5-X4f">
                                 <rect key="frame" x="246" y="273" width="97" height="1"/>
-                                <color key="backgroundColor" red="0.89330808080000002" green="0.36911921869999997" blue="0.35410595979999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.027450980390000001" green="0.4823529412" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7BI-v8-qMD">
                                 <rect key="frame" x="246" y="283" width="97" height="34"/>
-                                <color key="backgroundColor" red="0.95294117649999999" green="0.1176470588" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.027450980390000001" green="0.4823529412" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="bjA-1H-gZV"/>
                                 </constraints>
@@ -1838,7 +1839,7 @@ Cg
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Spq-Tl-css">
                                 <rect key="frame" x="33" y="285" width="534" height="34"/>
-                                <color key="backgroundColor" red="0.95294117649999999" green="0.1176470588" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.027450980390000001" green="0.4823529412" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="pKf-uo-efv"/>
                                 </constraints>
@@ -1858,11 +1859,11 @@ Cg
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BYekan+" family="B Yekan+" pointSize="15"/>
                                 <state key="normal" title="بعدا">
-                                    <color key="titleColor" red="1" green="0.66844736036578933" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
-                                        <color key="value" red="0.95294117647058818" green="0.66059313322368407" blue="0.23137254901960785" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="0.95294117647058818" green="0.94486881937106082" blue="0.93842739743409898" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value=".7"/>
                                 </userDefinedRuntimeAttributes>
@@ -1873,7 +1874,7 @@ Cg
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l5J-kg-Cd5">
                                 <rect key="frame" x="33" y="230" width="534" height="1"/>
-                                <color key="backgroundColor" red="0.89330808080000002" green="0.36911921869999997" blue="0.35410595979999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.027450980390000001" green="0.4823529412" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="uDS-RM-tMg"/>
                                 </constraints>
@@ -1927,6 +1928,24 @@ Cg
             </objects>
             <point key="canvasLocation" x="-786" y="-2"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="rNO-Zr-aLO">
+            <objects>
+                <viewController id="pj8-TA-Z04" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uOv-Vv-2ZQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="LGx-Xh-c11"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TVZ-s8-NAU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5zi-E8-JsW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-786" y="784"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -1936,9 +1955,9 @@ Cg
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" itemPositioning="fill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="tintColor" white="0.10511969422039233" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.12472240250520028" green="0.12472240250520028" blue="0.12472240250520028" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="selectedImageTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.0" green="0.3536778816126484" blue="0.84092881944444442" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.1470799324242171" green="0.14124927596408579" blue="0.1501144255050505" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.00094304057189398272" green="0.42874276318589211" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="r52-0L-LOB" kind="relationship" relationship="viewControllers" id="TSA-pO-3FG"/>
@@ -1976,7 +1995,7 @@ Cg
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="IE5-ok-2CR"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" name="BYekan+" family="B Yekan+" pointSize="10"/>
                                                     <color key="textColor" red="0.39819129050000002" green="0.59386299529999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1989,7 +2008,7 @@ Cg
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5Q-Ux-MKG">
                                             <rect key="frame" x="32" y="7" width="535" height="92"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="BYekan+" family="B Yekan+" pointSize="17"/>
                                             <color key="textColor" white="0.16" alpha="1" colorSpace="deviceWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -2553,22 +2572,22 @@ Cg
         <image name="backOutOfdate.png" width="1077" height="1361"/>
         <image name="close 2.png" width="66" height="66"/>
         <image name="close.png" width="66" height="66"/>
-        <image name="competition.png" width="32" height="32"/>
-        <image name="competitionPlus.png" width="32" height="32"/>
-        <image name="home.png" width="32" height="32"/>
+        <image name="competition.png" width="25" height="25"/>
+        <image name="competitionPlus.png" width="25" height="25"/>
+        <image name="home.png" width="25" height="25"/>
         <image name="homeBack2.png" width="500" height="281"/>
-        <image name="inbox.png" width="32" height="32"/>
+        <image name="inbox.png" width="25" height="24"/>
         <image name="iranFlag.png" width="640" height="480"/>
-        <image name="selection.png" width="32" height="32"/>
+        <image name="selection.png" width="20" height="25"/>
         <image name="simcard.png" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="c9V-Gj-WGS"/>
-        <segue reference="m7B-Gk-RC7"/>
-        <segue reference="SuU-c1-fRC"/>
-        <segue reference="Wbe-Jb-ZeH"/>
-        <segue reference="jt9-q3-wfT"/>
-        <segue reference="NrT-Ky-bgL"/>
-        <segue reference="t5S-9f-MsP"/>
+        <segue reference="sIh-EI-cOJ"/>
+        <segue reference="AiH-P8-g2S"/>
+        <segue reference="nHW-zW-bXJ"/>
+        <segue reference="Oya-5K-OK6"/>
+        <segue reference="ILu-q0-oTG"/>
+        <segue reference="bJF-Ij-fRY"/>
+        <segue reference="6kq-nw-eo4"/>
     </inferredMetricsTieBreakers>
 </document>

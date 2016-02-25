@@ -7,7 +7,7 @@
 //
 
 #import "HomeIcon.h"
-#define URLaddress "http://www.app.chargoosh.ir/"
+#define URLaddress "http://new.chargoosh.ir/"
 @implementation HomeIcon
 -(id)init
 {

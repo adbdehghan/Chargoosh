@@ -14,7 +14,7 @@
 #import "SelectedViewController.h"
 #import "Competition.h"
 #import "QRCodeReaderViewController.h"
-#define URLaddress "http://www.app.chargoosh.ir/"
+#define URLaddress "http://www.newapp.chargoosh.ir/"
 
 @interface competitionListTableViewController ()<QRCodeReaderDelegate>
 @property (strong, nonatomic) DataDownloader *getData;

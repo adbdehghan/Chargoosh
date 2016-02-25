@@ -20,7 +20,7 @@
 #import "CompetitionPlusDetailViewController.h"
 #import "SelectedViewController.h"
 #import "QRCodeReaderViewController.h"
-#define URLaddressPic "http://www.app.chargoosh.ir/"
+#define URLaddressPic "http://new.chargoosh.ir/"
 static NSString *Version = @"\"1.2\"";
 static NSString *currentVersion = @"\"1.2\"";
 static NSString *iconId;
@@ -61,7 +61,7 @@ static NSString *iconId;
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
     
-   
+   [collectionViewOutlet setTransform:CGAffineTransformMakeScale(-1, 1)];
     
     self.homeDictionary = [[NSMutableDictionary alloc]init];
     
@@ -118,8 +118,7 @@ static NSString *iconId;
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetHome:st.settingId Password:st.password
-             withCallback:callback];
+    [self.getData GetHome:@"d017bb5e-aa26-40b4-a62d-92c5d9552f05" token:st.accesstoken withCallback:callback];
     
     
     [self GetProfilePic:st];
@@ -156,7 +155,7 @@ static NSString *iconId;
         }
     };
     
-    [self.getData GetVersion:@"" withCallback:callback2];
+   // [self.getData GetVersion:@"" withCallback:callback2];
     
 }
 
@@ -224,8 +223,8 @@ static NSString *iconId;
     
     
     
-    [self.getData GetProfilePicInfo:st.settingId Password:st.password
-                       withCallback:callback2];
+  //  [self.getData GetProfilePicInfo:st.settingId Password:st.password
+             //          withCallback:callback2];
 }
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
@@ -281,9 +280,7 @@ static NSString *iconId;
         }
     };
     
-
-    [self.getData GetHome:st.settingId Password:st.password
-             withCallback:callback];
+    [self.getData GetHome:@"d017bb5e-aa26-40b4-a62d-92c5d9552f05" token:st.accesstoken withCallback:callback];
 }
 
 
@@ -341,7 +338,7 @@ static NSString *iconId;
     
     HomeIcon *homeIcon =((HomeIcon*)[home.homeIconList objectAtIndex:indexPath.row]);
     
-    
+    [cell setTransform:CGAffineTransformMakeScale(-1, 1)];
     
     cell.captionLabel.text = homeIcon.caption;
     [cell.captionLabel setTextAlignment:NSTextAlignmentCenter];
@@ -626,8 +623,7 @@ static NSString *iconId;
         }
     };
     
-    [self.getData GetHome:st.settingId Password:st.password
-             withCallback:callback];
+    [self.getData GetHome:@"d017bb5e-aa26-40b4-a62d-92c5d9552f05" token:st.accesstoken withCallback:callback];
 }
 #pragma mark - Navigation
 

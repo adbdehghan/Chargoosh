@@ -12,8 +12,10 @@
 {
     NSString *_settingId;
     NSString *password;
+    NSString *accesstoken;
 }
 @property (nonatomic , copy) NSString *settingId;
 @property (nonatomic , copy) NSString *password;
+@property (nonatomic , copy) NSString *accesstoken;
 
 @end

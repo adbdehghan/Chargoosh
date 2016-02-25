@@ -13,7 +13,7 @@
 #import <AddressBook/AddressBook.h>
 #import "THContact.h"
 #import "AFNetworking.h"
-#define URLaddress "http://www.app.chargoosh.ir/api/ProfileManager/Invites"
+#define URLaddress "http://www.newapp.chargoosh.ir/api/register/Invites"
 
 @interface InviteViewController ()
 {

@@ -49,8 +49,8 @@
 -(IBAction)continueButton:(id)sender
 {
     
-    if ([numberUiTextField.text length]!=10 && ![numberUiTextField.text isEqualToString:@""]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"خطا"
+    if (!([numberUiTextField.text length] >=10 &&[numberUiTextField.text length] <=11) && ![numberUiTextField.text isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
                                                         message:@"شماره ی وارد شده اشتباه است!"
                                                        delegate:self
                                               cancelButtonTitle:@"خب"
@@ -63,7 +63,7 @@
      
     
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"خطا"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
                                                         message:@"لطفا شماره ی خود را وارد کنید"
                                                        delegate:self
                                               cancelButtonTitle:@"خب"
@@ -71,7 +71,7 @@
         [alert show];
     
     }
-    else if([numberUiTextField.text length]==10 )
+    else if([numberUiTextField.text length] >=10 &&[numberUiTextField.text length] <=11)
     {
         
         continueButton.enabled = NO;
@@ -85,7 +85,7 @@
                 [self performSegueWithIdentifier:@"Next" sender:self];
                 
             } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"خطا"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
                                                                 message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                                delegate:self
                                                       cancelButtonTitle:@"خب"

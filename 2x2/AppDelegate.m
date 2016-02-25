@@ -11,6 +11,8 @@
 #import "UIImageView+WebCache.h"
 #import "DataDownloader.h"
 #import "DeviceRegisterer.h"
+#import "DBManager.h"
+#import "Settings.h"
 
 @interface AppDelegate ()
 
@@ -23,16 +25,39 @@
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     // set the bar background color
 
+    Settings *st = [[Settings alloc]init];
+    
+    for (Settings *item in [DBManager selectSetting])
+    {
+        st =item;
+    }
+    
+    
+    if (st.settingId!=nil )
+    {
+        UIStoryboard *storyboard = self.window.rootViewController.storyboard;
+        UIViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainBoard"];
+        self.window.rootViewController = rootViewController;
+        [self.window makeKeyAndVisible];
+    }
+    else
+    {
+        UIStoryboard *storyboard = self.window.rootViewController.storyboard;
+        UIViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"enternumber"];
+        self.window.rootViewController = rootViewController;
+        [self.window makeKeyAndVisible];
+    }
+    
     NSString *bundledPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"CustomPathImages"];
     [[SDImageCache sharedImageCache] addReadOnlyCachePath:bundledPath];
     
-    if ([self.window.rootViewController isKindOfClass:[UITabBarController class]]) {
-        
-        UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
-        [tabBar setSelectedIndex:4];
-        CGFloat width = tabBar.view.bounds.size.width/5;
-//        [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor colorWithRed:243.f/255.f green:30.f/255.f blue:75.f/255.f alpha:.8] forSize:CGSizeMake(width, 49) withCornerRadius:0]];
-    }
+//    if ([self.window.rootViewController isKindOfClass:[UITabBarController class]]) {
+//        
+//        UITabBarController *tabBar = (UITabBarController *)self.window.rootViewController;
+//        [tabBar setSelectedIndex:4];
+//        CGFloat width = tabBar.view.bounds.size.width/5;
+////        [[UITabBar appearance] setSelectionIndicatorImage:[AppDelegate imageFromColor:[UIColor colorWithRed:243.f/255.f green:30.f/255.f blue:75.f/255.f alpha:.8] forSize:CGSizeMake(width, 49) withCornerRadius:0]];
+//    }
     
     // set the text color for selected state
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
@@ -47,7 +72,7 @@
     [[UITabBar appearance] setShadowImage:nil];
 
 
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:243.f/255.f green:30.f/255.f blue:75.f/255.f alpha:1]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:7.f/255.f green:123.f/255.f blue:204.f/255.f alpha:1]];
     
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     NSDictionary *textTitleOptions = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil];

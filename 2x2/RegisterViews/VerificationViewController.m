@@ -49,22 +49,38 @@
 {
     continueButton.enabled = NO;
     
-    RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
+    RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data2) {
         if (wasSuccessful) {
             
             
-            if ([data count]>0 && ![[data valueForKey:@"password"]isEqualToString:@":"]) {
+            if ([data2 count]>0 && ![[data2 valueForKey:@"password"]isEqualToString:@":"]) {
                 
-                Settings *setting = [[Settings alloc]init];
-                setting.settingId = self.phoneNumber;
-                setting.password = [data valueForKey:@"password"];
+              
                 
                 
-                [DBManager createTable];
-                [DBManager saveOrUpdataSetting:setting];
+                
+                RequestCompleteBlock callback2 = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
+                    if (wasSuccessful) {
+                        
+                        Settings *setting = [[Settings alloc]init];
+                        setting.settingId = self.phoneNumber;
+                        setting.password = [data2 valueForKey:@"password"];
+                        setting.accesstoken = [data valueForKey:@"accesstoken"];
+                        
+                        [DBManager createTable];
+                        [DBManager saveOrUpdataSetting:setting];
+                        
+                        [self performSegueWithIdentifier:@"Next" sender:self];
+                        
+                    }};
                 
                 
-                [self performSegueWithIdentifier:@"Next" sender:self];
+                
+                [self.getData GetToken:self.phoneNumber password:[data2 valueForKey:@"password"] withCallback:callback2];
+                
+                
+                
+
             }
             
             else

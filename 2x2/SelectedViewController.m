@@ -14,7 +14,7 @@
 #import "TopParticipate.h"
 #import "UIImageView+WebCache.h"
 #import "UIImageView+UIActivityIndicatorForSDWebImage.h"
-#define URLaddress "http://www.app.chargoosh.ir/"
+#define URLaddress "http://www.newapp.chargoosh.ir/"
 
 @interface SelectedViewController ()
 @property (strong, nonatomic) DataDownloader *getData;

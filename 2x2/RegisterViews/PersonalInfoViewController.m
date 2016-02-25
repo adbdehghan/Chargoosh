@@ -48,8 +48,6 @@ CGFloat animatedDistance;
 
 -(IBAction)Done:(id)sender
 {
-//    if ([nameUiTextField.text length]>0 && [familyNameUiTextField.text length]>0) {
-    
         doneButton.enabled = NO;
         
         RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
@@ -58,7 +56,7 @@ CGFloat animatedDistance;
                 [self performSegueWithIdentifier:@"PersonalToMain" sender:self];
                 
             } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"خطا"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
                                                                 message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                                delegate:self
                                                       cancelButtonTitle:@"خب"
@@ -75,44 +73,8 @@ CGFloat animatedDistance;
         
         st = [DBManager selectSetting][0];
         
-        NSInteger selectedSegment = genderSegment.selectedSegmentIndex;
-        NSString *gender = @"";
-        if (selectedSegment == 0)
-        {
-            gender = @"مرد";
-            
-        }
-        else
-            gender = @"زن";
-        
-        
-        [self.getData RegisterProfile:st.settingId Password:st.password Name:nameUiTextField.text LastName:familyNameUiTextField.text Gender:gender
-         
-                         withCallback:callback];
-//    }
-//    else
-//    {
-//        if (![nameUiTextField.text length]>0) {
-//            doneButton.enabled = YES;
-//            
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"خطا"
-//                                                            message:@"لطفا نام خود را وارد نمایید."
-//                                                           delegate:self
-//                                                  cancelButtonTitle:@"خب"
-//                                                  otherButtonTitles:nil];
-//            [alert show];
-//        }
-//        else
-//        {
-//            doneButton.enabled = YES;
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"خطا"
-//                                                            message:@"لطفا نام خانوادگی خود را وارد نمایید."
-//                                                           delegate:self
-//                                                  cancelButtonTitle:@"خب"
-//                                                  otherButtonTitles:nil];
-//            [alert show];
-//        }
-//    }
+        [self.getData RegisterProfile:st.accesstoken  Name:nameUiTextField.text LastName:familyNameUiTextField.text  withCallback:callback];
+
     
 }
 

@@ -10,7 +10,7 @@
 #import "AFNetworking.h"
 #import "Settings.h"
 #import "DBManager.h"
-#define URLaddress "http://www.app.chargoosh.ir/api/ProfileManager/addorupdatetoken"
+#define URLaddress "http://www.newapp.chargoosh.ir/api/register/addorupdatetoken"
 
 @implementation DeviceRegisterer
 Settings *st ;
