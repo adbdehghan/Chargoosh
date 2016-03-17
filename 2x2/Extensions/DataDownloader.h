@@ -27,6 +27,8 @@ typedef void (^ImageRequestCompleteBlock) (BOOL wasSuccessful,UIImage *image);
 - (void)GetPolls:(NSString*)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback;
 - (void)GetPoll:(NSString*)pollId phoneNumber:(NSString *)phoneNumber withCallback:(RequestCompleteBlock)callback;
 - (void)GetOrganizations:(NSString*)token  withCallback:(RequestCompleteBlock)callback;
+- (void)GetAllOrganizations:(NSString*)token  withCallback:(RequestCompleteBlock)callback;
+- (void)SetOrganizations:(NSString*)token Orgs:(NSMutableArray*)orgs withCallback:(RequestCompleteBlock)callback;
 - (void)GetHome:(NSString *)orgId token:(NSString*)token withCallback:(RequestCompleteBlock)callback;
 - (void)GetSummarize:(NSString *)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback;
 - (void)GetProfilePicInfo:(NSString *)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback;

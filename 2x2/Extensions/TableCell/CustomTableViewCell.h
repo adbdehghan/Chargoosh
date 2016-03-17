@@ -12,4 +12,5 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *dateTimeLabel;
 @property (nonatomic, weak) IBOutlet UIView *background;
+@property (nonatomic, weak) IBOutlet UIView *dateBackground;
 @end

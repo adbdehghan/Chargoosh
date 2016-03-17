@@ -36,7 +36,7 @@
     if (st.settingId!=nil )
     {
         UIStoryboard *storyboard = self.window.rootViewController.storyboard;
-        UIViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainBoard"];
+        UIViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"organizations"];
         self.window.rootViewController = rootViewController;
         [self.window makeKeyAndVisible];
     }

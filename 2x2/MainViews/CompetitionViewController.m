@@ -14,6 +14,7 @@
 #import "CompetitionDetailViewController.h"
 #import "Competition.h"
 #import "QRCodeReaderViewController.h"
+#import "AppDelegate.h"
 #define URLaddress "http://new.chargoosh.ir"
 #define RGBCOLOR(r,g,b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 @interface CompetitionViewController ()<QRCodeReaderDelegate>
@@ -33,6 +34,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self CreateNavigationBarButtons];
+    
+    AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    self.organizationID = app.organizationID;
     
     self.cachedImages = [[NSMutableDictionary alloc] init];
     
@@ -99,7 +104,7 @@
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetCompetitions:@"d017bb5e-aa26-40b4-a62d-92c5d9552f05" token:st.accesstoken withCallback:callback];
+    [self.getData GetCompetitions:self.organizationID token:st.accesstoken withCallback:callback];
     
     
 }
@@ -165,7 +170,7 @@
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetCompetitions:@"d017bb5e-aa26-40b4-a62d-92c5d9552f05" token:st.accesstoken withCallback:callback];
+    [self.getData GetCompetitions:self.organizationID token:st.accesstoken withCallback:callback];
     
 }
 

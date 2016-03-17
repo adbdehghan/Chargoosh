@@ -100,6 +100,7 @@
     
     [self.getData GetProfilePicInfo:st.settingId Password:st.password
                        withCallback:callback];
+    
 }
 
 -(void)ChangeProfileInfo

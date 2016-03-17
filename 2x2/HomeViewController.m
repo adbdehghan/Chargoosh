@@ -21,6 +21,8 @@
 #import "SelectedViewController.h"
 #import "QRCodeReaderViewController.h"
 #define URLaddressPic "http://new.chargoosh.ir/"
+#import "AppDelegate.h"
+
 static NSString *Version = @"\"1.2\"";
 static NSString *currentVersion = @"\"1.2\"";
 static NSString *iconId;
@@ -45,6 +47,10 @@ static NSString *iconId;
     
     [self CreateNavigationBarButtons];
     
+    AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    self.organizationID = app.organizationID;
+    
     self.cachedImages = [[NSMutableDictionary alloc] init];
     
     profileImage.layer.cornerRadius = profileImage.frame.size.width / 2;
@@ -55,7 +61,9 @@ static NSString *iconId;
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [collectionViewOutlet addSubview:refreshControl];
     collectionViewOutlet.alwaysBounceVertical = YES;
-    collectionViewOutlet.backgroundColor = [UIColor clearColor];
+    collectionViewOutlet.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1.f];
+    [collectionViewOutlet.layer setCornerRadius:3];
+    
     activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
@@ -64,10 +72,6 @@ static NSString *iconId;
    [collectionViewOutlet setTransform:CGAffineTransformMakeScale(-1, 1)];
     
     self.homeDictionary = [[NSMutableDictionary alloc]init];
-    
-    
-    //  self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     
     RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
@@ -118,12 +122,10 @@ static NSString *iconId;
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetHome:@"d017bb5e-aa26-40b4-a62d-92c5d9552f05" token:st.accesstoken withCallback:callback];
+    [self.getData GetHome:self.organizationID token:st.accesstoken withCallback:callback];
     
     
     [self GetProfilePic:st];
-    
-    
     
     RequestCompleteBlock callback2 = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
@@ -262,8 +264,6 @@ static NSString *iconId;
                 [refreshControl endRefreshing];
             });
             
-            
-            
         }
         
         else
@@ -280,7 +280,7 @@ static NSString *iconId;
         }
     };
     
-    [self.getData GetHome:@"d017bb5e-aa26-40b4-a62d-92c5d9552f05" token:st.accesstoken withCallback:callback];
+    [self.getData GetHome:self.organizationID token:st.accesstoken withCallback:callback];
 }
 
 
@@ -348,7 +348,6 @@ static NSString *iconId;
 
     [cell.activityView startAnimating];
     
-    
     NSString *identifier = [NSString stringWithFormat:@"Cell%ld" , (long)indexPath.row];
     
     if([self.cachedImages objectForKey:identifier] != nil)
@@ -406,7 +405,7 @@ static NSString *iconId;
 // Layout: Set Edges
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     // return UIEdgeInsetsMake(0,8,0,8);  // top, left, bottom, right
-    return UIEdgeInsetsMake(0,0,0,5);  // top, left, bottom, right
+    return UIEdgeInsetsMake(5,5,0,5);  // top, left, bottom, right
 }
 
 -(void)actionButton:(id)sender

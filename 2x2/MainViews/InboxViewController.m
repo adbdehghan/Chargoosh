@@ -21,6 +21,15 @@
 
 @end
 
+@implementation CALayer (Additions)
+
+- (void)setBorderColorFromUIColor:(UIColor *)color
+{
+    self.borderColor = color.CGColor;
+}
+
+@end
+
 @implementation InboxViewController
 UIActivityIndicatorView *activityIndicator;
 
@@ -251,25 +260,25 @@ UIActivityIndicatorView *activityIndicator;
         [paragraphStyle setLineSpacing:6];
         //    paragraphStyle.alignment = NSTextAlignmentJustified;    // To justified text
         
-        
-        
-        
-        
-        
         [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [cellText length])];
         
         cell.titleLabel.attributedText = attributedString;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.dateTimeLabel.font =[UIFont fontWithName:@"B Yekan+" size:15];
+        cell.dateTimeLabel.text = [ NSString stringWithFormat:@"%@",dateText];
+
         
-        cell.dateTimeLabel.text = dateText;
+        if (indexPath.row % 2 == 0) {
+            [cell.dateBackground setBackgroundColor:RGBCOLOR(100, 100,100)];
+        }
         
         cell.titleLabel.textColor=[UIColor blackColor];
         cell.titleLabel.backgroundColor = [UIColor clearColor];
         
-        cell.background.layer.cornerRadius = 6;
+      //  cell.background.layer.cornerRadius = 6;
         
         cell.background.clipsToBounds = YES;
-        cell.background.backgroundColor = RGBCOLOR(225, 225, 225);
+        cell.background.backgroundColor = RGBCOLOR(239, 239,239);
         
         cell.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.titleLabel.numberOfLines = 0;

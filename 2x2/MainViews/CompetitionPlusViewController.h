@@ -11,4 +11,5 @@
 @interface CompetitionPlusViewController : UITableViewController
 @property (strong, nonatomic)  NSMutableDictionary *competitionPlusDictionary;
 @property (strong, nonatomic)  NSMutableArray *competitionPlusList;
+@property (nonatomic,retain)NSString *organizationID;
 @end

@@ -12,4 +12,5 @@
 @property (strong, nonatomic)  NSMutableDictionary *competitionDictionary;
 @property (strong, nonatomic)  NSMutableArray *competitionList;
 @property (strong ,nonatomic) NSMutableDictionary *cachedImages;
+@property (nonatomic,retain)NSString *organizationID;
 @end

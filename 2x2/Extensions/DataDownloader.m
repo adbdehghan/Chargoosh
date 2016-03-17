@@ -10,6 +10,8 @@
 #import "JCDHTTPConnection.h"
 #import "SBJsonParser.h"
 #import "AFNetworking.h"
+#import "Settings.h"
+#import "DBManager.h"
 #define URLaddress "http://www.newapp.chargoosh.ir/"
 
 @implementation DataDownloader
@@ -78,7 +80,7 @@ NSMutableDictionary *receivedData;
 
 - (void)GetToken:(NSString *)phoneNumber password:(NSString*)password withCallback:(RequestCompleteBlock)callback
 {
-
+    receivedData = [[NSMutableDictionary alloc]init];
     NSDictionary *parameters = @{@"username": phoneNumber,
                                  @"password": password,
                                  @"grant_type":@"password"};
@@ -263,9 +265,6 @@ NSMutableDictionary *receivedData;
 {
     NSString *sample =[NSString stringWithFormat: @"%s/api/register/GetMessage",URLaddress];
     
-
-    
-    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
@@ -296,6 +295,54 @@ NSMutableDictionary *receivedData;
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
     
     [manager GET:sample parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
+}
+
+
+
+- (void)GetAllOrganizations:(NSString*)token  withCallback:(RequestCompleteBlock)callback
+{
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/GetallOrgans",URLaddress];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
+}
+
+- (void)SetOrganizations:(NSString*)token Orgs:(NSMutableArray*)orgs withCallback:(RequestCompleteBlock)callback
+{
+    NSDictionary *parameters = @{@"myorgs": orgs};
+    
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/SetMyOrg",URLaddress];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager POST:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"Success %@", responseObject);
         

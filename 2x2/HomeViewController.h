@@ -20,6 +20,6 @@
 @property (strong, nonatomic)  NSMutableDictionary *homeDictionary;
 @property (strong, nonatomic)  NSMutableArray *homeList;
 @property (strong ,nonatomic) NSMutableDictionary *cachedImages;
-
+@property (nonatomic,retain)NSString *organizationID;
 @end
 

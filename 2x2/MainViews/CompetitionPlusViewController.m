@@ -14,6 +14,7 @@
 #import "Settings.h"
 #import "DBManager.h"
 #import "QRCodeReaderViewController.h"
+#import "AppDelegate.h"
 
 #define RGBCOLOR(r,g,b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 
@@ -33,6 +34,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    self.organizationID = app.organizationID;
     
     st = [[Settings alloc]init];
     
