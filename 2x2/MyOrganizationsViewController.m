@@ -47,11 +47,11 @@
     
     [collectionViewOutlet addSubview:refreshControl];
     collectionViewOutlet.alwaysBounceVertical = YES;
-    collectionViewOutlet.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:.95f];
+    collectionViewOutlet.backgroundColor = [UIColor clearColor];
     [collectionViewOutlet.layer setCornerRadius:3];
     
     [collectionViewOutlet setTransform:CGAffineTransformMakeScale(-1, 1)];
-    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
@@ -97,7 +97,7 @@
             
             NSLog( @"Unable to fetch Data. Try again.");
             
-            
+            self.getData = nil;
              self.getData = [[DataDownloader alloc] init];
             
             RequestCompleteBlock callback2 = ^(BOOL wasSuccessful,NSMutableDictionary *data2) {

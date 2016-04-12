@@ -68,7 +68,7 @@
     UIView *sectionHeaderView = [[UIView alloc] initWithFrame:
                                  CGRectMake(0, 10, tableView.frame.size.width, [self heightForTitle:item.question] + HEADER_MARGIN)];
     
-    sectionHeaderView.backgroundColor = RGBCOLOR(243, 30, 75);
+    sectionHeaderView.backgroundColor = RGBCOLOR(7, 123, 204);
     
     int headerW = self.view.frame.size.width * HEADER_W;
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:

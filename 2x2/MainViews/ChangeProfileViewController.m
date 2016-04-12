@@ -93,8 +93,8 @@
         if (wasSuccessful) {
             
             
-            nameTextField.text = [data valueForKey:@"name"];
-            lastNameTextField.text = [data valueForKey:@"lastname"];
+            nameTextField.text = [data valueForKey:@"name"] == [NSNull null] ? @"" : [data valueForKey:@"name"];
+            lastNameTextField.text = [data valueForKey:@"lastname"] == [NSNull null] ? @"" : [data valueForKey:@"lastname"];
             self.cityTextField.text = [data valueForKey:@"city"]==[NSNull null]?@"":[NSString stringWithFormat:@"%@",[data valueForKey:@"city"]];
             self.provinceTextField.text = [data valueForKey:@"provience"]==[NSNull null]?@"":[NSString stringWithFormat:@"%@",[data valueForKey:@"provience"]];
             
@@ -106,6 +106,15 @@
                 month =myArray[1];
                 year = myArray[0];
                 
+            }
+            
+            
+            NSDictionary *allCity = [data valueForKey:@"allProvience"];
+            self.provinceData =[data valueForKey:@"allProvience"];
+            
+            for (NSString *item in [allCity valueForKey:@"name"]) {
+                
+                [self.selections addObject:item];
             }
             
             
@@ -141,7 +150,7 @@
     };
     
     
-    [self.getData GetSetting:st.settingId Password:st.password withCallback:callback3];
+    [self.getData GetSetting:st.accesstoken withCallback:callback3];
     
     
     NSCalendar *persCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSPersianCalendar];
@@ -239,45 +248,6 @@
     self.provinceData = [[ NSMutableDictionary alloc]init];
     self.cityData = [[ NSMutableDictionary alloc]init];
     
-    RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
-        if (wasSuccessful) {
-            
-            self.provinceData = data;
-            
-            for (NSString *item in [data valueForKey:@"name"]) {
-                
-                [self.selections addObject:item];
-            }
-            
-            self.provinceTextField.enabled = YES;
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.provinceActivity stopAnimating];
-                
-                
-            });
-        }
-        
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
-                                                            message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"خب"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            
-            
-            NSLog( @"Unable to fetch Data. Try again.");
-        }
-    };
-    
-    
-    [self.getData GetProviences:@"" withCallback:callback];
-    [self.provinceActivity startAnimating];
-    
-    
-    
     RequestCompleteBlock callback2 = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
             self.cityData = data;
@@ -314,6 +284,8 @@
     
     __weak typeof(self) weakSelf = self;
     
+    __weak typeof(Settings*) weaksetting = st;
+    
     self.popView.selectedHandle = ^(NSInteger selectedIndex){
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -329,7 +301,7 @@
                     
                     if ([[item valueForKey:@"name"] isEqualToString:[NSString stringWithFormat:@"%@",weakSelf.selections[selectedIndex]]]) {
                         weakSelf.cityId =[NSString stringWithFormat:@"%@",[item valueForKey:@"id"]];
-                        [weakSelf.getData GetCity:weakSelf.cityId withCallback:callback2];
+                        [weakSelf.getData GetCity:weakSelf.cityId Token:weaksetting.accesstoken withCallback:callback2];
                     }
                 }
             }
@@ -408,7 +380,7 @@
         [pickerLabel setTextAlignment:NSTextAlignmentCenter];
         [pickerLabel setBackgroundColor:[UIColor clearColor]];
         [pickerLabel setFont:[UIFont systemFontOfSize:15.0f]];
-        pickerLabel.font = [UIFont fontWithName:@"B Yekan+" size:20 ];
+        pickerLabel.font = [UIFont fontWithName:@"B Yekan" size:20 ];
         pickerLabel.textColor = [UIColor whiteColor];
         
     }
@@ -641,6 +613,7 @@
 
 - (IBAction)tapAction:(UIGestureRecognizer *)sender {
     [self.popView hide:YES];
+    [self.view endEditing:YES];
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
@@ -701,7 +674,7 @@
     };
     
     
-    [self.getData SetSetiing:st.settingId Password:st.password Name:[NSString stringWithFormat:@"%@",nameTextField.text] LastName:[NSString stringWithFormat:@"%@", lastNameTextField.text] Gender:genderSegment.selectedSegmentIndex==1?@"زن":@"مرد" city:self.cityId birthdayDay:day birhtdayMonth:month birhtdayYear:year  withCallback:callback];
+    [self.getData SetSetiing:st.accesstoken Name:[NSString stringWithFormat:@"%@",nameTextField.text] LastName:[NSString stringWithFormat:@"%@", lastNameTextField.text] Gender:genderSegment.selectedSegmentIndex==1?@"زن":@"مرد" city:self.cityId birthdayDay:day birhtdayMonth:month birhtdayYear:year  withCallback:callback];
 }
 
 /*

@@ -46,7 +46,7 @@
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
     
-    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
@@ -56,6 +56,22 @@
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
+    UIView *layer = [[UIView alloc]init];
+    layer.backgroundColor = [UIColor blackColor];
+    layer.alpha = .5f;
+    [layer setFrame:self.view.frame];
+    
+    UIImageView *backImage =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"background.jpg"]];
+    [backImage setFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height-110 )];
+    
+    UIView *container = [[UIView alloc]init];
+    [container setFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height-110 )];
+    
+    [container addSubview:backImage];
+    [container addSubview:layer];
+    
+    self.tableView.backgroundView = container;
+    self.tableView.backgroundColor = [UIColor clearColor];
     
     [self CreateNavigationBarButtons];
     
@@ -94,7 +110,7 @@
         }
     };
     
-    [self.getData GetPolls:st.settingId Password:st.password  withCallback:callback];
+    [self.getData GetPolls:st.accesstoken orgID:self.organizationID withCallback:callback];
     
 }
 
@@ -104,6 +120,15 @@
 }
 
 - (void)CreateNavigationBarButtons {
+    UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
+    label.text=self.navigationItem.title;
+    label.textColor=[UIColor whiteColor];
+    label.backgroundColor =[UIColor clearColor];
+    label.adjustsFontSizeToFitWidth=YES;
+    label.font = [UIFont fontWithName:@"B Yekan+" size:17];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView=label;
+    
     UIButton *statusButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [statusButton addTarget:self action:@selector(statusButtonAction:)forControlEvents:UIControlEventTouchUpInside];
     [statusButton setFrame:CGRectMake(0, 0, 24, 24)];
@@ -131,7 +156,7 @@
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
-    UIImage *settingImage = [[UIImage imageNamed:@"setting.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *settingImage = [[UIImage imageNamed:@"groups.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [settingButton setImage:settingImage forState:UIControlStateNormal];
     
     settingButton.tintColor = [UIColor whiteColor];
@@ -223,7 +248,7 @@
         }
     };
     
-    [self.getData GetPolls:st.settingId Password:st.password  withCallback:callback];
+    [self.getData GetPolls:st.accesstoken orgID:self.organizationID withCallback:callback];
     
 }
 
@@ -264,8 +289,11 @@
     
     CompetitionPlus *competition = [self.competitionPlusList objectAtIndex:indexPath.row];
     
+    cell.backgroundColor = [UIColor clearColor];
+    
     cell.mmlabel.text= competition.title;
     cell.mmlabel.textColor=[UIColor blackColor];
+    
     cell.mmlabel.textAlignment = NSTextAlignmentRight;
     cell.mmimageView.layer.cornerRadius = cell.mmimageView.frame.size.width/3;
     cell.mmimageView.clipsToBounds = YES;
@@ -292,7 +320,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 140;
     
 }
 
@@ -322,7 +350,7 @@
 
 - (void) settingButtonAction:(id) sender
 {
-    [self performSegueWithIdentifier:@"setting" sender:self];
+    [self performSegueWithIdentifier:@"groups" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

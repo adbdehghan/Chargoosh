@@ -22,6 +22,15 @@
 
 @end
 
+@implementation CALayer (Additions)
+
+- (void)setBorderColorFromUIColor:(UIColor *)color
+{
+    self.borderColor = color.CGColor;
+}
+
+@end
+
 @implementation CompetitionViewController
 {
     NSString *competitionTitle;
@@ -45,7 +54,7 @@
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
     
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
@@ -61,6 +70,24 @@
     self.tableView.estimatedRowHeight = 100;
     
     //    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    UIView *layer = [[UIView alloc]init];
+    layer.backgroundColor = [UIColor blackColor];
+    layer.alpha = .5f;
+    [layer setFrame:self.view.frame];
+    
+    UIImageView *backImage =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"background.jpg"]];
+    [backImage setFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height-110 )];
+    
+    UIView *container = [[UIView alloc]init];
+    [container setFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height-110 )];
+    
+    [container addSubview:backImage];
+    [container addSubview:layer];
+    
+    self.tableView.backgroundView = container;
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    
     
     RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
@@ -175,6 +202,15 @@
 }
 
 - (void)CreateNavigationBarButtons {
+    UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
+    label.text=self.navigationItem.title;
+    label.textColor=[UIColor whiteColor];
+    label.backgroundColor =[UIColor clearColor];
+    label.adjustsFontSizeToFitWidth=YES;
+    label.font = [UIFont fontWithName:@"B Yekan+" size:17];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView=label;
+    
     UIButton *statusButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [statusButton addTarget:self action:@selector(statusButtonAction:)forControlEvents:UIControlEventTouchUpInside];
     [statusButton setFrame:CGRectMake(0, 0, 24, 24)];
@@ -202,7 +238,7 @@
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
-    UIImage *settingImage = [[UIImage imageNamed:@"setting.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *settingImage = [[UIImage imageNamed:@"groups.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [settingButton setImage:settingImage forState:UIControlStateNormal];
     
     settingButton.tintColor = [UIColor whiteColor];
@@ -278,6 +314,7 @@
     }
     
     
+    cell.backgroundColor = [UIColor clearColor];
     
     Competition *competition = [self.competitionList objectAtIndex:indexPath.row];
     
@@ -353,7 +390,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 140;
     
 }
 
@@ -414,7 +451,7 @@
 
 - (void) settingButtonAction:(id) sender
 {
-    [self performSegueWithIdentifier:@"setting" sender:self];
+    [self performSegueWithIdentifier:@"groups" sender:self];
 }
 
 

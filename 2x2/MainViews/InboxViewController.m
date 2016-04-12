@@ -40,7 +40,7 @@ UIActivityIndicatorView *activityIndicator;
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
     
-    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
@@ -48,6 +48,23 @@ UIActivityIndicatorView *activityIndicator;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.estimatedRowHeight = 80;
     //self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    UIView *layer = [[UIView alloc]init];
+    layer.backgroundColor = [UIColor blackColor];
+    layer.alpha = .5f;
+    [layer setFrame:self.view.frame];
+    
+    UIImageView *backImage =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"background.jpg"]];
+    [backImage setFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height-110 )];
+    
+    UIView *container = [[UIView alloc]init];
+    [container setFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height-110 )];
+    
+    [container addSubview:backImage];
+    [container addSubview:layer];
+    
+    self.tableView.backgroundView = container;
+    self.tableView.backgroundColor = [UIColor clearColor];
     
     [self CreateNavigationBarButtons];
 }
@@ -149,6 +166,16 @@ UIActivityIndicatorView *activityIndicator;
 }
 
 - (void)CreateNavigationBarButtons {
+    
+    UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
+    label.text=self.navigationItem.title;
+    label.textColor=[UIColor whiteColor];
+    label.backgroundColor =[UIColor clearColor];
+    label.adjustsFontSizeToFitWidth=YES;
+    label.font = [UIFont fontWithName:@"B Yekan+" size:17];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView=label;
+    
     UIButton *statusButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [statusButton addTarget:self action:@selector(statusButtonAction:)forControlEvents:UIControlEventTouchUpInside];
     [statusButton setFrame:CGRectMake(0, 0, 24, 24)];
@@ -176,7 +203,7 @@ UIActivityIndicatorView *activityIndicator;
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
-    UIImage *settingImage = [[UIImage imageNamed:@"setting.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *settingImage = [[UIImage imageNamed:@"groups.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [settingButton setImage:settingImage forState:UIControlStateNormal];
     
     settingButton.tintColor = [UIColor whiteColor];
@@ -264,21 +291,25 @@ UIActivityIndicatorView *activityIndicator;
         
         cell.titleLabel.attributedText = attributedString;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.dateTimeLabel.font =[UIFont fontWithName:@"B Yekan+" size:15];
+        cell.dateTimeLabel.font =[UIFont fontWithName:@"B Yekan" size:15];
         cell.dateTimeLabel.text = [ NSString stringWithFormat:@"%@",dateText];
 
         
         if (indexPath.row % 2 == 0) {
-            [cell.dateBackground setBackgroundColor:RGBCOLOR(100, 100,100)];
+            [cell.dateBackground setBackgroundColor:RGBCOLOR(110, 110,110)];
         }
-        
+        else
+        {
+            [cell.dateBackground setBackgroundColor:RGBCOLOR(5, 113,189)];
+        }
+        cell.backgroundColor = [UIColor clearColor];
         cell.titleLabel.textColor=[UIColor blackColor];
         cell.titleLabel.backgroundColor = [UIColor clearColor];
         
       //  cell.background.layer.cornerRadius = 6;
         
         cell.background.clipsToBounds = YES;
-        cell.background.backgroundColor = RGBCOLOR(239, 239,239);
+        cell.background.backgroundColor = [UIColor whiteColor];
         
         cell.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.titleLabel.numberOfLines = 0;
@@ -323,7 +354,7 @@ UIActivityIndicatorView *activityIndicator;
         
         int size = textLabel.frame.size.height;
         
-        return size + 70;
+        return size + 78;
     }
     
     else
@@ -354,7 +385,7 @@ UIActivityIndicatorView *activityIndicator;
 
 - (void) settingButtonAction:(id) sender
 {
-    [self performSegueWithIdentifier:@"setting" sender:self];
+    [self performSegueWithIdentifier:@"groups" sender:self];
 }
 
 

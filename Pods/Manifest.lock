@@ -1,0 +1,16 @@
+PODS:
+  - CarbonKit (2.0.1)
+  - CZPicker (0.3.5)
+  - VMaskTextField (1.0.8)
+
+DEPENDENCIES:
+  - CarbonKit
+  - CZPicker
+  - VMaskTextField
+
+SPEC CHECKSUMS:
+  CarbonKit: 0b1dfb92f07f0da31ae49426c8f6015a9fd432cd
+  CZPicker: ce4f352d65ef5ccb8d7378afe3ee4e5bdbead15a
+  VMaskTextField: e77fe33633f999c5c38e70bed0afece0625624a4
+
+COCOAPODS: 0.39.0

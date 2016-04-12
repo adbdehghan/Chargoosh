@@ -283,6 +283,16 @@ UIImage *competitionImage;
 
 
 - (void)CreateNavigationBarButtons {
+    
+    UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
+    label.text=self.navigationItem.title;
+    label.textColor=[UIColor whiteColor];
+    label.backgroundColor =[UIColor clearColor];
+    label.adjustsFontSizeToFitWidth=YES;
+    label.font = [UIFont fontWithName:@"B Yekan+" size:17];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView=label;
+    
     UIButton *statusButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [statusButton addTarget:self action:@selector(statusButtonAction:)forControlEvents:UIControlEventTouchUpInside];
     [statusButton setFrame:CGRectMake(0, 0, 24, 24)];
@@ -311,7 +321,7 @@ UIImage *competitionImage;
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
-    UIImage *settingImage = [[UIImage imageNamed:@"setting.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *settingImage = [[UIImage imageNamed:@"groups.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [settingButton setImage:settingImage forState:UIControlStateNormal];
     
     settingButton.tintColor = [UIColor whiteColor];
@@ -366,7 +376,7 @@ UIImage *competitionImage;
 
 - (void) settingButtonAction:(id) sender
 {
-    [self performSegueWithIdentifier:@"setting" sender:self];
+    [self performSegueWithIdentifier:@"groups" sender:self];
 }
 
 #pragma mark - Navigation

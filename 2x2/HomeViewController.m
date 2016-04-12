@@ -20,7 +20,7 @@
 #import "CompetitionPlusDetailViewController.h"
 #import "SelectedViewController.h"
 #import "QRCodeReaderViewController.h"
-#define URLaddressPic "http://new.chargoosh.ir/"
+#define URLaddressPic "http://newapp.chargoosh.ir/"
 #import "AppDelegate.h"
 
 static NSString *Version = @"\"1.2\"";
@@ -61,71 +61,19 @@ static NSString *iconId;
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [collectionViewOutlet addSubview:refreshControl];
     collectionViewOutlet.alwaysBounceVertical = YES;
-    collectionViewOutlet.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1.f];
+    collectionViewOutlet.backgroundColor = [UIColor clearColor];
     [collectionViewOutlet.layer setCornerRadius:3];
     
-    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
     
    [collectionViewOutlet setTransform:CGAffineTransformMakeScale(-1, 1)];
     
-    self.homeDictionary = [[NSMutableDictionary alloc]init];
     
-    RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
-        if (wasSuccessful) {
-            
-            self.homeDictionary = data;
-            
-            home = [Home alloc];
-            
-            home.dataDictionary = self.homeDictionary;
-            
-            home = [home init];
-            
-            
-            nameUiLabel.text = [NSString stringWithFormat:@"سلام %@", home.name];
-            dayWeekUiLabel.text = home.weekDay;
-            
-            [commentUiTextView setEditable:NO];
-            [commentUiTextView setSelectable:NO];
-            [commentUiTextView setText:home.comment];
-            commentUiTextView.textColor = [UIColor whiteColor];
-            commentUiTextView.font = [UIFont fontWithName:@"B Yekan+" size:15];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [collectionViewOutlet reloadData];
-                [refreshControl endRefreshing];
-                [activityIndicator stopAnimating];
-            });
-            
-            
-            
-        }
-        
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
-                                                            message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"خب"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            
-            
-            NSLog( @"Unable to fetch Data. Try again.");
-        }
-    };
+    [self GetHome];
     
-    st = [[Settings alloc]init];
-    
-    st = [DBManager selectSetting][0];
-    
-    [self.getData GetHome:self.organizationID token:st.accesstoken withCallback:callback];
-    
-    
-    [self GetProfilePic:st];
     
     RequestCompleteBlock callback2 = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
@@ -174,11 +122,15 @@ static NSString *iconId;
     
 }
 
-- (void)GetProfilePic:(Settings *)st {
-    RequestCompleteBlock callback2 = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
+- (void)GetHome {
+
+ 
+    self.homeDictionary = [[NSMutableDictionary alloc]init];
+    
+    RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
             
-            if ([data valueForKey:@"picture"] != nil) {
+            if ([data valueForKey:@"picture"] != [NSNull null]) {
                 
                 imageURL =[NSURL URLWithString:[NSString stringWithFormat: @"%s%@",URLaddressPic,[data valueForKey:@"picture"]]];
                 [activityView startAnimating];
@@ -206,6 +158,30 @@ static NSString *iconId;
                     
                 });
             }
+            self.homeDictionary = data;
+            
+            home = [Home alloc];
+            
+            home.dataDictionary = self.homeDictionary;
+            
+            home = [home init];
+            
+            
+            nameUiLabel.text = [NSString stringWithFormat:@"سلام %@", home.name];
+            dayWeekUiLabel.text = home.weekDay;
+            
+            [commentUiTextView setEditable:NO];
+            [commentUiTextView setSelectable:NO];
+            [commentUiTextView setText:home.comment];
+            commentUiTextView.textColor = [UIColor whiteColor];
+            commentUiTextView.font = [UIFont fontWithName:@"B Yekan+" size:15];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [collectionViewOutlet reloadData];
+                [activityIndicator stopAnimating];
+            });
+            
+            
             
         }
         
@@ -217,16 +193,20 @@ static NSString *iconId;
                                                   cancelButtonTitle:@"خب"
                                                   otherButtonTitles:nil];
             [alert show];
-            [activityView stopAnimating];
+            
             
             NSLog( @"Unable to fetch Data. Try again.");
         }
     };
     
+    st = [[Settings alloc]init];
     
+    st = [DBManager selectSetting][0];
     
-  //  [self.getData GetProfilePicInfo:st.settingId Password:st.password
-             //          withCallback:callback2];
+    [self.getData GetHome:self.organizationID token:st.accesstoken withCallback:callback];
+    
+
+
 }
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
@@ -511,7 +491,7 @@ static NSString *iconId;
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
-    UIImage *settingImage = [[UIImage imageNamed:@"setting@2x.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *settingImage = [[UIImage imageNamed:@"groups.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [settingButton setImage:settingImage forState:UIControlStateNormal];
     
     settingButton.tintColor = [UIColor whiteColor];
@@ -566,7 +546,7 @@ static NSString *iconId;
 
 - (void) settingButtonAction:(id) sender
 {
-    [self performSegueWithIdentifier:@"GOTOsetting" sender:self];
+    [self performSegueWithIdentifier:@"groups" sender:self];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(ChangeProfilePic)
                                                  name:@"ProfilePicIsChanged"
@@ -580,7 +560,7 @@ static NSString *iconId;
 
 -(void)ChangeProfilePic
 {
-  [self GetProfilePic:st];
+  [self GetHome];
 }
 
 -(void)ChangeProfileInfo
@@ -622,7 +602,7 @@ static NSString *iconId;
         }
     };
     
-    [self.getData GetHome:@"d017bb5e-aa26-40b4-a62d-92c5d9552f05" token:st.accesstoken withCallback:callback];
+    [self.getData GetHome:self.organizationID token:st.accesstoken withCallback:callback];
 }
 #pragma mark - Navigation
 

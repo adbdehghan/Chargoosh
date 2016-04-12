@@ -377,50 +377,52 @@ NSMutableDictionary *receivedData;
      } didSendData:nil];
 }
 
-- (void)GetPolls:(NSString*)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback
+- (void)GetPolls:(NSString*)token orgID:(NSString*)orgId withCallback:(RequestCompleteBlock)callback
 {
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%s/api/register/GetPolls?phoneNumber=%@&pass=%@",URLaddress,phoneNumber,password]]];
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/GetPolls",URLaddress];
     
-    JCDHTTPConnection *connection = [[JCDHTTPConnection alloc] initWithRequest:request];
-    [connection executeRequestOnSuccess:
-     ^(NSHTTPURLResponse *response, NSData *data) {
-         if (response.statusCode == 200) {
-             
-             NSString* newStr =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-             SBJsonParser *sbp = [SBJsonParser new];
-             
-             receivedData = [sbp objectWithString:newStr];
-             
-             callback(YES,receivedData);
-         } else {
-             callback(NO,nil);
-         }
-     } failure:^(NSHTTPURLResponse *response, NSData *data, NSError *error) {
-         callback(NO,nil);
-     } didSendData:nil];
+    NSDictionary *parameters = @{@"organizationid": orgId};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
 }
 
-- (void)GetPoll:(NSString*)pollId phoneNumber:(NSString *)phoneNumber withCallback:(RequestCompleteBlock)callback
+- (void)GetPoll:(NSString*)pollId token:(NSString *)token withCallback:(RequestCompleteBlock)callback
 {
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%s/api/register/GetPoll?phoneNumber=%@&id=%@",URLaddress,phoneNumber,pollId]]];
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/GetPoll",URLaddress];
     
-    JCDHTTPConnection *connection = [[JCDHTTPConnection alloc] initWithRequest:request];
-    [connection executeRequestOnSuccess:
-     ^(NSHTTPURLResponse *response, NSData *data) {
-         if (response.statusCode == 200) {
-             
-             NSString* newStr =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-             SBJsonParser *sbp = [SBJsonParser new];
-             
-             receivedData = [sbp objectWithString:newStr];
-             
-             callback(YES,receivedData);
-         } else {
-             callback(NO,nil);
-         }
-     } failure:^(NSHTTPURLResponse *response, NSData *data, NSError *error) {
-         callback(NO,nil);
-     } didSendData:nil];
+    NSDictionary *parameters = @{@"id": pollId};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
 }
 
 
@@ -472,50 +474,49 @@ NSMutableDictionary *receivedData;
      } didSendData:nil];
 }
 
-- (void)GetProfilePicInfo:(NSString *)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback
+- (void)GetProfilePicInfo:(NSString *)token  withCallback:(RequestCompleteBlock)callback
 {
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat: @"%s/api/register/GetPicture?phoneNumber=%@&pass=%@",URLaddress,phoneNumber,password]]];
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/getpicandname",URLaddress];
     
-    JCDHTTPConnection *connection = [[JCDHTTPConnection alloc] initWithRequest:request];
-    [connection executeRequestOnSuccess:
-     ^(NSHTTPURLResponse *response, NSData *data) {
-         if (response.statusCode == 200) {
-             
-             NSString* newStr =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-             SBJsonParser *sbp = [SBJsonParser new];
-             
-             receivedData = [sbp objectWithString:newStr];
-             
-             callback(YES,receivedData);
-         } else {
-             callback(NO,nil);
-         }
-     } failure:^(NSHTTPURLResponse *response, NSData *data, NSError *error) {
-         callback(NO,nil);
-     } didSendData:nil];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
 }
 
-- (void)SetSetiing:(NSString *)phoneNumber Password:(NSString*)password Name:(NSString*)name LastName:(NSString*)lastName Gender:(NSString*)gender city:(NSString*)city birthdayDay:(NSString*) birthdayDay birhtdayMonth:(NSString*)birhtdayMonth birhtdayYear:(NSString*)birhtdayYear withCallback:(RequestCompleteBlock)callback
+- (void)SetSetiing:(NSString *)token Name:(NSString*)name LastName:(NSString*)lastName Gender:(NSString*)gender city:(NSString*)city birthdayDay:(NSString*) birthdayDay birhtdayMonth:(NSString*)birhtdayMonth birhtdayYear:(NSString*)birhtdayYear withCallback:(RequestCompleteBlock)callback
 {
-    NSString *sample =[NSString stringWithFormat: @"%s/api/register/SetSetting?phoneNumber=%@&pass=%@&city=%@&Gender=%@&name=%@&lastname=%@&birhtday_Day=%@&birhtday_month=%@&birhtday_year=%@",URLaddress,phoneNumber,password,city,gender,name,lastName,birthdayDay,birhtdayMonth,birhtdayYear];
     
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[sample stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/SetSetting?city=%@&Gender=%@&name=%@&lastname=%@&birhtday_Day=%@&birhtday_month=%@&birhtday_year=%@",URLaddress,city,gender,name,lastName,birthdayDay,birhtdayMonth,birhtdayYear];
     
-    JCDHTTPConnection *connection = [[JCDHTTPConnection alloc] initWithRequest:request];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    [connection executeRequestOnSuccess:
-     ^(NSHTTPURLResponse *response, NSData *data) {
-         if (response.statusCode == 200) {
-             
-             
-             
-             callback(YES,receivedData);
-         } else {
-             callback(NO,nil);
-         }
-     } failure:^(NSHTTPURLResponse *response, NSData *data, NSError *error) {
-         callback(NO,nil);
-     } didSendData:nil];
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:[sample stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
 }
 
 - (void)ClearME:(NSString *)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback
@@ -564,50 +565,49 @@ NSMutableDictionary *receivedData;
      } didSendData:nil];
 }
 
-- (void)GetCity:(NSString*)cityId withCallback:(RequestCompleteBlock)callback
+- (void)GetCity:(NSString*)cityId Token:(NSString*)token withCallback:(RequestCompleteBlock)callback
 {
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%s/api/register/GetCities?provienceID=%@",URLaddress,cityId]]];
+    NSString *sample =[NSString stringWithFormat:@"%s/api/register/GetCities?proId=%@",URLaddress,cityId];
     
-    JCDHTTPConnection *connection = [[JCDHTTPConnection alloc] initWithRequest:request];
-    [connection executeRequestOnSuccess:
-     ^(NSHTTPURLResponse *response, NSData *data) {
-         if (response.statusCode == 200) {
-             
-             NSString* newStr =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-             SBJsonParser *sbp = [SBJsonParser new];
-             
-             receivedData = [sbp objectWithString:newStr];
-             
-             callback(YES,receivedData);
-         } else {
-             callback(NO,nil);
-         }
-     } failure:^(NSHTTPURLResponse *response, NSData *data, NSError *error) {
-         callback(NO,nil);
-     } didSendData:nil];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
 }
 
-- (void)GetSetting:(NSString *)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback
+- (void)GetSetting:(NSString *)token withCallback:(RequestCompleteBlock)callback
 {
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat: @"%s/api/register/GetSetting?phoneNumber=%@&pass=%@",URLaddress,phoneNumber,password]]];
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/GetSetting",URLaddress];
     
-    JCDHTTPConnection *connection = [[JCDHTTPConnection alloc] initWithRequest:request];
-    [connection executeRequestOnSuccess:
-     ^(NSHTTPURLResponse *response, NSData *data) {
-         if (response.statusCode == 200) {
-             
-             NSString* newStr =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-             SBJsonParser *sbp = [SBJsonParser new];
-             
-             receivedData = [sbp objectWithString:newStr];
-             
-             callback(YES,receivedData);
-         } else {
-             callback(NO,nil);
-         }
-     } failure:^(NSHTTPURLResponse *response, NSData *data, NSError *error) {
-         callback(NO,nil);
-     } didSendData:nil];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
+    
 }
 
 - (void)Invite:(NSString *)phoneNumber Password:(NSString*)password contactNumber:(NSString*)contactNumber withCallback:(RequestCompleteBlock)callback

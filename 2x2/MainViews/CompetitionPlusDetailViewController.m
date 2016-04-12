@@ -114,7 +114,7 @@
     };
     
     
-    [self.getData GetPoll:self.competitionId phoneNumber:st.settingId withCallback:callback];
+    [self.getData GetPoll:self.competitionId token:st.accesstoken withCallback:callback];
     
     
     // Do any additional setup after loading the view.

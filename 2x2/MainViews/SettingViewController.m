@@ -19,7 +19,7 @@
 #define URLaddress "http://www.newapp.chargoosh.ir/api/register/ChangePicture"
 #define URLaddressPic "http://www.newapp.chargoosh.ir/"
 #import "UIImageView+WebCache.h"
-
+#define RGBCOLOR(r,g,b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 @interface SettingViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate,UIActionSheetDelegate,RSKImageCropViewControllerDelegate>
 {
   Settings *st ;
@@ -75,8 +75,8 @@
 - (void)GetProfileInfo {
     RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
-            
-            name =[NSString stringWithFormat:@"%@ %@",[data valueForKey:@"name"],[data valueForKey:@"lastname"]];
+
+            name =[NSString stringWithFormat:@"%@",[data valueForKey:@"name"]];
             imageURL =[NSURL URLWithString:[NSString stringWithFormat: @"%s%@",URLaddressPic,[data valueForKey:@"picture"]]];
             [self.tableView reloadData];
             
@@ -98,8 +98,7 @@
     
     
     
-    [self.getData GetProfilePicInfo:st.settingId Password:st.password
-                       withCallback:callback];
+    [self.getData GetProfilePicInfo:st.accesstoken withCallback:callback];
     
 }
 
@@ -143,19 +142,29 @@
             
             cell.mmimageView.layer.cornerRadius = cell.mmimageView.frame.size.width / 2;
             cell.mmimageView.layer.masksToBounds = YES;
-            
+            cell.backgroundColor = RGBCOLOR(50, 50,50);
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
             [cell.activityView startAnimating];
             cell.startTimeLabel.text = st.settingId;
-            
+                    dispatch_async(dispatch_get_main_queue(), ^{
             cell.mmlabel.text =name;
+                               });
             
             [self downloadImageWithURL:imageURL completionBlock:^(BOOL succeeded, UIImage *image) {
                 if (succeeded) {
                     // change the image in the cell
                     cell.mmimageView.image = image;
                     
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [cell.activityView stopAnimating];
+                        
+                    });
+                }
+                else
+                {
+                
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         [cell.activityView stopAnimating];
@@ -388,7 +397,7 @@
         case 2:
         {
             
-            return 35;
+            return 18;
         }
         case 3:
         {
@@ -401,7 +410,7 @@
         {   return 60;
         }
         case 6:
-        {   return 35;
+        {   return 18;
         }
         case 7:
         {
@@ -607,44 +616,39 @@
 {
     NSString *fileName = [NSString stringWithFormat:@"%ld%c%c.jpg", (long)[[NSDate date] timeIntervalSince1970], arc4random_uniform(26) + 'a', arc4random_uniform(26) + 'a'];
     
-    NSDictionary *parameters = @{@"phoneNumber": st.settingId,
-                                 @"pass": st.password,
-                                 @"Wimg":fileName};
+    NSDictionary *parameters = @{@"Wimg":fileName};
     
     NSString *URLString = @URLaddress;
     
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    NSURLRequest *request = [[AFHTTPRequestSerializer serializer]
-                             multipartFormRequestWithMethod:
-                             @"POST" URLString:URLString
-                             parameters:parameters
-                             constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                                 [formData
-                                  appendPartWithFileData:UIImageJPEGRepresentation(imageToSend, .6)
-                                  name:@"Wimg"
-                                  fileName:fileName
-                                  mimeType:@"jpg"];
-                             } error:(NULL)];
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     
-    AFHTTPRequestOperation *operation =
-    [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",st.accesstoken] forHTTPHeaderField:@"Authorization"];
     
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,
-                                               id responseObject) {
+    [manager POST:URLString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
+        [formData
+         appendPartWithFileData:UIImageJPEGRepresentation(imageToSend, .6)
+         name:@"Wimg"
+         fileName:fileName
+         mimeType:@"jpg"];
+        
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         MMCell *cell = (MMCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-         cell.mmimageView.alpha = 1;
+        cell.mmimageView.alpha = 1;
         cell.mmimageView.image = imageToSend;
         [cell.activityView stopAnimating];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ProfilePicIsChanged"
                                                             object:nil
                                                           userInfo:nil];
+   
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
         NSLog(@"Failure %@, %@", error, operation.responseString);
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
@@ -655,17 +659,7 @@
         [alert show];
         
 
-      
     }];
-    
-    [operation setUploadProgressBlock:^(NSUInteger __unused bytesWritten,
-                                        long long totalBytesWritten,
-                                        long long totalBytesExpectedToWrite) {
-        NSLog(@"Wrote %lld/%lld", totalBytesWritten, totalBytesExpectedToWrite);
-    }];
-    
-    
-    [operation start];
 
 
 }

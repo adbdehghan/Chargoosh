@@ -7,17 +7,15 @@
 //
 
 #import "MyStatusViewController.h"
-#import "UUChart.h"
 #import "DataDownloader.h"
 #import "Settings.h"
 #import "DBManager.h"
 #import "Status.h"
 #define URLaddressPic "http://www.newapp.chargoosh.ir/"
 #define RGBCOLOR(r,g,b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
-@interface MyStatusViewController ()<UUChartDataSource>
+@interface MyStatusViewController ()
 {
     NSIndexPath *path;
-    UUChart *chartView;
     Status *status;
     NSMutableArray *dateTimeList;
     NSMutableArray *scoreList;
@@ -68,11 +66,6 @@
     coinImage.tintColor = RGBCOLOR(238, 213, 0);
     
     
-    chartView = [[UUChart alloc]initwithUUChartDataFrame:CGRectMake(5, 10, [UIScreen mainScreen].bounds.size.width-20, chartContainer.bounds.size.height-50)
-                                              withSource:self
-                                               withStyle:UUChartLineStyle];
-    
-    
     dateTimeList = [[NSMutableArray alloc]init];
     scoreList = [[NSMutableArray alloc]init];
     stringScoreList =[[NSMutableArray alloc]init];
@@ -99,7 +92,7 @@
             
             name.text = [NSString stringWithFormat:@" امتیاز شما: %@",status.score];
             [activityIndicator stopAnimating];
-            [chartView showInView:chartContainer];
+
         }
         
         else
@@ -171,9 +164,7 @@
     };
     
     
-    
-    [self.getData GetProfilePicInfo:st.settingId Password:st.password
-                       withCallback:callback2];
+    [self.getData GetProfilePicInfo:st.accesstoken withCallback:callback];
     
     
 }
@@ -204,49 +195,6 @@
     return _getData;
 }
 
-- (NSArray *)UUChart_xLableArray:(UUChart *)chart
-{
-    return dateTimeList;
-}
-
-- (CGRange)UUChartMarkRangeInLineChart:(UUChart *)chart
-{
-    if (path.row==2) {
-        return CGRangeMake(25, 75);
-    }
-    return CGRangeZero;
-}
-
-- (BOOL)UUChart:(UUChart *)chart ShowHorizonLineAtIndex:(NSInteger)index
-{
-    return YES;
-}
-
-- (BOOL)UUChart:(UUChart *)chart ShowMaxMinAtIndex:(NSInteger)index
-{
-    return NO;
-}
-
-
-- (NSArray *)UUChart_yValueArray:(UUChart *)chart
-{
-    
-    return @[stringScoreList];
-}
-
-- (CGRange)UUChartChooseRangeInLineChart:(UUChart *)chart
-{
-    if (path.row==0) {
-        //          return CGRangeMake([[scoreList valueForKeyPath:@"@max.self"]integerValue]+10,[[scoreList valueForKeyPath:@"@min.self"]integerValue]);
-        return CGRangeMake([[scoreList valueForKeyPath:@"@min.self"]integerValue],[[scoreList valueForKeyPath:@"@max.self"]integerValue]+10);
-    }
-    
-    return CGRangeZero;
-}
-- (NSArray *)UUChart_ColorArray:(UUChart *)chart
-{
-    return @[UUTwitterColor];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

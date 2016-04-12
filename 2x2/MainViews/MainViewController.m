@@ -21,7 +21,7 @@
     [tabBar setSelectedIndex:4];
     CGFloat width = tabBar.view.bounds.size.width/5;
     
-    [[UITabBar appearance] setSelectionIndicatorImage:[MainViewController imageFromColor:[UIColor colorWithRed:25/255.0 green:25/255.0 blue:23/255.0 alpha:1] forSize:CGSizeMake(width, 49) withCornerRadius:0]];
+//    [[UITabBar appearance] setSelectionIndicatorImage:[MainViewController imageFromColor:[UIColor colorWithRed:25/255.0 green:25/255.0 blue:23/255.0 alpha:1] forSize:CGSizeMake(width, 49) withCornerRadius:0]];
 
     // Do any additional setup after loading the view.
 }

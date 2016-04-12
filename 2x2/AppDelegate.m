@@ -65,7 +65,7 @@
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     
     // set the selected icon color
-    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:7.f/255.f green:123.f/255.f blue:204.f/255.f alpha:1]];
     //    [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:255/255.0 green:249/255.0 blue:82/255.0 alpha:1]];
 //    [[UITabBar appearance] setSelectedImageTintColor:[UIColor colorWithRed:243.f/255.f green:30.f/255.f blue:75.f/255.f alpha:.8]];
     // remove the shadow
@@ -99,7 +99,7 @@
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<> "]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     DeviceRegisterer *registrar = [[DeviceRegisterer alloc] init];
-    [registrar registerDeviceWithToken:token];
+   // [registrar registerDeviceWithToken:token];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
