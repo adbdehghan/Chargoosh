@@ -75,6 +75,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
+    label.text=@"اطلاعات شخصی";
+    label.textColor=[UIColor whiteColor];
+    label.backgroundColor =[UIColor clearColor];
+    label.adjustsFontSizeToFitWidth=YES;
+    label.font = [UIFont fontWithName:@"B Yekan" size:17];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView=label;
+    
     // Get the previous view controller
     UIViewController *previousVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count - 2];
     
@@ -137,7 +146,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -265,7 +274,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"

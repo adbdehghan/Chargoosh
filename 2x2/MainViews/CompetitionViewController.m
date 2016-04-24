@@ -115,7 +115,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -131,7 +131,7 @@
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetCompetitions:self.organizationID token:st.accesstoken withCallback:callback];
+    [self.getData GetCompetitions:self.organizationID  token:st.accesstoken Page:@"-2" withCallback:callback];
     
     
 }
@@ -181,7 +181,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -197,7 +197,7 @@
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetCompetitions:self.organizationID token:st.accesstoken withCallback:callback];
+    [self.getData GetCompetitions:self.organizationID  token:st.accesstoken Page:@"-2" withCallback:callback];
     
 }
 
@@ -220,21 +220,8 @@
     statusButton.tintColor = [UIColor whiteColor];
     
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:statusButton];
-    UIButton *barcodeButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
-    UIImage *barcodeImage = [UIImage imageNamed:@"m_scan.png"];
-    
-    [barcodeButton setImage:barcodeImage forState:UIControlStateNormal];
-    
-    [barcodeButton addTarget:self action:@selector(ShowQR)forControlEvents:UIControlEventTouchUpInside];
-    [barcodeButton setFrame:CGRectMake(0, 0, 20, 20)];
-    
-    
-    UIBarButtonItem *barcodeBarButton = [[UIBarButtonItem alloc] initWithCustomView:barcodeButton];
-    
-      NSArray *barButtons = @[barcodeBarButton,barButton];
-    
-    self.navigationItem.leftBarButtonItems = barButtons;
+    self.navigationItem.leftBarButtonItem = barButton;
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -250,40 +237,7 @@
     self.navigationItem.rightBarButtonItem = settingBarButton;
 }
 
--(void)ShowQR
-{
-    static QRCodeReaderViewController *reader = nil;
-    static dispatch_once_t onceToken;
-    
-    dispatch_once(&onceToken, ^{
-        reader = [QRCodeReaderViewController new];
-        reader.modalPresentationStyle = UIModalPresentationFormSheet;
-    });
-    reader.delegate = self;
-    
-    [reader setCompletionWithBlock:^(NSString *resultAsString) {
-        NSLog(@"Completion with result: %@", resultAsString);
-    }];
-    
-    [self presentViewController:reader animated:YES completion:NULL];
-    
-    
-}
 
-#pragma mark - QRCodeReader Delegate Methods
-
-- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
-{
-    [self dismissViewControllerAnimated:YES completion:^{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }];
-}
-
-- (void)readerDidCancel:(QRCodeReaderViewController *)reader
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
 
 #pragma mark - Table view data source
 

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Yekan.ttf">
+            <string>BYekan</string>
+            <string>BYekan</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="3us-ga-XSv" customClass="MXRefreshHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blurdesk.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="T7I-F0-pOe" userLabel="Image">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </imageView>
+                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLJ-xv-yUO">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dqu-HW-lZj">
+                    <rect key="frame" x="148" y="264" width="75" height="72"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet.png" translatesAutoresizingMaskIntoConstraints="NO" id="K41-Zk-1z1">
+                            <rect key="frame" x="22" y="10" width="30" height="28"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bq0-yI-PKm">
+                            <rect key="frame" x="10" y="41" width="54" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="a7s-6T-46s"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="bq0-yI-PKm" firstAttribute="leading" secondItem="dqu-HW-lZj" secondAttribute="leading" constant="10" id="5fw-kM-iz8"/>
+                        <constraint firstItem="bq0-yI-PKm" firstAttribute="top" secondItem="K41-Zk-1z1" secondAttribute="bottom" constant="3" id="VCs-sA-Vyd"/>
+                        <constraint firstItem="K41-Zk-1z1" firstAttribute="leading" secondItem="dqu-HW-lZj" secondAttribute="leading" constant="22" id="X7q-Qk-xle"/>
+                        <constraint firstItem="K41-Zk-1z1" firstAttribute="centerX" secondItem="dqu-HW-lZj" secondAttribute="centerX" id="ckE-5m-oBJ"/>
+                        <constraint firstAttribute="bottom" secondItem="bq0-yI-PKm" secondAttribute="bottom" constant="10" id="gv8-1D-YAO"/>
+                        <constraint firstAttribute="width" constant="75" id="iAm-xD-o7N"/>
+                        <constraint firstAttribute="height" constant="72" id="oth-5p-vYB"/>
+                        <constraint firstItem="bq0-yI-PKm" firstAttribute="centerX" secondItem="K41-Zk-1z1" secondAttribute="centerX" id="tAe-sX-CRr"/>
+                        <constraint firstItem="K41-Zk-1z1" firstAttribute="top" secondItem="dqu-HW-lZj" secondAttribute="top" constant="10" id="wog-dl-Hr9"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eyE-HG-vwU">
+                    <rect key="frame" x="375" y="264" width="75" height="72"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transactionIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="fno-Lz-Rvd">
+                            <rect key="frame" x="22" y="10" width="30" height="28"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPb-zI-C9T">
+                            <rect key="frame" x="10" y="41" width="54" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="XuQ-5m-0WN"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="BYekan" family="B Yekan" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="UPb-zI-C9T" secondAttribute="bottom" constant="10" id="37u-Kq-ba8"/>
+                        <constraint firstAttribute="height" constant="72" id="5Hv-Fv-Kyr"/>
+                        <constraint firstItem="UPb-zI-C9T" firstAttribute="leading" secondItem="eyE-HG-vwU" secondAttribute="leading" constant="10" id="Np8-Ey-Ojf"/>
+                        <constraint firstItem="fno-Lz-Rvd" firstAttribute="top" secondItem="eyE-HG-vwU" secondAttribute="top" constant="10" id="QW6-Ax-H7f"/>
+                        <constraint firstAttribute="width" constant="75" id="ctW-z9-6bY"/>
+                        <constraint firstItem="UPb-zI-C9T" firstAttribute="top" secondItem="fno-Lz-Rvd" secondAttribute="bottom" constant="3" id="dL1-H4-Unv"/>
+                        <constraint firstItem="fno-Lz-Rvd" firstAttribute="leading" secondItem="eyE-HG-vwU" secondAttribute="leading" constant="22" id="iqM-fJ-w4E"/>
+                        <constraint firstItem="fno-Lz-Rvd" firstAttribute="centerX" secondItem="eyE-HG-vwU" secondAttribute="centerX" id="uzB-Ud-hTQ"/>
+                        <constraint firstItem="UPb-zI-C9T" firstAttribute="centerX" secondItem="fno-Lz-Rvd" secondAttribute="centerX" id="x18-HP-F77"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="fCr-ia-bTS">
+                    <rect key="frame" x="230" y="230" width="140" height="140"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="140" id="137-w3-UV5"/>
+                        <constraint firstAttribute="width" constant="140" id="4XO-CQ-Ji6"/>
+                    </constraints>
+                </imageView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dyX-H8-iRw">
+                    <rect key="frame" x="282" y="281" width="37" height="37"/>
+                    <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="eyE-HG-vwU" firstAttribute="leading" secondItem="fCr-ia-bTS" secondAttribute="trailing" constant="5" id="0oA-4c-Wqc"/>
+                <constraint firstItem="fCr-ia-bTS" firstAttribute="centerY" secondItem="dyX-H8-iRw" secondAttribute="centerY" id="72h-nk-FJ2"/>
+                <constraint firstItem="dyX-H8-iRw" firstAttribute="centerY" secondItem="T7I-F0-pOe" secondAttribute="centerY" id="KOZ-n0-nga"/>
+                <constraint firstItem="YLJ-xv-yUO" firstAttribute="leading" secondItem="T7I-F0-pOe" secondAttribute="leading" id="MSH-N5-gVh"/>
+                <constraint firstItem="YLJ-xv-yUO" firstAttribute="bottom" secondItem="T7I-F0-pOe" secondAttribute="bottom" id="OBA-Xm-b1I"/>
+                <constraint firstItem="dqu-HW-lZj" firstAttribute="centerY" secondItem="3us-ga-XSv" secondAttribute="centerY" id="RNn-Rc-Rbx"/>
+                <constraint firstItem="eyE-HG-vwU" firstAttribute="centerY" secondItem="3us-ga-XSv" secondAttribute="centerY" id="SmV-k4-cZd"/>
+                <constraint firstItem="T7I-F0-pOe" firstAttribute="top" secondItem="3us-ga-XSv" secondAttribute="top" id="V18-hw-Mil"/>
+                <constraint firstItem="YLJ-xv-yUO" firstAttribute="top" secondItem="T7I-F0-pOe" secondAttribute="top" id="ZE7-fZ-qpS"/>
+                <constraint firstItem="fCr-ia-bTS" firstAttribute="leading" secondItem="dqu-HW-lZj" secondAttribute="trailing" constant="7" id="b9d-Kp-zbN"/>
+                <constraint firstItem="dyX-H8-iRw" firstAttribute="centerX" secondItem="T7I-F0-pOe" secondAttribute="centerX" id="bBu-L5-Tqc"/>
+                <constraint firstItem="YLJ-xv-yUO" firstAttribute="trailing" secondItem="T7I-F0-pOe" secondAttribute="trailing" id="dCt-2s-xEd"/>
+                <constraint firstAttribute="trailing" secondItem="T7I-F0-pOe" secondAttribute="trailing" id="dvL-AQ-y4X"/>
+                <constraint firstItem="T7I-F0-pOe" firstAttribute="leading" secondItem="3us-ga-XSv" secondAttribute="leading" id="io1-78-Yic"/>
+                <constraint firstItem="fCr-ia-bTS" firstAttribute="centerX" secondItem="dyX-H8-iRw" secondAttribute="centerX" id="mP3-nr-K8c"/>
+                <constraint firstAttribute="bottom" secondItem="T7I-F0-pOe" secondAttribute="bottom" id="ruq-7V-Dtu"/>
+            </constraints>
+            <connections>
+                <outlet property="activityView" destination="dyX-H8-iRw" id="L0x-K5-Lbk"/>
+                <outlet property="avatar" destination="fCr-ia-bTS" id="Y6i-NI-0Dz"/>
+                <outlet property="background" destination="T7I-F0-pOe" id="bhN-CI-T5g"/>
+                <outlet property="shops" destination="UPb-zI-C9T" id="QJU-ki-ANd"/>
+            </connections>
+            <point key="canvasLocation" x="269" y="201"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="avatar.png" width="256" height="223"/>
+        <image name="blurdesk.jpg" width="2048" height="2475"/>
+        <image name="transactionIcon.png" width="94" height="100"/>
+        <image name="wallet.png" width="100" height="90"/>
+    </resources>
+</document>

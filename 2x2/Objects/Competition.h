@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSString *limit;
 @property (strong, nonatomic) NSString *userParticipationCount;
 @property (strong, nonatomic) NSURL *competitionUrl;
+@property (strong, nonatomic) NSURL *favUrl;
 @property (strong, nonatomic) UIImage *image;
 
 @end

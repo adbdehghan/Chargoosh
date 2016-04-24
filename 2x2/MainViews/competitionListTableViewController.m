@@ -10,13 +10,19 @@
 #import "DataDownloader.h"
 #import "Settings.h"
 #import "DBManager.h"
-#import "MMCell.h"
+#import "iconCollectionViewCell.h"
 #import "SelectedViewController.h"
 #import "Competition.h"
-#import "QRCodeReaderViewController.h"
-#define URLaddress "http://www.newapp.chargoosh.ir/"
+#import "AppDelegate.h"
+#import "UIImageView+WebCache.h"
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
+#define URLaddress "http://www.new.chargoosh.ir/"
+#define URLaddressFav "http://www.newapp.chargoosh.ir/"
 
-@interface competitionListTableViewController ()<QRCodeReaderDelegate>
+@interface competitionListTableViewController ()
+{
+    Settings *st ;
+}
 @property (strong, nonatomic) DataDownloader *getData;
 @end
 
@@ -26,29 +32,47 @@ NSString *competitionContent;
 NSString *competitionId;
 UIImage *competitionImage;
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.cachedImages = [[NSMutableDictionary alloc] init];
     [self CreateNavigationBarButtons];
+    
+    AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    
+    self.organizationID = app.organizationID;
+    
+    UIView *layer = [[UIView alloc]init];
+    layer.backgroundColor = [UIColor blackColor];
+    layer.alpha = .5f;
+    [layer setFrame:self.view.frame];
+    
+    UIImageView *backImage =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"background.jpg"]];
+    [backImage setFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height-110 )];
+    
+    UIView *container = [[UIView alloc]init];
+    [container setFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height-110 )];
+    
+    [container addSubview:backImage];
+    [container addSubview:layer];
+    
+    self.collectionView.backgroundView = container;
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:refreshControl];
+    [self.collectionView addSubview:refreshControl];
     
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
     
-    for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
-        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    for (NSIndexPath *indexPath in self.collectionView.indexPathsForSelectedItems) {
+        [self.collectionView deselectRowAtIndexPath:indexPath animated:NO];
     }
     
     self.competitionDictionary = [[NSMutableDictionary alloc]init];
     self.competitionList = [[NSMutableArray alloc]init];
-    
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     
     RequestCompleteBlock callback = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
         if (wasSuccessful) {
@@ -61,17 +85,17 @@ UIImage *competitionImage;
                 competition.title =[item valueForKey:@"title"];
                 competition.competitionId =[item valueForKey:@"id"];
                 competition.competitionUrl =[NSURL URLWithString:[NSString stringWithFormat: @"%s%@",URLaddress,[item valueForKey:@"picture"]]];
-                
+                 competition.favUrl =[NSURL URLWithString:[NSString stringWithFormat: @"%s%@",URLaddressFav,[item valueForKey:@"favImg"]]];
                 [self.competitionList addObject:competition];
             }
             
             [activityIndicator stopAnimating];
-            [self.tableView reloadData];
+            [self.collectionView reloadData];
         }
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -87,8 +111,7 @@ UIImage *competitionImage;
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetCompetitionsForTopUsers:st.settingId Password:st.password
-                     withCallback:callback];
+    [self.getData GetCompetitionsForTopUsers:st.accesstoken orgId:self.organizationID withCallback:callback];
     
     
 
@@ -116,7 +139,7 @@ UIImage *competitionImage;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [self.tableView reloadData];
+                [self.collectionView reloadData];
                 [refreshControl endRefreshing];
             });
             
@@ -124,7 +147,7 @@ UIImage *competitionImage;
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -140,9 +163,7 @@ UIImage *competitionImage;
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetCompetitionsForTopUsers:st.settingId Password:st.password
-                     withCallback:callback];
-
+    [self.getData GetCompetitionsForTopUsers:st.accesstoken orgId:self.organizationID withCallback:callback];
     
 }
 
@@ -150,85 +171,72 @@ UIImage *competitionImage;
 {
     [super viewWillAppear:animated];
     
-    // this UIViewController is about to re-appear, make sure we remove the current selection in our table view
-    NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
-    [self.tableView deselectRowAtIndexPath:tableSelection animated:NO];
+   // NSIndexPath *tableSelection = [self.collectionView indexPathForSelectedRow];
+    //[self.collectionView deselectRowAtIndexPath:tableSelection animated:NO];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.competitionList count];
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    self.tableView.estimatedRowHeight = 100;
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *cellIdentifier = @"CellIdentifier";
-    
-    MMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell==nil) {
-        cell = [[MMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        
-    }
+    iconCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectionViewCellIdentifier forIndexPath:indexPath];
     
     Competition *competition = [self.competitionList objectAtIndex:indexPath.row];
     
-    cell.mmlabel.text= competition.title;
+    cell.captionLabel.text= competition.title;
 
-    cell.mmlabel.textColor=[UIColor blackColor];
-    cell.mmlabel.textAlignment = NSTextAlignmentCenter;
-    cell.mmimageView.layer.cornerRadius = cell.mmimageView.frame.size.width/3;
-    cell.mmimageView.clipsToBounds = YES;
-    [cell.activityView startAnimating];
+    cell.captionLabel.textColor=[UIColor blackColor];
+    cell.captionLabel.textAlignment = NSTextAlignmentCenter;
+    cell.icon.layer.cornerRadius = cell.icon.frame.size.width/3;
+    cell.icon.clipsToBounds = YES;
     
+//     [cell.activityView startAnimating];
     
-    NSString *identifier = [NSString stringWithFormat:@"Cell%ld" , (long)indexPath.row];
-    
-    if([self.cachedImages objectForKey:identifier] != nil)
-    {
-        
-        cell.mmimageView.image = [self.cachedImages valueForKey:identifier];
-        [cell.activityView stopAnimating];
-    }
-    else
-    {
-        // download the image asynchronously
-        if (self.tableView.dragging == NO && self.tableView.decelerating == NO)
-        {
-            
-            
-            [self downloadImageWithURL:competition.competitionUrl identifier:identifier completionBlock:^(BOOL succeeded, NSMutableDictionary *image) {
-                if (succeeded) {
-                    // change the image in the cell
-                    if ([tableView indexPathForCell:cell].row == indexPath.row) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            
-                            
-                            if ([image objectForKey:identifier]!=nil) {
-                                
-                                [self.cachedImages setValue:[image valueForKey:identifier] forKey:identifier];
-                                cell.mmimageView.image =  [self.cachedImages valueForKey:identifier];
-                                [cell.activityView stopAnimating];
-                            }
-                            
-                        });
-                    }
-                }
-            }];
+    [self downloadImageWithURL:competition.competitionUrl completionBlock:^(BOOL succeeded,UIImage *image) {
+        if (succeeded) {
+            // change the image in the cell
+            if ([collectionView indexPathForCell:cell].row == indexPath.row) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell.icon.image = image;
+                    [cell.iconActivityView stopAnimating];
+                    
+                });
+            }
         }
-        cell.mmimageView.image = nil;
-        
-    }
+    }];
+    
+    [cell.iconActivityView startAnimating];
+
+    [cell.thumbnail setImageWithURL:competition.favUrl
+                     placeholderImage:[UIImage imageNamed:@"photoPlaceHolder.png"] options:SDWebImageRefreshCached usingActivityIndicatorStyle:(UIActivityIndicatorViewStyle)UIActivityIndicatorViewStyleWhiteLarge];
+    
     return cell;
     
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 5.0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 2.0;
+}
+
+// Layout: Set Edges
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    // return UIEdgeInsetsMake(0,8,0,8);  // top, left, bottom, right
+    return UIEdgeInsetsMake(5,5,5,5);  // top, left, bottom, right
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CGSize calCulateSizze = CGSizeMake(self.view.frame.size.width / 2 - 8, self.view.frame.size.width / 2 - 8);
+    
+    return calCulateSizze;
 }
 
 - (void)downloadImageWithURL:(NSURL *)url identifier:(NSString*)Identifier completionBlock:(void (^)(BOOL succeeded, NSMutableDictionary *image))completionBlock
@@ -254,16 +262,35 @@ UIImage *competitionImage;
 }
 
 
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
 {
-    MMCell *cell =(MMCell*)[tableView cellForRowAtIndexPath:indexPath];
-    competitionTitle = cell.mmlabel.text;
-    competitionImage = cell.mmimageView.image;
-    competitionId = ((Competition*)[self.competitionList objectAtIndex:[indexPath row]]).competitionId;
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES,image);
+                               } else{
+                                   completionBlock(NO,nil);
+                               }
+                           }];
+}
+
+
+
+
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    [self performSegueWithIdentifier:@"selections" sender:self];
+//    iconCollectionViewCell *cell =(iconCollectionViewCell*)[collectionView cellForRowAtIndexPath:indexPath];
+    competitionTitle = ((Competition*)[self.competitionList objectAtIndex:[indexPath row]]).title;
+//    competitionImage = cell.icon.image;
+    competitionId =[NSString stringWithFormat:@"%@",((Competition*)[self.competitionList objectAtIndex:[indexPath row]]).competitionId];
+//
+//    
+    [self performSegueWithIdentifier:@"next" sender:self];
 }
 
 
@@ -303,21 +330,7 @@ UIImage *competitionImage;
     
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:statusButton];
     
-    UIButton *barcodeButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    UIImage *barcodeImage = [UIImage imageNamed:@"m_scan.png"];
-    
-    [barcodeButton setImage:barcodeImage forState:UIControlStateNormal];
-    
-    [barcodeButton addTarget:self action:@selector(ShowQR)forControlEvents:UIControlEventTouchUpInside];
-    [barcodeButton setFrame:CGRectMake(0, 0, 20, 20)];
-    
-    
-    UIBarButtonItem *barcodeBarButton = [[UIBarButtonItem alloc] initWithCustomView:barcodeButton];
-    
-      NSArray *barButtons = @[barcodeBarButton,barButton];
-    
-    self.navigationItem.leftBarButtonItems = barButtons;
+    self.navigationItem.leftBarButtonItem = barButton;
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -333,40 +346,6 @@ UIImage *competitionImage;
     self.navigationItem.rightBarButtonItem = settingBarButton;
 }
 
--(void)ShowQR
-{
-    static QRCodeReaderViewController *reader = nil;
-    static dispatch_once_t onceToken;
-    
-    dispatch_once(&onceToken, ^{
-        reader = [QRCodeReaderViewController new];
-        reader.modalPresentationStyle = UIModalPresentationFormSheet;
-    });
-    reader.delegate = self;
-    
-    [reader setCompletionWithBlock:^(NSString *resultAsString) {
-        NSLog(@"Completion with result: %@", resultAsString);
-    }];
-    
-    [self presentViewController:reader animated:YES completion:NULL];
-    
-    
-}
-
-#pragma mark - QRCodeReader Delegate Methods
-
-- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
-{
-    [self dismissViewControllerAnimated:YES completion:^{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }];
-}
-
-- (void)readerDidCancel:(QRCodeReaderViewController *)reader
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
 
 - (void) statusButtonAction:(id) sender
 {
@@ -384,9 +363,10 @@ UIImage *competitionImage;
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqual:@"selections"]) {
+    if ([segue.identifier isEqual:@"next"]) {
         SelectedViewController *destination = [segue destinationViewController];
         destination.competitionId = competitionId;
+        destination.competitionTitle = competitionTitle;
     }
     
 }
@@ -396,7 +376,7 @@ UIImage *competitionImage;
     if ([self.cachedImages count]>0) {
         
         
-        NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
+        NSArray *visiblePaths = [self.collectionView indexPathsForVisibleItems];
         for (NSIndexPath *indexPath in visiblePaths)
         {
             NSString *identifier = [NSString stringWithFormat:@"Cell%ld" , (long)indexPath.row];
@@ -405,7 +385,7 @@ UIImage *competitionImage;
             if([self.cachedImages objectForKey:identifier] == nil)
                 // Avoid the app icon download if the app already has an icon
             {
-                MMCell *cell =(MMCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+                iconCollectionViewCell *cell =(iconCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
                 
                 [self downloadImageWithURL:competition.competitionUrl identifier:identifier completionBlock:^(BOOL succeeded, NSMutableDictionary *image) {
                     if (succeeded) {
@@ -417,7 +397,7 @@ UIImage *competitionImage;
                             if ([image objectForKey:identifier]!=nil) {
                                 
                                 [self.cachedImages setValue:[image valueForKey:identifier] forKey:identifier];
-                                cell.mmimageView.image =  [self.cachedImages valueForKey:identifier];
+                                cell.icon.image =  [self.cachedImages valueForKey:identifier];
                                 [cell.activityView stopAnimating];
                             }
                             

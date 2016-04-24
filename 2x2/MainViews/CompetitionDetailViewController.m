@@ -95,7 +95,7 @@
             self.competitionDictionary = data;
             
             self.content =[self.competitionDictionary valueForKey:@"content"];
-            self.canParticipate = [[self.competitionDictionary valueForKey:@"canPartipiateLimit"]boolValue];
+            self.canParticipate = [[self.competitionDictionary valueForKey:@"canPartipiate"]boolValue];
             self.timeLimitParticipate =[[self.competitionDictionary valueForKey:@"canPartipiateDate"]boolValue];
             [activityIndicator stopAnimating];
             
@@ -105,7 +105,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -208,34 +208,34 @@
 -(void)Participate:(id)sender
 {
     
-//    if (!self.canParticipate) {
-//        
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
-//                                                        message:@"شما از تمام شانس شرکت در مسابقه خود استفاده کرده اید!"
-//                                                       delegate:self
-//                                              cancelButtonTitle:@"خب"
-//                                              otherButtonTitles:nil];
-//        [alert show];
-//        
-//    }
-//    
-//    else if(!self.timeLimitParticipate)
-//    {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
-//                                                        message:@"زمان شرکت در مسابقه هنوز نرسیده یا تمام شده!"
-//                                                       delegate:self
-//                                              cancelButtonTitle:@"خب"
-//                                              otherButtonTitles:nil];
-//        [alert show];
-//    
-//    }
-//    else
-//    {
+    if (!self.canParticipate) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
+                                                        message:@"شما از تمام شانس شرکت در مسابقه خود استفاده کرده اید!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"خب"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+    }
+    
+    else if(!self.timeLimitParticipate)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
+                                                        message:@"زمان شرکت در مسابقه هنوز نرسیده یا تمام شده!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"خب"
+                                              otherButtonTitles:nil];
+        [alert show];
+    
+    }
+    else
+    {
         SCNavigationController *nav = [[SCNavigationController alloc] init];
         nav.scNaigationDelegate = self;
         [nav showCameraWithParentController:self];
         
-//    }
+    }
     
 }
 
@@ -273,7 +273,11 @@
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"شرکت" style:UIBarButtonItemStyleDone target:self action:@selector(Participate:)];
     
-    [self.navigationItem setRightBarButtonItem:backButton];
+
+        [self.navigationItem setRightBarButtonItem:backButton];
+  
+    
+    
     
 }
 
@@ -331,7 +335,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"

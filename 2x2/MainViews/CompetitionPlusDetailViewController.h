@@ -12,5 +12,7 @@
 @property(nonatomic,strong) NSString *competitionTitle;
 @property(nonatomic,strong) NSString *competitionId;
 @property(nonatomic,strong)  NSMutableDictionary *competitionDictionary;
+@property (strong, nonatomic) IBOutlet UILabel *whyCantLabel;
+@property (strong, nonatomic) IBOutlet UIView *whyCantView;
 @property (strong, nonatomic) NSString *exAnswer;
 @end

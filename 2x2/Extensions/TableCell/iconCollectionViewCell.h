@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ClickImage.h"
 
 @interface iconCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIButton *iconImage;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *iconActivityView;
+@property (weak, nonatomic) IBOutlet UIImageView *thumbnail;
+@property (weak, nonatomic) IBOutlet ClickImage *clickableThumbnail;
+@property (weak, nonatomic) IBOutlet UIImageView *icon;
+@property (weak, nonatomic) IBOutlet UILabel *date;
 @end

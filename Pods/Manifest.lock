@@ -1,16 +1,28 @@
 PODS:
-  - CarbonKit (2.0.1)
   - CZPicker (0.3.5)
+  - HMSegmentedControl (1.5.2)
+  - MXPagerView (0.1.2)
+  - MXParallaxHeader (0.4.3)
+  - MXSegmentedPager (3.0.4):
+    - HMSegmentedControl (~> 1.5.2)
+    - MXPagerView (~> 0.1.2)
+    - MXParallaxHeader (~> 0.4.3)
+  - UIImage-Helpers (0.0.3)
   - VMaskTextField (1.0.8)
 
 DEPENDENCIES:
-  - CarbonKit
   - CZPicker
+  - MXSegmentedPager
+  - UIImage-Helpers
   - VMaskTextField
 
 SPEC CHECKSUMS:
-  CarbonKit: 0b1dfb92f07f0da31ae49426c8f6015a9fd432cd
   CZPicker: ce4f352d65ef5ccb8d7378afe3ee4e5bdbead15a
+  HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
+  MXPagerView: b0cc1695ff8470a1bb1628e25e8878eb94606a60
+  MXParallaxHeader: 96d9e7c392a26b29b97ddc34bff904a9c0baef27
+  MXSegmentedPager: 48a6129c823a3a5c6f5809c43463dbdf8351f528
+  UIImage-Helpers: 06b04a42bdd222844035602e87e936765c80f620
   VMaskTextField: e77fe33633f999c5c38e70bed0afece0625624a4
 
 COCOAPODS: 0.39.0

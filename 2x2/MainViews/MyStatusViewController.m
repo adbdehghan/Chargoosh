@@ -11,9 +11,18 @@
 #import "Settings.h"
 #import "DBManager.h"
 #import "Status.h"
+#import <QuartzCore/QuartzCore.h>
+#import "MypicsCollectionViewController.h"
+#import "MyCompetitionsTableViewController.h"
+#import "MyshopsTableViewController.h"
+#import "MXRefreshHeaderView.h"
+#import "UIImage+MDQRCode.h"
+#import "KLCPopup.h"
+
 #define URLaddressPic "http://www.newapp.chargoosh.ir/"
 #define RGBCOLOR(r,g,b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 @interface MyStatusViewController ()
+
 {
     NSIndexPath *path;
     Status *status;
@@ -21,18 +30,69 @@
     NSMutableArray *scoreList;
     NSMutableArray *stringScoreList;
     NSURL *imageURL;
+    Settings *st ;
+
 }
 @property (strong, nonatomic) DataDownloader *getData;
+
 @end
 
 @implementation MyStatusViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    profileImage.layer.cornerRadius = profileImage.frame.size.width / 2;
-    profileImage.layer.masksToBounds = YES;
+    UIButton *barcodeButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
+    UIImage *barcodeImage = [UIImage imageNamed:@"m_scan.png"];
+    
+    [barcodeButton setImage:barcodeImage forState:UIControlStateNormal];
+    
+    [barcodeButton addTarget:self action:@selector(ShowQR)forControlEvents:UIControlEventTouchUpInside];
+    [barcodeButton setFrame:CGRectMake(0, 0, 20, 20)];
+    
+    
+    UIBarButtonItem *barcodeBarButton = [[UIBarButtonItem alloc] initWithCustomView:barcodeButton];
+    
+    self.navigationItem.rightBarButtonItem = barcodeBarButton;
+    
+    self.segmentedPager.parallaxHeader.view = [MXRefreshHeaderView instantiateFromNib];
+    self.segmentedPager.parallaxHeader.mode = MXParallaxHeaderModeFill;
+    self.segmentedPager.parallaxHeader.height = 240;
+    self.segmentedPager.parallaxHeader.minimumHeight = 190;
+    
+    // Segmented Control customization
+    self.segmentedPager.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+    self.segmentedPager.segmentedControl.backgroundColor = [UIColor whiteColor];
+    self.segmentedPager.segmentedControl.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor blackColor]};
+    self.segmentedPager.segmentedControl.selectedTitleTextAttributes = @{NSForegroundColorAttributeName : [UIColor colorWithRed:74/255.f green:144/255.f blue:226/255.f alpha:1.f]};
+    self.segmentedPager.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+    self.segmentedPager.segmentedControl.type = HMSegmentedControlTypeImages;
+
+    self.segmentedPager.segmentedControl.selectionIndicatorColor = [UIColor colorWithRed:74/255.f green:144/255.f blue:226/255.f alpha:1.f];
+    
+    self.segmentedPager.segmentedControlEdgeInsets = UIEdgeInsetsMake(0, 0, 1, 0);
+
+    
+    ///
+    UIView *layer = [[UIView alloc]init];
+    layer.backgroundColor = [UIColor blackColor];
+    layer.alpha = .5f;
+    [layer setFrame:self.view.frame];
+    
+    UIImageView *backImage =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"background.jpg"]];
+    [backImage setFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height-110 )];
+    
+    UIView *container = [[UIView alloc]init];
+    [container setFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height-110 )];
+    
+    [container addSubview:backImage];
+    [container addSubview:layer];
+    
+//    [backGroundContainer addSubview:container];
+    ///
     
     [self setTitle:@"وضعیت من"];
     
@@ -57,7 +117,7 @@
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.view addSubview:activityIndicator];
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
-    [activityIndicator startAnimating];
+ //   [activityIndicator startAnimating];
     
     
     UIImage *settingImage = [[UIImage imageNamed:@"status.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -97,7 +157,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -109,13 +169,13 @@
         }
     };
     
-    Settings *st = [[Settings alloc]init];
+    st = [[Settings alloc]init];
     
     st = [DBManager selectSetting][0];
     
-    [self.getData GetSummarize:st.settingId Password:st.password
-                  withCallback:callback];
-    
+//    [self.getData GetSummarize:st.settingId Password:st.password
+//                  withCallback:callback];
+//    
     
     
     RequestCompleteBlock callback2 = ^(BOOL wasSuccessful,NSMutableDictionary *data) {
@@ -151,7 +211,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -164,8 +224,25 @@
     };
     
     
-    [self.getData GetProfilePicInfo:st.accesstoken withCallback:callback];
+//    [self.getData GetProfilePicInfo:st.accesstoken withCallback:callback];
+    // Parallax Header
     
+}
+
+-(void)ShowQR
+{
+    CGFloat imageSize = ceilf(self.view.bounds.size.width * 0.6f);
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(floorf(self.view.bounds.size.width * 0.5f - imageSize * 0.5f), floorf(self.view.bounds.size.height * 0.5f - imageSize * 0.5f), imageSize, imageSize)];
+    
+    imageView.image = [UIImage mdQRCodeForString:st.settingId size:imageView.bounds.size.width fillColor:[UIColor blackColor]];
+    imageView.backgroundColor = [UIColor whiteColor];
+    
+    UIView* contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor orangeColor];
+    contentView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
+    
+    KLCPopup* popup = [KLCPopup popupWithContentView:imageView];
+    [popup show];
     
 }
 
@@ -228,16 +305,49 @@
     self.navigationItem.rightBarButtonItem = settingBarButton;
 }
 
+#pragma mark Navigation
 
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(MXPageSegue *)segue sender:(id)sender {
+//    MXNumberViewController *numberViewController = segue.destinationViewController;
+//    numberViewController.number = segue.pageIndex;
+}
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+#pragma mark <MXSegmentedPagerControllerDataSource>
+
+- (NSInteger)numberOfPagesInSegmentedPager:(MXSegmentedPager *)segmentedPager {
+    return 3;
+}
+
+//- (NSString *)segmentedPager:(MXSegmentedPager *)segmentedPager titleForSectionAtIndex:(NSInteger)index {
+//    return @[@"Table", @"Web", @"Text"][index];
+//}
+
+- (UIImage*) segmentedPager:(MXSegmentedPager*)segmentedPager imageForSectionAtIndex:(NSInteger)index
+{
+    return @[[UIImage imageNamed:@"gallery"],[UIImage imageNamed:@"scoreListD@2x"],[UIImage imageNamed:@"transactionD@2x"]][index];
+}
+
+- (UIImage*) segmentedPager:(MXSegmentedPager*)segmentedPager selectedImageForSectionAtIndex:(NSInteger)index{
+    return @[[UIImage imageNamed:@"galleryS@2x"],[UIImage imageNamed:@"scoreList@2x"],[UIImage imageNamed:@"transaction@2x"]][index];
+
+}
+
+- (NSString *)segmentedPager:(MXSegmentedPager *)segmentedPager segueIdentifierForPageAtIndex:(NSInteger)index {
+    switch (index) {
+        case 0:
+            return @"pic";
+            break;
+            case 1:
+            return @"comp";
+            break;
+            case 2:
+            return @"shop";
+            break;
+        default:
+            break;
+    }
+    return @"pic";
+}
 
 @end

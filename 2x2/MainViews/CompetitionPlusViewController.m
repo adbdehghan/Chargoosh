@@ -13,12 +13,11 @@
 #import "CompetitionPlusDetailViewController.h"
 #import "Settings.h"
 #import "DBManager.h"
-#import "QRCodeReaderViewController.h"
 #import "AppDelegate.h"
 
 #define RGBCOLOR(r,g,b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 
-@interface CompetitionPlusViewController ()<QRCodeReaderDelegate>
+@interface CompetitionPlusViewController ()
 {
     Settings *st ;
 }
@@ -98,7 +97,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -138,21 +137,9 @@
     statusButton.tintColor = [UIColor whiteColor];
     
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:statusButton];
-    UIButton *barcodeButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+   
     
-    UIImage *barcodeImage = [UIImage imageNamed:@"m_scan.png"];
-    
-    [barcodeButton setImage:barcodeImage forState:UIControlStateNormal];
-    
-    [barcodeButton addTarget:self action:@selector(ShowQR)forControlEvents:UIControlEventTouchUpInside];
-    [barcodeButton setFrame:CGRectMake(0, 0, 20, 20)];
-    
-    
-    UIBarButtonItem *barcodeBarButton = [[UIBarButtonItem alloc] initWithCustomView:barcodeButton];
-    
-      NSArray *barButtons = @[barcodeBarButton,barButton];
-    
-    self.navigationItem.leftBarButtonItems = barButtons;
+    self.navigationItem.leftBarButtonItem = barButton;
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -168,40 +155,6 @@
     self.navigationItem.rightBarButtonItem = settingBarButton;
 }
 
--(void)ShowQR
-{
-    static QRCodeReaderViewController *reader = nil;
-    static dispatch_once_t onceToken;
-    
-    dispatch_once(&onceToken, ^{
-        reader = [QRCodeReaderViewController new];
-        reader.modalPresentationStyle = UIModalPresentationFormSheet;
-    });
-    reader.delegate = self;
-    
-    [reader setCompletionWithBlock:^(NSString *resultAsString) {
-        NSLog(@"Completion with result: %@", resultAsString);
-    }];
-    
-    [self presentViewController:reader animated:YES completion:NULL];
-    
-    
-}
-
-#pragma mark - QRCodeReader Delegate Methods
-
-- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
-{
-    [self dismissViewControllerAnimated:YES completion:^{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }];
-}
-
-- (void)readerDidCancel:(QRCodeReaderViewController *)reader
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
     
@@ -236,7 +189,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"

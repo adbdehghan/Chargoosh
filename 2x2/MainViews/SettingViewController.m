@@ -14,6 +14,7 @@
 #import "AFNetworking.h"
 #import "DBManager.h"
 #import "Settings.h"
+#import "UIImage+Blur.h"
 #import "DataDownloader.h"
 #import "DXAlertView.h"
 #define URLaddress "http://www.newapp.chargoosh.ir/api/register/ChangePicture"
@@ -84,7 +85,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -117,7 +118,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return 8;
 }
 
 
@@ -139,10 +140,13 @@
                 cell = [[MMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
                 
             }
-            
+            [cell.coinButton addTarget:self action:@selector(ChangePic:)forControlEvents:UIControlEventTouchUpInside];
             cell.mmimageView.layer.cornerRadius = cell.mmimageView.frame.size.width / 2;
             cell.mmimageView.layer.masksToBounds = YES;
-            cell.backgroundColor = RGBCOLOR(50, 50,50);
+         
+            
+            
+            cell.backgroundColor =[UIColor whiteColor]; //RGBCOLOR(50, 50,50);
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
             [cell.activityView startAnimating];
@@ -155,10 +159,17 @@
                 if (succeeded) {
                     // change the image in the cell
                     cell.mmimageView.image = image;
+                    cell.mmimageView.layer.borderColor = [UIColor whiteColor].CGColor;
+                    cell.mmimageView.layer.borderWidth = 2;
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         [cell.activityView stopAnimating];
+                        
+                        NSData *imageData = UIImageJPEGRepresentation(image,  .00001f);
+                        UIImage *blurredImage = [[UIImage imageWithData:imageData] blurredImage:.5f];
+                        
+                        cell.backimageView.image = blurredImage;
                         
                     });
                 }
@@ -176,38 +187,8 @@
             return cell;
         }
             break;
-            
-        case 1:
-        {
-            static NSString *cellIdentifier = @"ChangePicCellIdentifier";
-            MMCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            
-            if (cell==nil) {
-                
-                cell = [[MMCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-              
-            }
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.coinButton addTarget:self action:@selector(ChangePic:)forControlEvents:UIControlEventTouchUpInside];
-            
-            return cell;
-        }
-        case 2:
-        {
-            static NSString *cellIdentifier = @"EmptyCellIdentifier1";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-            
-            if (cell==nil) {
-                
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-                
-            }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-            return cell;
-        }
-        case 3:
+        case 1:
         {
             static NSString *cellIdentifier = @"PersonalCellIdentifier";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
@@ -219,7 +200,7 @@
             }
             return cell;
         }
-        case 4:
+        case 2:
         {
             static NSString *cellIdentifier = @"InviteCellIdentifier";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
@@ -231,7 +212,7 @@
             }
             return cell;
         }
-        case 5:
+        case 3:
         {
             static NSString *cellIdentifier = @"AboutCellIdentifier";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
@@ -243,7 +224,7 @@
             }
             return cell;
         }
-        case 6:
+        case 4:
         {
             static NSString *cellIdentifier = @"EmptyCellIdentifier2";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
@@ -257,7 +238,7 @@
 
             return cell;
         }
-        case 7:
+        case 5:
         {
             static NSString *cellIdentifier = @"ClearImageCacheCellIdentifier";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
@@ -269,7 +250,7 @@
             }
             return cell;
         }
-        case 8:
+        case 6:
         {
             static NSString *cellIdentifier = @"DestroyCellIdentifier";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
@@ -281,7 +262,7 @@
             }
             return cell;
         }
-        case 9:
+        case 7:
         {
             
             static NSString *cellIdentifier = @"LogoutCellIdentifier";
@@ -387,40 +368,31 @@
     switch (indexPath.row) {
         case 0:
         {
-            return 92;
+            return 200;
         }
             break;
-            
         case 1:
-        {     return 40;
-        }
-        case 2:
-        {
-            
-            return 18;
-        }
-        case 3:
         {
             return 60;
         }
+        case 2:
+        {   return 60;
+        }
+        case 3:
+        {   return 60;
+        }
         case 4:
-        {   return 60;
-        }
-        case 5:
-        {   return 60;
-        }
-        case 6:
         {   return 18;
         }
+        case 5:
+        {
+            return 47;
+        }
+        case 6:
+        {
+            return 47;
+        }
         case 7:
-        {
-            return 47;
-        }
-        case 8:
-        {
-            return 47;
-        }
-        case 9:
         {
             
             
@@ -446,7 +418,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -604,6 +576,13 @@
     MMCell *cell = (MMCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     cell.mmimageView.image = croppedImage;
     cell.mmimageView.alpha = .3;
+    
+    
+    NSData *imageData = UIImageJPEGRepresentation(croppedImage,  .00001f);
+    UIImage *blurredImage = [[UIImage imageWithData:imageData] blurredImage:.5f];
+    cell.backimageView.image = blurredImage;
+    cell.backimageView.alpha = .3;
+    
     [cell.activityView startAnimating];
     
     [self PostPicture:croppedImage];
@@ -639,9 +618,26 @@
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         MMCell *cell = (MMCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-        cell.mmimageView.alpha = 1;
+ 
         cell.mmimageView.image = imageToSend;
+        NSData *imageData = UIImageJPEGRepresentation(imageToSend,  .00001f);
+        UIImage *blurredImage = [[UIImage imageWithData:imageData] blurredImage:.5f];
+        
+        cell.backimageView.image = blurredImage;
+       
         [cell.activityView stopAnimating];
+        
+        [UIView animateWithDuration:1
+                              delay:0
+                            options: UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+                            cell.backimageView.alpha = 1;
+                             cell.mmimageView.alpha = 1;
+                         }
+                         completion:^(BOOL finished){
+                             NSLog(@"Done!");
+                         }];
+        
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ProfilePicIsChanged"
                                                             object:nil
@@ -651,7 +647,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Failure %@, %@", error, operation.responseString);
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                         message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                        delegate:self
                                               cancelButtonTitle:@"خب"

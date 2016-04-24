@@ -17,6 +17,11 @@
 #define URLaddress "http://www.newapp.chargoosh.ir/"
 
 @interface SelectedViewController ()
+{
+    
+    Settings *st ;
+
+}
 @property (strong, nonatomic) DataDownloader *getData;
 @end
 
@@ -41,6 +46,9 @@ UIImage *competitionImage;
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
     
+    st = [[Settings alloc]init];
+    
+    st = [DBManager selectSetting][0];
     
     self.competitionDictionary = [[NSMutableDictionary alloc]init];
     self.topParticipateList = [[NSMutableArray alloc]init];
@@ -73,7 +81,7 @@ UIImage *competitionImage;
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -86,8 +94,7 @@ UIImage *competitionImage;
     };
     
     
-    [self.getData GetTopParticipates:self.competitionId
-                        withCallback:callback];
+    [self.getData GetTopParticipates:self.competitionId Token:st.accesstoken withCallback:callback];
     
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -122,7 +129,7 @@ UIImage *competitionImage;
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -135,8 +142,7 @@ UIImage *competitionImage;
     };
     
     
-    [self.getData GetTopParticipates:self.competitionId
-                        withCallback:callback];
+[self.getData GetTopParticipates:self.competitionId Token:st.accesstoken withCallback:callback];
     
 }
 
@@ -151,6 +157,15 @@ UIImage *competitionImage;
 
 
 - (void)CreateNavigationBarButtons {
+    
+    UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
+    label.text=self.competitionTitle;
+    label.textColor=[UIColor whiteColor];
+    label.backgroundColor =[UIColor clearColor];
+    label.adjustsFontSizeToFitWidth=YES;
+    label.font = [UIFont fontWithName:@"B Yekan+" size:17];
+    label.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView=label;
     
     UIViewController *previousVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count - 2];
     
@@ -233,9 +248,9 @@ UIImage *competitionImage;
     CGRect frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width , 40);
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
     label.font = [UIFont fontWithName:@"B Yekan+" size:15];
-    label.backgroundColor = [[UIColor darkGrayColor]colorWithAlphaComponent:1];
+    label.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:1];
     label.text = cellText;
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor blackColor];
     label.textAlignment = NSTextAlignmentCenter;
     return label;
 }
@@ -248,7 +263,7 @@ UIImage *competitionImage;
     CGRect frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width , 40);
     UILabel *label = [[UILabel alloc]initWithFrame:frame];
     label.font = [UIFont fontWithName:@"B Yekan+" size:15];
-    label.backgroundColor = [[UIColor lightGrayColor]colorWithAlphaComponent:1];
+    label.backgroundColor = [UIColor colorWithRed:5/255.f green:113/255.f blue:189/255.f alpha:1.f];
     label.text = top.imageDescription;
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;

@@ -151,7 +151,7 @@
   self.cancelButton                                       = [[UIButton alloc] init];
   _cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
   [_cancelButton setTitle:cancelButtonTitle forState:UIControlStateNormal];
-    _cancelButton.titleLabel.font = [UIFont fontWithName:@"B Yekan" size:17];
+    _cancelButton.titleLabel.font = [UIFont fontWithName:@"B Yekan+" size:17];
 
   [_cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
   [_cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];

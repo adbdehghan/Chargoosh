@@ -15,7 +15,7 @@
 #import "Settings.h"
 #import "DBManager.h"
 #import "PollAnswers.h"
-#define URLaddress "http://www.app.chargoosh.ir/api/ProfileManager/ParticipatePoll"
+#define URLaddress "http://www.newapp.chargoosh.ir/api/Register/ParticipatePoll"
 #define RGBCOLOR(r,g,b)     [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
 
 @interface CompetitionPlusDetailViewController ()
@@ -82,7 +82,7 @@
             pollList = [[NSMutableArray alloc]init];
             
             for (NSMutableDictionary *item in competitionPlusDetail.pollQuestions) {
-                
+            
                 
                 poll = [Poll alloc];
                 
@@ -101,7 +101,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -117,7 +117,6 @@
     [self.getData GetPoll:self.competitionId token:st.accesstoken withCallback:callback];
     
     
-    // Do any additional setup after loading the view.
 }
 
 - (DataDownloader *)getData
@@ -141,9 +140,17 @@
         NSMutableArray *answers = [[NSMutableArray alloc]init];
         for (NSString *answer in question.pollAnswers ) {
             
+            if ([answer isEqualToString:question.yourAns]) {
+                NSDictionary *answerItem = [NSDictionary dictionaryWithObjectsAndKeys:answer,@"text",[NSNumber numberWithBool:YES],@"marked", nil];
+                [answers addObject:answerItem];
+            }
+            else
+            {
+                NSDictionary *answerItem = [NSDictionary dictionaryWithObjectsAndKeys:answer,@"text",[NSNumber numberWithBool:NO],@"marked", nil];
+                [answers addObject:answerItem];
+            }
             
-            NSDictionary *answerItem = [NSDictionary dictionaryWithObjectsAndKeys:answer,@"text",[NSNumber numberWithBool:NO],@"marked", nil];
-            [answers addObject:answerItem];
+            
             
         }
         
@@ -162,7 +169,17 @@
     [questions addObject:questionItem];
     
     surveyController = [[GWQuestionnaire alloc] initWithItems:questions];
-    surveyController.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-20);
+    
+    if ([[NSString stringWithFormat:@"%@",competitionPlusDetail.canParticipate] isEqualToString:@"0"]) {
+        surveyController.view.frame = CGRectMake(0,40,self.view.frame.size.width,self.view.frame.size.height-60);
+        
+        self.whyCantView.hidden = NO;
+        self.whyCantLabel.text = competitionPlusDetail.whyCant;
+        
+    }
+    else
+        surveyController.view.frame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-20);
+    
     [self.view addSubview:surveyController.view];
     
     
@@ -194,46 +211,59 @@
 
 -(void)getAnswersPressed:(id)sender
 {
-    pollAnswers = [[NSMutableArray alloc]init];
-    if(![surveyController isCompleted])
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢" message:@"لطفا به تمامی سوالات پاسخ دهید!" delegate:nil cancelButtonTitle:@"خب" otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
-    
-    // NSLog answers
-    for(GWQuestionnaireItem *item in surveyController.surveyItems)
-    {
-        
-        PollAnswers *answers = [[PollAnswers alloc]init];
-        NSLog(@"-----------------");
-        NSLog(@"%@",item.question);
-        NSLog(@"-----------------");
-        if(item.type == GWQuestionnaireOpenQuestion)
+    if ([[NSString stringWithFormat:@"%@",competitionPlusDetail.canParticipate] isEqualToString:@"1"]) {
+        pollAnswers = [[NSMutableArray alloc]init];
+        if(![surveyController isCompleted])
         {
-            NSLog(@"Answer: %@", item.userAnswer);
-            self.exAnswer = [[NSString alloc]init];
-            self.exAnswer = item.userAnswer;
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢" message:@"لطفا به تمامی سوالات پاسخ دهید!" delegate:nil cancelButtonTitle:@"خب" otherButtonTitles:nil];
+            [alert show];
+            return;
         }
-        else
-            for(NSDictionary *dict in item.answers)
+        
+        // NSLog answers
+        for(GWQuestionnaireItem *item in surveyController.surveyItems)
+        {
+            
+            PollAnswers *answers = [[PollAnswers alloc]init];
+            NSLog(@"-----------------");
+            NSLog(@"%@",item.question);
+            NSLog(@"-----------------");
+            if(item.type == GWQuestionnaireOpenQuestion)
             {
-                
-                answers.questionId = item.questionId;
-                
-                if ([[dict objectForKey:@"marked"]boolValue]) {
-                    
-                    answers.answer =[dict objectForKey:@"text"];
-                    
-                    [pollAnswers addObject:answers.dictionary];
-                }
-                
-                NSLog(@"%d - %@",[[dict objectForKey:@"marked"]boolValue], [dict objectForKey:@"text"]);
+                NSLog(@"Answer: %@", item.userAnswer);
+                self.exAnswer = [[NSString alloc]init];
+                self.exAnswer = item.userAnswer;
             }
+            else
+                for(NSDictionary *dict in item.answers)
+                {
+                    
+                    answers.questionId = item.questionId;
+                    
+                    if ([[dict objectForKey:@"marked"]boolValue]) {
+                        
+                        answers.answer =[dict objectForKey:@"text"];
+                        
+                        [pollAnswers addObject:answers.dictionary];
+                    }
+                    
+                    NSLog(@"%d - %@",[[dict objectForKey:@"marked"]boolValue], [dict objectForKey:@"text"]);
+                }
+        }
+        
+        [self SubmitPoll];
+        
     }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
+                                                        message:@"زمان شرکت هنوز نرسیده یا تمام شده!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"خب"
+                                              otherButtonTitles:nil];
+        [alert show];
     
-    [self SubmitPoll];
+    }
 }
 
 
@@ -245,30 +275,27 @@
     activityIndicator.center = CGPointMake(btn.frame.size.width / 2, btn.frame.size.height / 2);
     [activityIndicator startAnimating];
     
-    NSDictionary *parameters = @{@"phoneNumber": st.settingId,
-                                 @"pass": st.password,
-                                 @"pollid": self.competitionId,
+    NSDictionary *parameters = @{@"pollid": self.competitionId,
                                  @"answers":pollAnswers,
                                  @"ExAnswer":[NSString stringWithFormat:@" %@",self.exAnswer]};
     
     btn.enabled = NO;
     
-
+    NSString *URLString = @URLaddress;
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
-    
-    NSString *URLString = @URLaddress;
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",st.accesstoken] forHTTPHeaderField:@"Authorization"];
     
     
     [manager POST:URLString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"Success %@", responseObject);
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"🤔"
                                                         message:[NSString stringWithFormat:@"%@",responseObject]
                                                        delegate:self
                                               cancelButtonTitle:@"خب"
@@ -281,7 +308,8 @@
         if ([[NSString stringWithFormat:@"%@",responseObject] length]<20) {
             [[self.tabBarController.tabBar.items objectAtIndex:0] setBadgeValue:@"⚡︎"];
         }
-
+       
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         btn.enabled = YES;

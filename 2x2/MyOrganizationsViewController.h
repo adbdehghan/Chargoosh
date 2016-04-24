@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CZPicker.h>
+#import "CZPicker.h"
 
 @interface MyOrganizationsViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegate,CZPickerViewDataSource, CZPickerViewDelegate>
 {

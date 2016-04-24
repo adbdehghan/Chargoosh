@@ -18,6 +18,9 @@
         _questionId =[self.dataDictionary valueForKey:@"id"];
         _pollAnswers = [self.dataDictionary valueForKey:@"answerTemplate"];
         _question = [self.dataDictionary valueForKey:@"question"];
+        _yourAns = [self.dataDictionary valueForKey:@"yourAns"];
+        
+
         
     }
     return self;

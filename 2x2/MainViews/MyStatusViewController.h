@@ -6,15 +6,16 @@
 //  Copyright (c) 2015 aDb. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MXSegmentedPagerController.h"
 
-@interface MyStatusViewController : UIViewController
+@interface MyStatusViewController : MXSegmentedPagerController
 {
     IBOutlet UIView *chartContainer;
     IBOutlet UILabel *name;
     IBOutlet UIButton *coinImage;
     IBOutlet UIImageView *profileImage;
     IBOutlet UIActivityIndicatorView *activityView;
+    IBOutlet UIView *backGroundContainer;
 }
 @property (strong, nonatomic)  NSMutableDictionary *statusDictionary;
 @end

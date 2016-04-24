@@ -6,8 +6,8 @@
 target 'Chargoosh' do
 pod "VMaskTextField"
 pod "CZPicker"
-use_frameworks!
-pod "CarbonKit"
+pod 'MXSegmentedPager'
+pod 'UIImage-Helpers'
 end
 
 target '2x2Tests' do

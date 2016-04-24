@@ -25,7 +25,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                     message:@"لطفا برنامه را بروزرسانی کنید"
                                                    delegate:self
                                           cancelButtonTitle:@"بروزرسانی"

@@ -62,7 +62,7 @@
         self.layer.cornerRadius = 5.0;
         self.backgroundColor = [UIColor whiteColor];
         self.alertTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kTitleYOffset, kAlertWidth, kTitleHeight)];
-        self.alertTitleLabel.font = [UIFont boldSystemFontOfSize:20.0f];
+        self.alertTitleLabel.font = [UIFont fontWithName:@"B Yekan+" size:20];
         self.alertTitleLabel.textColor = [UIColor colorWithRed:56.0/255.0 green:64.0/255.0 blue:71.0/255.0 alpha:1];
         [self addSubview:self.alertTitleLabel];
         
@@ -71,7 +71,7 @@
         self.alertContentLabel.numberOfLines = 0;
         self.alertContentLabel.textAlignment = self.alertTitleLabel.textAlignment = NSTextAlignmentCenter;
         self.alertContentLabel.textColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1];
-        self.alertContentLabel.font = [UIFont systemFontOfSize:15.0f];
+        self.alertContentLabel.font = [UIFont fontWithName:@"B Yekan+" size:15];
         [self addSubview:self.alertContentLabel];
         
         CGRect leftBtnFrame;
@@ -94,11 +94,11 @@
             self.rightBtn.frame = rightBtnFrame;
         }
         
-        [self.rightBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:87.0/255.0 green:135.0/255.0 blue:173.0/255.0 alpha:1]] forState:UIControlStateNormal];
-        [self.leftBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:227.0/255.0 green:100.0/255.0 blue:83.0/255.0 alpha:1]] forState:UIControlStateNormal];
+        [self.rightBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:73.0/255.0 green:152.0/255.0 blue:239.0/255.0 alpha:1]] forState:UIControlStateNormal];
+        [self.leftBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithRed:247.0/255.0 green:109.0/255.0 blue:96.0/255.0 alpha:1]] forState:UIControlStateNormal];
         [self.rightBtn setTitle:rigthTitle forState:UIControlStateNormal];
         [self.leftBtn setTitle:leftTitle forState:UIControlStateNormal];
-        self.leftBtn.titleLabel.font = self.rightBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        self.leftBtn.titleLabel.font = self.rightBtn.titleLabel.font = [UIFont fontWithName:@"B Yekan+" size:14];
         [self.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         

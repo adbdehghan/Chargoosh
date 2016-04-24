@@ -14,6 +14,9 @@
 @property (strong, nonatomic) NSString *question;
 @property (strong, nonatomic) NSArray *pollAnswers;
 @property (strong, nonatomic) NSString *questionId;
+@property (strong, nonatomic) NSString *yourAns;
 @property (strong, nonatomic) NSString *exAnswer;
 @property (strong, nonatomic) NSString *answerTemplate;
+
+
 @end

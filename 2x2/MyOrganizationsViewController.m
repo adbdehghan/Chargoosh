@@ -18,16 +18,18 @@
 #import "AppDelegate.h"
 #import "MZLoadingCircle.h"
 #import "UIImageView+WebCache.h"
-
+#import "QRCodeReaderViewController.h"
+#import "InfoViewController.h"
 #define URLaddressPic "http://new.chargoosh.ir/"
 
-@interface MyOrganizationsViewController ()
+@interface MyOrganizationsViewController ()<QRCodeReaderDelegate>
 {
     Organization *organization;
     NSURL *imageURL;
     UIActivityIndicatorView *activityIndicator;
     Settings *st ;
     MZLoadingCircle *loadingCircle;
+    NSString *qrData;
 }
 @property (strong, nonatomic) DataDownloader *getData;
 @property CZPickerView *pickerWithImage;
@@ -113,7 +115,7 @@
             else
             {
             
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                                 message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                                delegate:self
                                                       cancelButtonTitle:@"خب"
@@ -202,7 +204,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -392,7 +394,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -470,7 +472,7 @@
         else
         {
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -527,7 +529,7 @@
         
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                             message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                            delegate:self
                                                   cancelButtonTitle:@"خب"
@@ -578,7 +580,24 @@
     
     
     UIBarButtonItem *addBarButton = [[UIBarButtonItem alloc] initWithCustomView:addButton];
-    self.navigationItem.leftBarButtonItem = addBarButton;
+    
+    
+    UIButton *barcodeButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    UIImage *barcodeImage = [UIImage imageNamed:@"m_scan.png"];
+    
+    [barcodeButton setImage:barcodeImage forState:UIControlStateNormal];
+    barcodeButton.tintColor = [UIColor whiteColor];
+    [barcodeButton addTarget:self action:@selector(ShowQR)forControlEvents:UIControlEventTouchUpInside];
+    [barcodeButton setFrame:CGRectMake(0, 0, 20, 20)];
+    
+    
+    UIBarButtonItem *barcodeBarButton = [[UIBarButtonItem alloc] initWithCustomView:barcodeButton];
+    
+    NSArray *barButtons = @[addBarButton,barcodeBarButton];
+
+    
+    self.navigationItem.leftBarButtonItems = barButtons;
     
     
     UIButton *settingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
@@ -606,14 +625,52 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+-(void)ShowQR
+{
+    static QRCodeReaderViewController *reader = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        reader = [QRCodeReaderViewController new];
+        reader.modalPresentationStyle = UIModalPresentationFormSheet;
+    });
+    reader.delegate = self;
+    
+    [reader setCompletionWithBlock:^(NSString *resultAsString) {
+        NSLog(@"Completion with result: %@", resultAsString);
+    }];
+    
+    [self presentViewController:reader animated:YES completion:NULL];
+    
+    
+}
+
+#pragma mark - QRCodeReader Delegate Methods
+
+- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        qrData = result;
+        [self performSegueWithIdentifier:@"info" sender:self];
+    }];
+}
+
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqual:@"info"]) {
+        InfoViewController *destination = [segue destinationViewController];
+        destination.qrData = qrData;
+    
+    }
 }
-*/
+
 
 @end

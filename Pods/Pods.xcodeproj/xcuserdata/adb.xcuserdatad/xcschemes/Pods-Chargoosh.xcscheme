@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'BDDD09B51E9D0016E120D4AC'
+               BlueprintIdentifier = 'F32553019CFD7CA0D35F5A70'
                BlueprintName = 'Pods-Chargoosh'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods_Chargoosh.framework'>
+               BuildableName = 'libPods-Chargoosh.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

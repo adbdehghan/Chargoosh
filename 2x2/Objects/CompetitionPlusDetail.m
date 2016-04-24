@@ -20,6 +20,11 @@
         _name = [self.data valueForKey:@"name"];
         _score = [self.data valueForKey:@"score"];
         _pollQuestions = [self.data valueForKey:@"pollQuestions"];
+        _endTime = [self.data valueForKey:@"endTime"];
+        _startTime = [self.data valueForKey:@"startTime"];
+        _whyCant = [self.data valueForKey:@"whyCant"];
+        _canParticipate = [self.data valueForKey:@"canParticipate"];
+        _exAnswer = [self.data valueForKey:@"exAnswer"];
         
     }
     return self;

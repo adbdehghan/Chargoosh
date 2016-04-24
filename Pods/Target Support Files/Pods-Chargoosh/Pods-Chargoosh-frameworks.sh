@@ -82,14 +82,3 @@ strip_invalid_archs() {
   fi
 }
 
-
-if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-Chargoosh/CZPicker.framework"
-  install_framework "Pods-Chargoosh/CarbonKit.framework"
-  install_framework "Pods-Chargoosh/VMaskTextField.framework"
-fi
-if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-Chargoosh/CZPicker.framework"
-  install_framework "Pods-Chargoosh/CarbonKit.framework"
-  install_framework "Pods-Chargoosh/VMaskTextField.framework"
-fi

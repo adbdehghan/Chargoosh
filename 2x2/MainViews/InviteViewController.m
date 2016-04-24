@@ -13,7 +13,7 @@
 #import <AddressBook/AddressBook.h>
 #import "THContact.h"
 #import "AFNetworking.h"
-#define URLaddress "http://www.newapp.chargoosh.ir/api/register/Invites"
+#define URLaddress "http://www.newapp.chargoosh.ir/"
 
 @interface InviteViewController ()
 {
@@ -490,37 +490,34 @@ UIBarButtonItem *barButton;
         
     }
     
-    NSDictionary *parameters = @{@"phoneNumber": st.settingId,
-                                 @"pass": st.password,
-                                 @"numbers":selectedNumbers};
+    NSDictionary *parameters = @{@"numberInv": selectedNumbers};
     
-
-    
-    
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/InviteIos",URLaddress];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",st.accesstoken] forHTTPHeaderField:@"Authorization"];
     
-    NSString *URLString = @URLaddress;
-    
-    
-    [manager POST:URLString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"Success %@", responseObject);
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
-                                                        message:[NSString stringWithFormat:@"%@",responseObject]
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
+                                                        message:@"انجام شد"
                                                        delegate:self
                                               cancelButtonTitle:@"خب"
                                               otherButtonTitles:nil];
         [alert show];
         
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
+                                                        message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
+                                                       delegate:self
+                                              cancelButtonTitle:@"خب"
+                                              otherButtonTitles:nil];
+        [alert show];
         NSLog(@"Failure %@, %@", error, operation.responseString);
     }];
 }
@@ -531,7 +528,7 @@ UIBarButtonItem *barButton;
     
     if ([numberUiTextField.text isEqualToString:@""]) {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"خطا"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                         message:@"لطفا شماره ی خود را وارد کنید"
                                                        delegate:self
                                               cancelButtonTitle:@"خب"
@@ -546,7 +543,7 @@ UIBarButtonItem *barButton;
             if (wasSuccessful) {
                 
                 
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                                 message:@"انجام شد!"
                                                                delegate:self
                                                       cancelButtonTitle:@"خب"
@@ -561,7 +558,7 @@ UIBarButtonItem *barButton;
             
             else
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"📢"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"👻"
                                                                 message:@"لطفا ارتباط خود با اینترنت را بررسی نمایید."
                                                                delegate:self
                                                       cancelButtonTitle:@"خب"

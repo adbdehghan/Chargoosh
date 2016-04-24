@@ -14,12 +14,32 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>CarbonKit.xcscheme</key>
+		<key>HMSegmentedControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MXPagerView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MXParallaxHeader.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MXSegmentedPager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-Chargoosh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>UIImage-Helpers.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,32 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>157D8DC93B2E33660E5BEC1446DABCFA</key>
+		<key>1246D72EBE9DC6C28D83D23CB8AB1488</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>77452F41F3A2A4DFB7A064F03CCC6E2C</key>
+		<key>210D2BD370EFC8BE03F3E27D3F929F13</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>85E17D5FEB6CE21C1688532444DB22EA</key>
+		<key>242F2F1C75AEE93D1B3E5607A7E1740C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C0CF835D8DF42FCD70A17AA1AEB46D32</key>
+		<key>2AB49797D14D57FA43A345254AFB9F18</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C7A801EADE7643B7A1E65A9168D5EAB1</key>
+		<key>65FC464968B54AEEC9527E53FF8198E2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DE8F8AFC2A21E7182BCA4D5C74E29D3C</key>
+		<key>66BAFE48E61D0FD962914D7A750DE26A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>87DEA48480739787A5D9E282DDE9655D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>980B204EFC435ECB3845D3DB6232BA0D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AF5B36BD22C406CDC3D18E893FFAA2DF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C9A6DC363608575F5978512DC211C0D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

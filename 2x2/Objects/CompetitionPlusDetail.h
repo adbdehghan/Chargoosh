@@ -14,4 +14,10 @@
 @property (strong, nonatomic) NSString *competitionId;
 @property (strong, nonatomic) NSString *score;
 @property (strong, nonatomic) NSMutableDictionary *pollQuestions;
+@property (strong, nonatomic) NSString *canParticipate;
+@property (strong, nonatomic) NSString *endTime;
+@property (strong, nonatomic) NSString *startTime;
+@property (strong, nonatomic) NSString *whyCant;
+@property (strong, nonatomic) NSString *exAnswer;
+
 @end

@@ -187,11 +187,11 @@ NSMutableDictionary *receivedData;
      } didSendData:nil];
 }
 
-- (void)GetCompetitions:(NSString *)orgId token:(NSString*)token withCallback:(RequestCompleteBlock)callback
+- (void)GetCompetitions:(NSString *)orgId token:(NSString*)token Page:(NSString*)page withCallback:(RequestCompleteBlock)callback
 {
         NSString *sample =[NSString stringWithFormat: @"%s/api/register/GETCompetitions",URLaddress];
     
-        NSDictionary *parameters = @{@"organizationid": orgId};
+        NSDictionary *parameters = @{@"organizationid": orgId , @"page": page};
     
     
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -212,27 +212,179 @@ NSMutableDictionary *receivedData;
         }];
 }
 
-- (void)GetCompetitionsForTopUsers:(NSString *)phoneNumber Password:(NSString*)password withCallback:(RequestCompleteBlock)callback
+- (void)GetCompetitionsForTopUsers:(NSString *)token orgId:(NSString *)orgId withCallback:(RequestCompleteBlock)callback
 {
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat: @"%s/api/register/GECompetitionsForTop?phoneNumber=%@&pass=%@",URLaddress,phoneNumber,password]]];
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/getTopSubjects",URLaddress];
     
-    JCDHTTPConnection *connection = [[JCDHTTPConnection alloc] initWithRequest:request];
-    [connection executeRequestOnSuccess:
-     ^(NSHTTPURLResponse *response, NSData *data) {
-         if (response.statusCode == 200) {
-             
-             NSString* newStr =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-             SBJsonParser *sbp = [SBJsonParser new];
-             
-             receivedData = [sbp objectWithString:newStr];
-             
-             callback(YES,receivedData);
-         } else {
-             callback(NO,nil);
-         }
-     } failure:^(NSHTTPURLResponse *response, NSData *data, NSError *error) {
-         callback(NO,nil);
-     } didSendData:nil];
+    NSDictionary *parameters = @{@"organizationid": orgId};
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
+}
+
+- (void)GetStatusMyScoreDetail:(NSString *)token orgId:(NSString *)orgId withCallback:(RequestCompleteBlock)callback
+{
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/GetStatusMyScoreDetail",URLaddress];
+    
+    NSDictionary *parameters = @{@"organizationid": orgId};
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
+}
+
+- (void)GetStatusMyShopping:(NSString *)token orgId:(NSString *)orgId withCallback:(RequestCompleteBlock)callback
+{
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/GetStatusMyShopping",URLaddress];
+    
+    NSDictionary *parameters = @{@"organizationid": orgId};
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
+}
+
+- (void)GetStatusParams:(NSString *)token orgId:(NSString *)orgId withCallback:(RequestCompleteBlock)callback
+{
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/GetStatusParams",URLaddress];
+    
+    NSDictionary *parameters = @{@"organizationid": orgId};
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
+}
+
+- (void)GetDataQR:(NSString *)token Number:(NSString *)number withCallback:(RequestCompleteBlock)callback
+{
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/GetDataQR",URLaddress];
+    
+    NSDictionary *parameters = @{@"number": number};
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
+}
+
+- (void)Doshopping:(NSString *)token Number:(NSString *)number Detail:(NSString *)detail ReduceScore:(NSString *)reduceScore Price:(NSString *)price withCallback:(RequestCompleteBlock)callback
+{
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/Doshopping",URLaddress];
+    
+    NSDictionary *parameters = @{@"number": number,@"detail": detail,@"reduceScore": reduceScore,@"price": price};
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
+}
+
+- (void)GetAllPictures:(NSString *)token orgId:(NSString *)orgId withCallback:(RequestCompleteBlock)callback
+{
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/GetStatusMyCompetitions",URLaddress];
+    
+    NSDictionary *parameters = @{@"organizationid": orgId};
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
 }
 
 - (void)GetCompetition:(NSString*)token CompetitionId:(NSString*)Id withCallback:(RequestCompleteBlock)callback
@@ -354,27 +506,29 @@ NSMutableDictionary *receivedData;
     }];
 }
 
-- (void)GetTopParticipates:(NSString *)competitionid withCallback:(RequestCompleteBlock)callback
+- (void)GetTopParticipates:(NSString *)competitionid Token:(NSString *)token withCallback:(RequestCompleteBlock)callback
 {
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat: @"%s/api/register/GetTopParticipates?competitionid=%@",URLaddress,competitionid]]];
+    NSString *sample =[NSString stringWithFormat: @"%s/api/register/GetTopParticipates",URLaddress];
     
-    JCDHTTPConnection *connection = [[JCDHTTPConnection alloc] initWithRequest:request];
-    [connection executeRequestOnSuccess:
-     ^(NSHTTPURLResponse *response, NSData *data) {
-         if (response.statusCode == 200) {
-             
-             NSString* newStr =[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-             SBJsonParser *sbp = [SBJsonParser new];
-             
-             receivedData = [sbp objectWithString:newStr];
-             
-             callback(YES,receivedData);
-         } else {
-             callback(NO,nil);
-         }
-     } failure:^(NSHTTPURLResponse *response, NSData *data, NSError *error) {
-         callback(NO,nil);
-     } didSendData:nil];
+    NSDictionary *parameters = @{@"competitionid": competitionid};
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",token] forHTTPHeaderField:@"Authorization"];
+    
+    [manager GET:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"Success %@", responseObject);
+        
+        callback(YES,responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        callback(NO,nil);
+        NSLog(@"Failure %@, %@", error, operation.responseString);
+    }];
 }
 
 - (void)GetPolls:(NSString*)token orgID:(NSString*)orgId withCallback:(RequestCompleteBlock)callback

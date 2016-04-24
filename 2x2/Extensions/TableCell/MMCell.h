@@ -10,6 +10,7 @@
 
 @interface MMCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *mmimageView;
+@property (weak, nonatomic) IBOutlet UIImageView *backimageView;
 @property (weak, nonatomic) IBOutlet UILabel *mmlabel;
 @property (weak, nonatomic) IBOutlet UILabel *coinLabel;
 @property (weak, nonatomic) IBOutlet UILabel *limitLabel;
