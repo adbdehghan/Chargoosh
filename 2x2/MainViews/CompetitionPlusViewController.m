@@ -61,10 +61,10 @@
     [layer setFrame:self.view.frame];
     
     UIImageView *backImage =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"background.jpg"]];
-    [backImage setFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height-110 )];
+    [backImage setFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height )];
     
     UIView *container = [[UIView alloc]init];
-    [container setFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height-110 )];
+    [container setFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height )];
     
     [container addSubview:backImage];
     [container addSubview:layer];

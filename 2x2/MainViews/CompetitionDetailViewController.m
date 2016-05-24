@@ -187,7 +187,7 @@
     
     
     NSString *css = [NSString stringWithFormat:
-                     @"<html><head><style>body {direction:rtl; background-color: transparent; text-align: %@; font-family:B Yekan;} a { color: #172983; } </style></head><span>",
+                     @"<html><head><style>body {direction:rtl; background-color: transparent; text-align: %@; font-family:B Yekan+;} a { color: #172983; } </style></head><span>",
                      @"justify"];
 
     

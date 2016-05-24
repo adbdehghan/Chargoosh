@@ -190,7 +190,7 @@ UIImage *competitionImage;
     cell.captionLabel.text= competition.title;
 
     cell.captionLabel.textColor=[UIColor blackColor];
-    cell.captionLabel.textAlignment = NSTextAlignmentCenter;
+    cell.captionLabel.textAlignment = NSTextAlignmentRight;
     cell.icon.layer.cornerRadius = cell.icon.frame.size.width/3;
     cell.icon.clipsToBounds = YES;
     

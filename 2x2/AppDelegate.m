@@ -15,7 +15,9 @@
 #import "Settings.h"
 
 @interface AppDelegate ()
-
+{
+    NSString *token;
+}
 @end
 
 @implementation AppDelegate
@@ -89,6 +91,9 @@
          (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
     }
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    
+    [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(notify) name:@"token" object:nil];
+    
     return YES;
 }
 
@@ -96,10 +101,11 @@
 {
     NSLog(@"My token is: %@", deviceToken);
     
-    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<> "]];
+    token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<> "]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     DeviceRegisterer *registrar = [[DeviceRegisterer alloc] init];
-   // [registrar registerDeviceWithToken:token];
+    [registrar registerDeviceWithToken:token];
+    
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
@@ -113,6 +119,13 @@
     
     [[NSNotificationCenter defaultCenter]postNotificationName:@"post" object:nil];
      
+}
+
+
+-(void)notify{
+    
+    DeviceRegisterer *registrar = [[DeviceRegisterer alloc] init];
+    [registrar registerDeviceWithToken:token];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

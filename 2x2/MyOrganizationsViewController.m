@@ -77,9 +77,11 @@
                 organization = [organization init];
                 
                 [self.organizationList addObject:organization];
+                
+                
             }
             
-    
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"token" object:nil];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 

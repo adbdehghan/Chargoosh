@@ -10,7 +10,7 @@
 #import "AFNetworking.h"
 #import "Settings.h"
 #import "DBManager.h"
-#define URLaddress "http://www.newapp.chargoosh.ir/api/register/addorupdatetoken"
+#define URLaddress "http://www.newapp.chargoosh.ir"
 
 @implementation DeviceRegisterer
 Settings *st ;
@@ -24,33 +24,30 @@ Settings *st ;
         st =item;
     }
     
-    if (st.settingId!=nil )
+    if (st.accesstoken!=nil && token !=nil )
     {
         
-        NSDictionary *parameters = @{@"phoneNumber": st.settingId,
-                                     @"pass": st.password,
-                                     @"token": token,
+        NSDictionary *parameters = @{@"token": token,
                                      @"device":@"ios"};
         
+        NSString *sample =[NSString stringWithFormat: @"%s/api/register/addorupdatetoken",URLaddress];
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
         manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-        manager.requestSerializer = [AFJSONRequestSerializer serializer];
         
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@",st.accesstoken] forHTTPHeaderField:@"Authorization"];
         
-        NSString *URLString = @URLaddress;
-        
-        
-        [manager POST:URLString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [manager POST:sample parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             NSLog(@"Success %@", responseObject);
             
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            
+
+
             NSLog(@"Failure %@, %@", error, operation.responseString);
         }];
+        
     }
     
 }

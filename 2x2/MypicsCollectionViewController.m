@@ -60,6 +60,9 @@ UIImage *competitionImage;
         [self.collectionView deselectRowAtIndexPath:indexPath animated:NO];
     }
     
+
+    
+    
     self.competitionDictionary = [[NSMutableDictionary alloc]init];
     self.competitionList = [[NSMutableArray alloc]init];
     
@@ -77,6 +80,26 @@ UIImage *competitionImage;
                 [self.competitionList addObject:competition];
             }
             
+            if (self.competitionDictionary.count == 0) {
+                
+            
+            
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, self.view.center.y - 30, self.view.frame.size.width,40)];
+            label.textColor = [UIColor lightGrayColor];
+            label.backgroundColor =[UIColor clearColor];
+            label.adjustsFontSizeToFitWidth=YES;
+            label.font = [UIFont fontWithName:@"B Yekan+" size:17];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.text =@"عکسی موجود نیست";
+        
+            
+            UIView *container = [[UIView alloc]init];
+            [container setFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height )];
+            
+            [container addSubview:label];
+            
+            self.collectionView.backgroundView = container;
+            }
             [activityIndicator stopAnimating];
             [self.collectionView reloadData];
         }
