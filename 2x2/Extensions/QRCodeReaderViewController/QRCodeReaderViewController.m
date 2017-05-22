@@ -49,7 +49,7 @@
 
 - (id)init
 {
-  return [self initWithCancelButtonTitle:NSLocalizedString(@"بی خیال", @"بی خیال")];
+  return [self initWithCancelButtonTitle:NSLocalizedString(@"لغو", @"لغو")];
 }
 
 - (id)initWithCancelButtonTitle:(NSString *)cancelTitle
@@ -145,6 +145,7 @@
     _switchCameraButton = [[QRCameraSwitchButton alloc] init];
     [_switchCameraButton setTranslatesAutoresizingMaskIntoConstraints:false];
     [_switchCameraButton addTarget:self action:@selector(switchCameraAction:) forControlEvents:UIControlEventTouchUpInside];
+      _switchCameraButton.hidden = YES;
     [self.view addSubview:_switchCameraButton];
   }
   

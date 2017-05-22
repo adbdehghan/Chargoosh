@@ -62,7 +62,7 @@
     
     UIImageView *backImage =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"background.jpg"]];
     [backImage setFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height )];
-    
+    backImage.contentMode = UIViewContentModeScaleAspectFill;
     UIView *container = [[UIView alloc]init];
     [container setFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height )];
     

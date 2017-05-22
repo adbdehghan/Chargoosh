@@ -56,9 +56,9 @@ UIImage *competitionImage;
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
     
-    for (NSIndexPath *indexPath in self.collectionView.indexPathsForSelectedItems) {
-        [self.collectionView deselectRowAtIndexPath:indexPath animated:NO];
-    }
+//    for (NSIndexPath *indexPath in self.collectionView.indexPathsForSelectedItems) {
+//        [self.collectionView deselectRowAtIndexPath:indexPath animated:NO];
+//    }
     
 
     

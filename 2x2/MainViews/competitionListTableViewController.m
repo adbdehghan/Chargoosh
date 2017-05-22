@@ -48,7 +48,7 @@ UIImage *competitionImage;
     
     UIImageView *backImage =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"background.jpg"]];
     [backImage setFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height-110 )];
-    
+    backImage.contentMode = UIViewContentModeScaleAspectFill;
     UIView *container = [[UIView alloc]init];
     [container setFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height-110 )];
     
@@ -67,9 +67,9 @@ UIImage *competitionImage;
     activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
     [activityIndicator startAnimating];
     
-    for (NSIndexPath *indexPath in self.collectionView.indexPathsForSelectedItems) {
-        [self.collectionView deselectRowAtIndexPath:indexPath animated:NO];
-    }
+//    for (NSIndexPath *indexPath in self.collectionView.indexPathsForSelectedItems) {
+//        [self.collectionView deselectRowAtIndexPath:indexPath animated:NO];
+//    }
     
     self.competitionDictionary = [[NSMutableDictionary alloc]init];
     self.competitionList = [[NSMutableArray alloc]init];

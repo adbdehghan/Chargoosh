@@ -55,7 +55,7 @@ UIActivityIndicatorView *activityIndicator;
     
     UIImageView *backImage =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"background.jpg"]];
     [backImage setFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height-110 )];
-    
+    backImage.contentMode = UIViewContentModeScaleAspectFill;
     UIView *container = [[UIView alloc]init];
     [container setFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height-110 )];
     
@@ -118,10 +118,7 @@ UIActivityIndicatorView *activityIndicator;
 
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
-    
-    
-    
-    
+     
     Settings *st = [[Settings alloc]init];
     
     st = [DBManager selectSetting][0];
