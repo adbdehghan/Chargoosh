@@ -41,7 +41,7 @@
     [super viewDidLoad];
     
     [self CreateNavigationBarButtons];
-    
+
     self.cachedImages = [[NSMutableDictionary alloc] init];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -382,7 +382,7 @@
                 
                 [loadingCircle.view removeFromSuperview];
                 loadingCircle = nil;
-                self.pickerWithImage = [[CZPickerView alloc] initWithHeaderTitle:@"همه ی گروه ها" cancelButtonTitle:@"بی خیال" confirmButtonTitle:@"تایید"];
+                self.pickerWithImage = [[CZPickerView alloc] initWithHeaderTitle:@"تمامی فروشگاه ها" cancelButtonTitle:@"بی خیال" confirmButtonTitle:@"تایید"];
                 self.pickerWithImage.delegate = self;
                 self.pickerWithImage.dataSource = self;
                 self.pickerWithImage.needFooterView = YES;
@@ -563,7 +563,7 @@
 - (void)CreateNavigationBarButtons {
     
     UILabel* label=[[UILabel alloc] initWithFrame:CGRectMake(0,0, self.navigationItem.titleView.frame.size.width, 40)];
-    label.text=@"گروه ها";
+    label.text=@"فروشگاه ها";
     label.textColor=[UIColor whiteColor];
     label.backgroundColor =[UIColor clearColor];
     label.adjustsFontSizeToFitWidth=YES;

@@ -21,6 +21,7 @@
 #import "SelectedViewController.h"
 #define URLaddressPic "http://newapp.chargoosh.ir/"
 #import "AppDelegate.h"
+#import "AnimatedGIFImageSerialization.h"
 
 static NSString *Version = @"\"1.2\"";
 static NSString *currentVersion = @"\"1.2\"";
@@ -45,6 +46,8 @@ static NSString *iconId;
     [super viewDidLoad];
     
     [self CreateNavigationBarButtons];
+    
+     mainImage.image = [UIImage imageNamed:@"mainimage.GIF"];
     
     AppDelegate *app = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     

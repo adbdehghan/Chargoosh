@@ -8,6 +8,7 @@ pod "VMaskTextField"
 pod "CZPicker"
 pod 'MXSegmentedPager'
 pod 'UIImage-Helpers'
+pod 'AnimatedGIFImageSerialization'
 end
 
 target '2x2Tests' do

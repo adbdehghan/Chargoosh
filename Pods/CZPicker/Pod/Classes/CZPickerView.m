@@ -7,7 +7,6 @@
 
 #import "CZPickerView.h"
 
-
 #define CZP_FOOTER_HEIGHT 44.0
 #define CZP_HEADER_HEIGHT 44.0
 #if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1 
@@ -29,7 +28,8 @@ typedef void (^CZDismissCompletionCallback)(void);
 @property UIView *headerView;
 @property UIView *footerview;
 @property UITableView *tableView;
-@property NSMutableArray *selectedIndexPaths;
+@property NSIndexPath *selectedIndexPath;
+@property NSMutableArray *selectedRows;
 @end
 
 @implementation CZPickerView
@@ -54,7 +54,7 @@ typedef void (^CZDismissCompletionCallback)(void);
         
         self.headerTitle = headerTitle ? headerTitle : @"";
         self.headerTitleColor = [UIColor whiteColor];
-        self.headerBackgroundColor = [UIColor colorWithRed:7.f/255.f green:123.f/255.f blue:204.f/255.f alpha:1];
+        self.headerBackgroundColor = [UIColor colorWithRed:56.0/255 green:185.0/255 blue:158.0/255 alpha:1];
         
         self.cancelButtonNormalColor = [UIColor colorWithRed:59.0/255 green:72/255.0 blue:5.0/255 alpha:1];
         self.cancelButtonHighlightedColor = [UIColor grayColor];
@@ -62,12 +62,10 @@ typedef void (^CZDismissCompletionCallback)(void);
         
         self.confirmButtonNormalColor = [UIColor whiteColor];
         self.confirmButtonHighlightedColor = [UIColor colorWithRed:236.0/255 green:240/255.0 blue:241.0/255 alpha:1];
-        self.confirmButtonBackgroundColor = [UIColor colorWithRed:7.f/255.f green:123.f/255.f blue:204.f/255.f alpha:1];
+        self.confirmButtonBackgroundColor = [UIColor colorWithRed:56.0/255 green:185.0/255 blue:158.0/255 alpha:1];
         
         CGRect rect= [UIScreen mainScreen].bounds;
         self.frame = rect;
-        
-
     }
     return self;
 }
@@ -77,14 +75,13 @@ typedef void (^CZDismissCompletionCallback)(void);
         self.backgroundDimmingView = [self buildBackgroundDimmingView];
         [self addSubview:self.backgroundDimmingView];
     }
-
     
     self.containerView = [self buildContainerView];
     [self addSubview:self.containerView];
     
     self.tableView = [self buildTableView];
     [self.containerView addSubview:self.tableView];
-
+    
     self.headerView = [self buildHeaderView];
     [self.containerView addSubview:self.headerView];
     
@@ -99,8 +96,6 @@ typedef void (^CZDismissCompletionCallback)(void);
                                           self.headerView.frame.size.height + self.tableView.frame.size.height + self.footerview.frame.size.height);
     self.containerView.center = CGPointMake(self.center.x, self.center.y + self.frame.size.height);
     
-    if(!self.selectedIndexPaths){
-        self.selectedIndexPaths = [NSMutableArray new];}
 }
 
 - (void)performContainerAnimation {
@@ -174,7 +169,6 @@ typedef void (^CZDismissCompletionCallback)(void);
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     return tableView;
 }
 
@@ -220,7 +214,7 @@ typedef void (^CZDismissCompletionCallback)(void);
     [cancelButton setTitle:self.cancelButtonTitle forState:UIControlStateNormal];
     [cancelButton setTitleColor: self.cancelButtonNormalColor forState:UIControlStateNormal];
     [cancelButton setTitleColor:self.cancelButtonHighlightedColor forState:UIControlStateHighlighted];
-    cancelButton.titleLabel.font = [UIFont fontWithName:@"B Yekan+" size:16];
+    cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     cancelButton.backgroundColor = self.cancelButtonBackgroundColor;
     [cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:cancelButton];
@@ -229,7 +223,7 @@ typedef void (^CZDismissCompletionCallback)(void);
     [confirmButton setTitle:self.confirmButtonTitle forState:UIControlStateNormal];
     [confirmButton setTitleColor:self.confirmButtonNormalColor forState:UIControlStateNormal];
     [confirmButton setTitleColor:self.confirmButtonHighlightedColor forState:UIControlStateHighlighted];
-    confirmButton.titleLabel.font = [UIFont fontWithName:@"B Yekan+" size:16];
+    confirmButton.titleLabel.font = [UIFont systemFontOfSize:16];
     confirmButton.backgroundColor = self.confirmButtonBackgroundColor;
     [confirmButton addTarget:self action:@selector(confirmButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:confirmButton];
@@ -241,7 +235,7 @@ typedef void (^CZDismissCompletionCallback)(void);
     view.backgroundColor = self.headerBackgroundColor;
     NSDictionary *dict = @{
                            NSForegroundColorAttributeName: self.headerTitleColor,
-                           NSFontAttributeName: [UIFont fontWithName:@"B Yekan+" size:18]
+                           NSFontAttributeName: [UIFont systemFontOfSize:18.0]
                            };
     NSAttributedString *at = [[NSAttributedString alloc] initWithString:self.headerTitle attributes:dict];
     UILabel *label = [[UILabel alloc] initWithFrame:view.frame];
@@ -250,25 +244,6 @@ typedef void (^CZDismissCompletionCallback)(void);
     [view addSubview:label];
     label.center = view.center;
     return view;
-}
-
-- (NSArray *)selectedRows {
-    NSMutableArray *rows = [NSMutableArray new];
-    for (NSIndexPath *ip in self.selectedIndexPaths) {
-        [rows addObject:@(ip.row)];
-    }
-    return rows;
-}
-
-- (void)setSelectedRows:(NSArray *)rows{
-    if (![rows isKindOfClass: NSArray.class]) {
-        return;
-    }
-    self.selectedIndexPaths = [NSMutableArray new];
-    for (NSNumber *n in rows){
-        NSIndexPath *ip = [NSIndexPath indexPathForRow:[n integerValue] inSection: 0];
-        [self.selectedIndexPaths addObject:ip];
-    }
 }
 
 - (IBAction)cancelButtonPressed:(id)sender{
@@ -282,14 +257,10 @@ typedef void (^CZDismissCompletionCallback)(void);
 - (IBAction)confirmButtonPressed:(id)sender{
     [self dismissPicker:^{
         if(self.allowMultipleSelection && [self.delegate respondsToSelector:@selector(czpickerView:didConfirmWithItemsAtRows:)]){
-            [self.delegate czpickerView:self didConfirmWithItemsAtRows:[self selectedRows]];
+            [self.delegate czpickerView:self didConfirmWithItemsAtRows:self.selectedRows];
         }
-        
-        else if(!self.allowMultipleSelection && [self.delegate respondsToSelector:@selector(czpickerView:didConfirmWithItemAtRow:)]){
-            if (self.selectedIndexPaths.count > 0){
-                NSInteger row = ((NSIndexPath *)self.selectedIndexPaths[0]).row;
-                [self.delegate czpickerView:self didConfirmWithItemAtRow:row];
-            }
+        else if(self.selectedIndexPath && [self.delegate respondsToSelector:@selector(czpickerView:didConfirmWithItemAtRow:)]){
+            [self.delegate czpickerView:self didConfirmWithItemAtRow:self.selectedIndexPath.row];
         }
     }];
 }
@@ -308,105 +279,62 @@ typedef void (^CZDismissCompletionCallback)(void);
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: cellIdentifier];
     }
-
     cell.accessoryType = UITableViewCellAccessoryNone;
     for(NSNumber *n in self.selectedRows){
         if([n integerValue] == indexPath.row){
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
     }
-    
-    cell.textLabel.textAlignment = NSTextAlignmentRight;
-    cell.textLabel.font = [UIFont fontWithName:@"B Yekan+" size:15];;
-    
-    if([self.dataSource respondsToSelector:@selector(czpickerView:titleForRow:)])
-    {
-    
-        NSString *isMine =[NSString stringWithFormat:@"%@",[self.dataSource czpickerView:self checkForRow:indexPath.row]];
-        
-        if ([isMine isEqualToString:@"1"]) {
-            [self.selectedIndexPaths addObject:indexPath];
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
+    if([self.selectedIndexPath isEqual:indexPath]){
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
-    
-    if([self.dataSource respondsToSelector:@selector(czpickerView:titleForRow:)] && [self.dataSource respondsToSelector:@selector(czpickerView:imageForRow:)]){
-        cell.textLabel.text = [self.dataSource czpickerView:self titleForRow:indexPath.row];
-        cell.imageView.image = [self getImageFromURL:[self.dataSource czpickerView:self imageForRow:indexPath.row]];
-        
-    } else if ([self.dataSource respondsToSelector:@selector(czpickerView:attributedTitleForRow:)] && [self.dataSource respondsToSelector:@selector(czpickerView:imageForRow:)]){
-        cell.textLabel.attributedText = [self.dataSource czpickerView:self attributedTitleForRow:indexPath.row];
-//        cell.imageView.image = [self.dataSource czpickerView:self imageForRow:indexPath.row];
-    } else if ([self.dataSource respondsToSelector:@selector(czpickerView:attributedTitleForRow:)]) {
+    if ([self.dataSource respondsToSelector:@selector(czpickerView:attributedTitleForRow:)]) {
         cell.textLabel.attributedText = [self.dataSource czpickerView:self attributedTitleForRow:indexPath.row];
     } else if([self.dataSource respondsToSelector:@selector(czpickerView:titleForRow:)]){
         cell.textLabel.text = [self.dataSource czpickerView:self titleForRow:indexPath.row];
-
     }
-    
     return cell;
-}
-
--(UIImage *) getImageFromURL:(NSURL *)fileURL {
-    
-    if ((NSURL*)fileURL != nil) {
-        UIImage * result;
-    
-        NSData * data = [NSData dataWithContentsOfURL:fileURL];
-
-        result = [UIImage imageWithData:data];
-        return result;
-    }
-    else
-        return (UIImage*)fileURL;
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if(!self.selectedIndexPaths){
-        self.selectedIndexPaths = [NSMutableArray new];
-    }
-    // the row has already been selected
-    
-    if (self.allowMultipleSelection){
-        
-        if([self.selectedIndexPaths containsObject:indexPath]){
-            [self.selectedIndexPaths removeObject:indexPath];
+    if(self.allowMultipleSelection){
+        if(!self.selectedRows){
+            self.selectedRows = [NSMutableArray new];
+        }
+        NSNumber *row = @(indexPath.row);
+        // the row has already been selected
+        if([self.selectedRows containsObject:row]){
+            [self.selectedRows removeObject:row];
             cell.accessoryType = UITableViewCellAccessoryNone;
         } else {
-            [self.selectedIndexPaths addObject:indexPath];
+            [self.selectedRows addObject:row];
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
-        
-    } else { //single selection mode
-        
-        if (self.selectedIndexPaths.count > 0){// has selection
-            NSIndexPath *prevIp = (NSIndexPath *)self.selectedIndexPaths[0];
-            UITableViewCell *prevCell = [tableView cellForRowAtIndexPath:prevIp];
-            if(indexPath.row != prevIp.row){ //different cell
+    }
+    else {
+        if(self.selectedIndexPath){
+            UITableViewCell *prevCell = [tableView cellForRowAtIndexPath:self.selectedIndexPath];
+            if(prevCell){
                 prevCell.accessoryType = UITableViewCellAccessoryNone;
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                [self.selectedIndexPaths removeObject:prevIp];
-                [self.selectedIndexPaths addObject:indexPath];
-            } else {//same cell
-                cell.accessoryType = UITableViewCellAccessoryNone;
-                self.selectedIndexPaths = [NSMutableArray new];
+            } else {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }
-        } else {//no selection
-            [self.selectedIndexPaths addObject:indexPath];
+        } else{
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
-        
+        self.selectedIndexPath = indexPath;
         if(!self.needFooterView && [self.delegate respondsToSelector:@selector(czpickerView:didConfirmWithItemAtRow:)]){
             [self dismissPicker:^{
                 [self.delegate czpickerView:self didConfirmWithItemAtRow:indexPath.row];
             }];
         }
     }
-    
 }
+
 #pragma mark - Notification Handler
 
 - (BOOL)needHandleOrientation{

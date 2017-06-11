@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A4E76271ED8CCAE00465B35 /* introImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E76261ED8CCAE00465B35 /* introImage.gif */; };
+		3A4E76291EDA0FE500465B35 /* mainimage.GIF in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E76281EDA0FE500465B35 /* mainimage.GIF */; };
+		3A4E762B1EDDB88C00465B35 /* ArenaLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E762A1EDDB88C00465B35 /* ArenaLogo.png */; };
 		64000DCC1AE2731600D79588 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64000DB71AE2731600D79588 /* Default-568h@2x.png */; };
 		64000DCD1AE2731600D79588 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 64000DB81AE2731600D79588 /* Default.png */; };
 		64000DCE1AE2731600D79588 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64000DB91AE2731600D79588 /* Default@2x.png */; };
@@ -184,7 +187,6 @@
 		64B734A41C7C6C1F004B8B4F /* simcard.png in Resources */ = {isa = PBXBuildFile; fileRef = 64B734A31C7C6C1F004B8B4F /* simcard.png */; };
 		64B734A61C7C6EF2004B8B4F /* downarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 64B734A51C7C6EF2004B8B4F /* downarrow.png */; };
 		64B734A81C7C732A004B8B4F /* close 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 64B734A71C7C732A004B8B4F /* close 2.png */; };
-		64C38B6A1AB1478E004A05D3 /* ayandehLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 64C38B691AB1478E004A05D3 /* ayandehLogo.png */; };
 		64C3A0631C81B00700DB8331 /* firstView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C3A0621C81B00700DB8331 /* firstView.jpg */; };
 		64C3A0661C81B11000DB8331 /* secondView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C3A0641C81B11000DB8331 /* secondView.jpg */; };
 		64C3A0671C81B11000DB8331 /* thirdView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C3A0651C81B11000DB8331 /* thirdView.jpg */; };
@@ -273,7 +275,8 @@
 		64F2A1371AEB9DF10012D8CA /* DeviceRegisterer.m in Sources */ = {isa = PBXBuildFile; fileRef = 64F2A1361AEB9DF10012D8CA /* DeviceRegisterer.m */; };
 		64F2A13B1AEBF4220012D8CA /* sub.caf in Resources */ = {isa = PBXBuildFile; fileRef = 64F2A13A1AEBF4220012D8CA /* sub.caf */; };
 		64FA72AE1AA6A7EE0028D9BB /* competitionListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64FA72AD1AA6A7EE0028D9BB /* competitionListTableViewController.m */; };
-		74A6790D80113F9FA5ACF8E9 /* libPods-Chargoosh.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C28EF6F61244BF34AB76FF /* libPods-Chargoosh.a */; };
+		C6D33E5ADC70063C7F5F5C05 /* libPods-2x2Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F38F3741B4C7C433992A0DEB /* libPods-2x2Tests.a */; };
+		CD9BB58059398A0CD9709AFA /* libPods-Chargoosh.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B8B6D011975BA821CE3F71 /* libPods-Chargoosh.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -287,6 +290,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37B8B6D011975BA821CE3F71 /* libPods-Chargoosh.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Chargoosh.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A4E76261ED8CCAE00465B35 /* introImage.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = introImage.gif; sourceTree = "<group>"; };
+		3A4E76281EDA0FE500465B35 /* mainimage.GIF */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mainimage.GIF; sourceTree = "<group>"; };
+		3A4E762A1EDDB88C00465B35 /* ArenaLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ArenaLogo.png; sourceTree = "<group>"; };
+		468C9925044916B5BB59CE5A /* Pods-2x2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-2x2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-2x2Tests/Pods-2x2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		64000DB71AE2731600D79588 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Extensions/Contact Picker/Default-568h@2x.png"; sourceTree = "<group>"; };
 		64000DB81AE2731600D79588 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = "Extensions/Contact Picker/Default.png"; sourceTree = "<group>"; };
 		64000DB91AE2731600D79588 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Extensions/Contact Picker/Default@2x.png"; sourceTree = "<group>"; };
@@ -567,7 +575,6 @@
 		64B734A31C7C6C1F004B8B4F /* simcard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = simcard.png; sourceTree = "<group>"; };
 		64B734A51C7C6EF2004B8B4F /* downarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downarrow.png; sourceTree = "<group>"; };
 		64B734A71C7C732A004B8B4F /* close 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close 2.png"; sourceTree = "<group>"; };
-		64C38B691AB1478E004A05D3 /* ayandehLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ayandehLogo.png; sourceTree = "<group>"; };
 		64C3A0621C81B00700DB8331 /* firstView.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = firstView.jpg; sourceTree = "<group>"; };
 		64C3A0641C81B11000DB8331 /* secondView.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = secondView.jpg; sourceTree = "<group>"; };
 		64C3A0651C81B11000DB8331 /* thirdView.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = thirdView.jpg; sourceTree = "<group>"; };
@@ -726,9 +733,10 @@
 		64F2A13A1AEBF4220012D8CA /* sub.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sub.caf; sourceTree = "<group>"; };
 		64FA72AC1AA6A7EE0028D9BB /* competitionListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = competitionListTableViewController.h; path = MainViews/competitionListTableViewController.h; sourceTree = "<group>"; };
 		64FA72AD1AA6A7EE0028D9BB /* competitionListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = competitionListTableViewController.m; path = MainViews/competitionListTableViewController.m; sourceTree = "<group>"; };
-		662449BEE167003CB34A87B5 /* Pods-Chargoosh.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chargoosh.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chargoosh/Pods-Chargoosh.debug.xcconfig"; sourceTree = "<group>"; };
-		7CF683339D24EDC6EDF38F3D /* Pods-Chargoosh.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chargoosh.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chargoosh/Pods-Chargoosh.release.xcconfig"; sourceTree = "<group>"; };
-		84C28EF6F61244BF34AB76FF /* libPods-Chargoosh.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Chargoosh.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A54488F7BDC4F1E7415BC5C5 /* Pods-Chargoosh.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chargoosh.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chargoosh/Pods-Chargoosh.debug.xcconfig"; sourceTree = "<group>"; };
+		A5815E8C8CE4A97FB510471F /* Pods-Chargoosh.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chargoosh.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chargoosh/Pods-Chargoosh.release.xcconfig"; sourceTree = "<group>"; };
+		CB23F68B2D9A536C9E078C38 /* Pods-2x2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-2x2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-2x2Tests/Pods-2x2Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		F38F3741B4C7C433992A0DEB /* libPods-2x2Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-2x2Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -749,7 +757,7 @@
 				64E078C91A9D2B5C007A7F7D /* QuartzCore.framework in Frameworks */,
 				64E078C41A9D2AB6007A7F7D /* Foundation.framework in Frameworks */,
 				64E078C21A9D2AA1007A7F7D /* UIKit.framework in Frameworks */,
-				74A6790D80113F9FA5ACF8E9 /* libPods-Chargoosh.a in Frameworks */,
+				CD9BB58059398A0CD9709AFA /* libPods-Chargoosh.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,29 +765,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6D33E5ADC70063C7F5F5C05 /* libPods-2x2Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1EA764A48A7D94080CAE2509 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				662449BEE167003CB34A87B5 /* Pods-Chargoosh.debug.xcconfig */,
-				7CF683339D24EDC6EDF38F3D /* Pods-Chargoosh.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		34180C6AC23992AC0869CCB6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				84C28EF6F61244BF34AB76FF /* libPods-Chargoosh.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		64000D7D1AE2339F00D79588 /* Contact Picker */ = {
 			isa = PBXGroup;
 			children = (
@@ -814,8 +806,8 @@
 				640323E11A9BA467000E1469 /* 2x2 */,
 				640323FE1A9BA467000E1469 /* 2x2Tests */,
 				640323E01A9BA467000E1469 /* Products */,
-				1EA764A48A7D94080CAE2509 /* Pods */,
-				34180C6AC23992AC0869CCB6 /* Frameworks */,
+				A44C1AE3AF77E69FE49B5512 /* Pods */,
+				84B9A80C64E99A2C7EDDA9CB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -874,6 +866,9 @@
 		6403240B1A9BD4D8000E1469 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3A4E762A1EDDB88C00465B35 /* ArenaLogo.png */,
+				3A4E76281EDA0FE500465B35 /* mainimage.GIF */,
+				3A4E76261ED8CCAE00465B35 /* introImage.gif */,
 				645C90171CC9A53E00FEF2D9 /* camera.png */,
 				647BA5AE1CC70CDF0022A106 /* transactionIcon.png */,
 				647BA5AC1CC709400022A106 /* wallet.png */,
@@ -916,7 +911,6 @@
 				64F2A13A1AEBF4220012D8CA /* sub.caf */,
 				64D9A83B1AE7C1D900221B6E /* backOutOfdate.png */,
 				641F9B841AD941BF00ABCA27 /* photoPlaceHolder.png */,
-				64C38B691AB1478E004A05D3 /* ayandehLogo.png */,
 				64D9DA601AAD158A006D4B26 /* avatar.png */,
 				649A86D31AA5E81D00F8FDE9 /* close.png */,
 				64B13BC31AA576D90072B5D5 /* participate.png */,
@@ -1697,6 +1691,26 @@
 			name = SDImage;
 			sourceTree = "<group>";
 		};
+		84B9A80C64E99A2C7EDDA9CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F38F3741B4C7C433992A0DEB /* libPods-2x2Tests.a */,
+				37B8B6D011975BA821CE3F71 /* libPods-Chargoosh.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A44C1AE3AF77E69FE49B5512 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CB23F68B2D9A536C9E078C38 /* Pods-2x2Tests.debug.xcconfig */,
+				468C9925044916B5BB59CE5A /* Pods-2x2Tests.release.xcconfig */,
+				A54488F7BDC4F1E7415BC5C5 /* Pods-Chargoosh.debug.xcconfig */,
+				A5815E8C8CE4A97FB510471F /* Pods-Chargoosh.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1704,12 +1718,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 640324051A9BA467000E1469 /* Build configuration list for PBXNativeTarget "Chargoosh" */;
 			buildPhases = (
-				E2EA2B98D75E89E61D26FCFF /* Check Pods Manifest.lock */,
+				1B06CD40A45746E5D0F97D0C /* [CP] Check Pods Manifest.lock */,
 				640323DB1A9BA467000E1469 /* Sources */,
 				640323DC1A9BA467000E1469 /* Frameworks */,
 				640323DD1A9BA467000E1469 /* Resources */,
-				AB1CB1161DCDB2142B4F418D /* Embed Pods Frameworks */,
-				6F29BF8C1C28635FEF730D2C /* Copy Pods Resources */,
+				4F5F5612B4473437F0CEAE36 /* [CP] Embed Pods Frameworks */,
+				7B49CB1B143AAC9E57582822 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1724,9 +1738,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 640324081A9BA467000E1469 /* Build configuration list for PBXNativeTarget "2x2Tests" */;
 			buildPhases = (
+				4353C5ECA26C5B36590D95CC /* [CP] Check Pods Manifest.lock */,
 				640323F71A9BA467000E1469 /* Sources */,
 				640323F81A9BA467000E1469 /* Frameworks */,
 				640323F91A9BA467000E1469 /* Resources */,
+				88E7A8E670D9C84E296CAF49 /* [CP] Embed Pods Frameworks */,
+				620E0075F04CF2A64B476209 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1814,10 +1831,12 @@
 				6409FFC51CC5CA470072BC5E /* MXRefreshHeaderView.xib in Resources */,
 				64000DCF1AE2731600D79588 /* icon-avatar-60x60.png in Resources */,
 				64000DCE1AE2731600D79588 /* Default@2x.png in Resources */,
+				3A4E762B1EDDB88C00465B35 /* ArenaLogo.png in Resources */,
 				64000DD31AE2731600D79588 /* icon-checkbox-unselected-25x25.png in Resources */,
 				647BA54D1CC6C2DC0022A106 /* scoreList@2x.png in Resources */,
 				647BA54C1CC6C2DC0022A106 /* scoreList.png in Resources */,
 				64B734A81C7C732A004B8B4F /* close 2.png in Resources */,
+				3A4E76291EDA0FE500465B35 /* mainimage.GIF in Resources */,
 				645871B21AA3D453009D2945 /* flashing_auto@2x.png in Resources */,
 				645871B71AA3D453009D2945 /* shot_h@2x.png in Resources */,
 				645871B31AA3D453009D2945 /* flashing_off@2x.png in Resources */,
@@ -1847,6 +1866,7 @@
 				6427D29A1C7A24F1004E19F0 /* home@2x.png in Resources */,
 				648BE5881AA7F1320018481E /* unchecked.png in Resources */,
 				64B13BC41AA576D90072B5D5 /* participate.png in Resources */,
+				3A4E76271ED8CCAE00465B35 /* introImage.gif in Resources */,
 				648BE5841AA7F1320018481E /* GWQuestionnaireCellSelection.xib in Resources */,
 				645871B81AA3D453009D2945 /* switch_camera@2x.png in Resources */,
 				6462D0981CA2188F00C3727A /* groups.png in Resources */,
@@ -1873,7 +1893,6 @@
 				64000DD01AE2731600D79588 /* icon-avatar-60x60@2x.png in Resources */,
 				64000DD11AE2731600D79588 /* icon-checkbox-selected-green-25x25.png in Resources */,
 				64C3A0631C81B00700DB8331 /* firstView.jpg in Resources */,
-				64C38B6A1AB1478E004A05D3 /* ayandehLogo.png in Resources */,
 				643C93F51CBEA20A00680214 /* transaction.png in Resources */,
 				64000DCD1AE2731600D79588 /* Default.png in Resources */,
 				647BA5431CC6BDD80022A106 /* galleryS@2x.png in Resources */,
@@ -1890,29 +1909,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6F29BF8C1C28635FEF730D2C /* Copy Pods Resources */ = {
+		1B06CD40A45746E5D0F97D0C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chargoosh/Pods-Chargoosh-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		AB1CB1161DCDB2142B4F418D /* Embed Pods Frameworks */ = {
+		4353C5ECA26C5B36590D95CC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4F5F5612B4473437F0CEAE36 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1920,19 +1954,49 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chargoosh/Pods-Chargoosh-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E2EA2B98D75E89E61D26FCFF /* Check Pods Manifest.lock */ = {
+		620E0075F04CF2A64B476209 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-2x2Tests/Pods-2x2Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7B49CB1B143AAC9E57582822 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chargoosh/Pods-Chargoosh-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		88E7A8E670D9C84E296CAF49 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-2x2Tests/Pods-2x2Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2212,7 +2276,7 @@
 		};
 		640324061A9BA467000E1469 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 662449BEE167003CB34A87B5 /* Pods-Chargoosh.debug.xcconfig */;
+			baseConfigurationReference = A54488F7BDC4F1E7415BC5C5 /* Pods-Chargoosh.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2235,7 +2299,7 @@
 		};
 		640324071A9BA467000E1469 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7CF683339D24EDC6EDF38F3D /* Pods-Chargoosh.release.xcconfig */;
+			baseConfigurationReference = A5815E8C8CE4A97FB510471F /* Pods-Chargoosh.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2257,6 +2321,7 @@
 		};
 		640324091A9BA467000E1469 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB23F68B2D9A536C9E078C38 /* Pods-2x2Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2276,6 +2341,7 @@
 		};
 		6403240A1A9BA467000E1469 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 468C9925044916B5BB59CE5A /* Pods-2x2Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

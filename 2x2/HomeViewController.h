@@ -16,6 +16,7 @@
     IBOutlet UITextView *commentUiTextView;
     IBOutlet UIImageView *profileImage;
     IBOutlet UIActivityIndicatorView *activityView;
+    IBOutlet UIImageView *mainImage;
 }
 @property (strong, nonatomic)  NSMutableDictionary *homeDictionary;
 @property (strong, nonatomic)  NSMutableArray *homeList;

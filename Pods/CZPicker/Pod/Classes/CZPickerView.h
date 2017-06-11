@@ -6,7 +6,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CZPicker.h"
 
 @class CZPickerView;
 
@@ -21,20 +20,15 @@
  Implement at least one of the following method,
  CZPickerView:(CZPickerView *)pickerView
  attributedTitleForRow:(NSInteger)row has higer priority
- */
+*/
 
 /* attributed picker item title for each row */
 - (NSAttributedString *)czpickerView:(CZPickerView *)pickerView
-               attributedTitleForRow:(NSInteger)row;
+                            attributedTitleForRow:(NSInteger)row;
 
 /* picker item title for each row */
 - (NSString *)czpickerView:(CZPickerView *)pickerView
-               titleForRow:(NSInteger)row;
-
-/* picker item image for each row */
-- (NSURL *)czpickerView:(CZPickerView *)pickerView imageForRow:(NSInteger)row;
-
-- (NSString *)czpickerView:(CZPickerView *)pickerView checkForRow:(NSInteger)row;
+                            titleForRow:(NSInteger)row;
 
 @end
 
@@ -44,7 +38,7 @@
 
 /** delegate method for picking one item */
 - (void)czpickerView:(CZPickerView *)pickerView
-didConfirmWithItemAtRow:(NSInteger)row;
+          didConfirmWithItemAtRow:(NSInteger)row;
 
 /*
  delegate method for picking multiple items,
@@ -52,7 +46,7 @@ didConfirmWithItemAtRow:(NSInteger)row;
  rows is an array of NSNumbers
  */
 - (void)czpickerView:(CZPickerView *)pickerView
-didConfirmWithItemsAtRows:(NSArray *)rows;
+          didConfirmWithItemsAtRows:(NSArray *)rows;
 
 /** delegate method for canceling */
 - (void)czpickerViewDidClickCancelButton:(CZPickerView *)pickerView;
@@ -71,12 +65,6 @@ didConfirmWithItemsAtRows:(NSArray *)rows;
 
 /** show the picker */
 - (void)show;
-
-/** return previously selected row, in array of NSNumber form. */
-- (NSArray *)selectedRows;
-
-/** set pre-selected rows, rows should be array of NSNumber. */
-- (void)setSelectedRows: (NSArray *)rows;
 
 @property id<CZPickerViewDelegate> delegate;
 
@@ -115,8 +103,5 @@ didConfirmWithItemsAtRows:(NSArray *)rows;
 
 /** picker confirm button highlighted state color */
 @property (nonatomic, strong) UIColor *confirmButtonHighlightedColor;
-
-/** picker's animation duration for showing and dismissing*/
-@property CGFloat animationDuration;
 
 @end

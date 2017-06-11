@@ -4,105 +4,125 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AnimatedGIFImageSerialization.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>CZPicker-CZPicker.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>CZPicker.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>HMSegmentedControl.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>MXPagerView.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>MXParallaxHeader.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>MXSegmentedPager.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-2x2Tests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-Chargoosh.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>7</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>UIImage-Helpers.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>8</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>VMaskTextField-VMaskTextField.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>10</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>VMaskTextField.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>9</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1246D72EBE9DC6C28D83D23CB8AB1488</key>
+		<key>00774C1DCED2D8E19CC694151228636A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>210D2BD370EFC8BE03F3E27D3F929F13</key>
+		<key>1C2E04AB8E7E68F7A8FB8A630DA93FA3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>242F2F1C75AEE93D1B3E5607A7E1740C</key>
+		<key>28B24030ADE97E3A07654E36C3ADACF7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2AB49797D14D57FA43A345254AFB9F18</key>
+		<key>4AE91A67AE779562F7CA8F280E4E55D3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>65FC464968B54AEEC9527E53FF8198E2</key>
+		<key>53D04C37D3190357869027A72FA0CB5B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>66BAFE48E61D0FD962914D7A750DE26A</key>
+		<key>6E66B362AE57238557E51E1B585B5C93</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>87DEA48480739787A5D9E282DDE9655D</key>
+		<key>9AD69E2D4320A414647A139588E19FAB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>980B204EFC435ECB3845D3DB6232BA0D</key>
+		<key>B555608EF2DD77FAA7EC6700146BA54A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AF5B36BD22C406CDC3D18E893FFAA2DF</key>
+		<key>D9AA026C0D46735BBF537992C4A95DFF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C9A6DC363608575F5978512DC211C0D4</key>
+		<key>DA3D8A152DA028FE066C1EE9C0A87F91</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F0A05CEE522FFC2DBB1DB60737A84DD2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F49311C41CC82FC11B8F4CD29EAE610B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

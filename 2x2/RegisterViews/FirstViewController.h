@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FirstViewController : UIViewController
-
+{
+    IBOutlet UIImageView *introImage;
+}
 @end

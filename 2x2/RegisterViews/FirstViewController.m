@@ -9,6 +9,8 @@
 #import "FirstViewController.h"
 #import "DBManager.h"
 #import "Settings.h"
+#import "AnimatedGIFImageSerialization.h"
+
 
 @interface FirstViewController ()
 
@@ -19,36 +21,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    Settings *st = [[Settings alloc]init];
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    
+    introImage.image = [UIImage imageNamed:@"introImage.gif"];
     
     
     
-    for (Settings *item in [DBManager selectSetting])
-    {
-        st =item;
-    }
+        Settings *st = [[Settings alloc]init];
     
+        for (Settings *item in [DBManager selectSetting])
+        {
+            st =item;
+        }
+
     
     if (st.settingId!=nil )
     {
-        [self performSelector:@selector(performSegueToMain) withObject:nil afterDelay:.9];
+        [self performSelector:@selector(performSegueToMain) withObject:nil afterDelay:2.5];
     }
     else
-        [self performSelector:@selector(performSegueToNext) withObject:nil afterDelay:.9];
-    
+        [self performSelector:@selector(performSegueToNext) withObject:nil afterDelay:2.5];
 
-
-    // Do any additional setup after loading the view.
 }
 
 -(void)performSegueToNext
 {
-    [self performSegueWithIdentifier:@"FirstToEnterNumber" sender:self];
+    [self performSegueWithIdentifier:@"enterNumber" sender:self];
 }
 
 -(void)performSegueToMain
 {
-    [self performSegueWithIdentifier:@"FirstToMain" sender:self];
+    [self performSegueWithIdentifier:@"main" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
